@@ -1,0 +1,75 @@
+<div class="bubble-element Group bubble-r-container flex column" id="addtional-element-1" style="z-index: 18; align-self: center; min-width: 100%; max-width: 100%; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 0px; justify-content: flex-start; overflow: visible; background-color: rgb(255, 255, 255); border-style: solid; border-width: 1px; border-color: rgb(225, 223, 235); border-radius: 10px; opacity: 1; margin-top: 10px;">
+   <form id="infoForm" action="{% url 'save_info' id=landing.id %}" method="POST">
+      {% csrf_token %}
+      <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 1; min-height: 28.2074px; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 0px; justify-content: space-between; overflow: visible; background-color: rgb(246, 247, 249); border-radius: 10px; border-style: none; border-width: 1px; border-color: rgb(107, 107, 107) rgb(107, 107, 107) rgb(225, 223, 235); opacity: 1;">
+       <div class="bubble-element Text" style="z-index: 40; align-self: flex-start; min-width: 130px; max-width: 80%; order: 2; min-height: 15px; width: 130px; flex-grow: 1; height: max-content; margin: 8px 16px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 18px; font-weight: bold; color: rgb(0, 0, 0); line-height: 1.3; border-radius: 0px; opacity: 1;">Socials and Contacts</div>
+       <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 0px; order: 7; min-height: 0px; width: 0px; flex-grow: 1; height: max-content; margin: 0px; justify-content: flex-end; overflow: visible; border-radius: 0px; opacity: 1;">
+          <div class="bubble-element Group bubble-r-container fixed clickable-element" style="align-self: flex-start; min-width: 26px; max-width: 26px; order: 2; min-height: 26px; max-height: 26px; width: 26px; flex-grow: 1; height: 26px; margin: 9px 16px 0px 0px; overflow: visible; border-style: solid; border-width: 1px; border-color: rgb(107, 107, 107); border-radius: 20px; padding: 0px; opacity: 1; cursor: pointer;">
+             <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 2; top: 2px; left: 2px; width: 20px; min-width: 20px; max-width: 20px; height: 20px; border-radius: 0px;">
+                <div class="addtional-buttonOpen" style="width: 100%; height: 100%;">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right" color="rgba(51, 51, 51, 1)" pointer-events="none">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                   </svg>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="bubble-element Group bubble-r-container flex row" id="addtional-element-2" style="align-self: center; min-width: 100%; max-width: 100%; order: 2; min-height: 56px; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 12px 0px 0px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1; visibility: hidden; display: none;">
+       <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 1; min-height: 7.19444px; width: 100%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 0px; opacity: 1;">
+          <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 2; min-height: 10px; width: 100%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 0px; opacity: 1;">
+             <div class="bubble-element Text" style="align-self: flex-start; min-width: 186px; order: 2; min-height: 17px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 0px 4px 16px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 12px; font-weight: 300; color: rgb(15, 7, 7); line-height: 1.4; border-radius: 0px; opacity: 1;">SOCIALS</div>
+          </div>
+          <input type="input" name="facebook" class="bubble-element Input a1687185060327x4640" style="z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.facebook.text}}"data-id="{{landing.get_additional.facebook.id}}" placeholder="Facebook" maxlength="255">
+          <input type="input" name="twitter" class="bubble-element Input a1687185060327x4640" style="margin-top: 10px!important; z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}" placeholder="Twitter" maxlength="255">
+          <input type="input" name="youtube" class="bubble-element Input a1687185060327x4640" style="margin-top: 10px!important; z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.youtube.text}}"data-id="{{landing.get_additional.youtube.id}}" placeholder="Youtube" maxlength="255">
+          <input type="input" name="instagram" class="bubble-element Input a1687185060327x4640" style="margin-top: 10px!important; z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.instagram.text}}"data-id="{{landing.get_additional.instagram.id}}" placeholder="Instagram" maxlength="255">
+       </div>
+       <div class="bubble-element Group bubble-r-container flex row" style="margin-top: 20px !important; align-self: flex-start; min-width: 100%; max-width: 100%; order: 2; min-height: 7.19444px; width: 100%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 0px; opacity: 1;">
+          <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 2; min-height: 10px; width: 100%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 0px; opacity: 1;">
+             <div class="bubble-element Text" style="align-self: flex-start; min-width: 186px; order: 2; min-height: 17px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 0px 4px 16px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 12px; font-weight: 300; color: rgb(15, 7, 7); line-height: 1.4; border-radius: 0px; opacity: 1;">CONTACTS</div>
+          </div>
+          <input type="input" name="phone" class="bubble-element Input a1687185060327x4640" style="z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.phone.text}}"data-id="{{landing.get_additional.phone.id}}" placeholder="Phone" maxlength="255">
+          <input type="input" name="email" class="bubble-element Input a1687185060327x4640" style="margin-top: 10px!important; z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.email.text}}" data-id="{{landing.get_additional.email.id}}" placeholder="Email" maxlength="255">
+          <input type="input" name="address" class="bubble-element Input a1687185060327x4640" style="margin-top: 10px!important; z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" value="{{landing.get_additional.address.text}}" data-id="{{landing.get_additional.address.id}}" placeholder="Address" maxlength="255">
+       </div>
+
+       <div class="bubble-element Group bubble-r-container flex row" style="margin-top: 20px !important; align-self: flex-start; min-width: 100%; max-width: 100%; order: 2; min-height: 7.19444px; width: 100%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 0px; opacity: 1;">
+         <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 2; min-height: 10px; width: 100%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 0px; opacity: 1;">
+            <div class="bubble-element Text" style="align-self: flex-start; min-width: 186px; order: 2; min-height: 17px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 0px 4px 16px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 12px; font-weight: 300; color: rgb(15, 7, 7); line-height: 1.4; border-radius: 0px; opacity: 1;">Map Embed Code</div>
+         </div>
+         <input value="{{landing.get_additional.map.text}}" data-id="{{landing.get_additional.map.id}}"  type="text" name="map" style="z-index: 8; align-self: flex-start; min-width: 80%; order: 5; min-height: 32px; max-height: 32px; width: 80%; flex-grow: 1; height: 32px; margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); padding: 0px 4px; opacity: 1;" placeholder="Enter Embed Code">
+      </div>
+
+
+
+       <button class="bubble-element Button clickable-element" style="z-index: 2; align-self: flex-start; min-width: 80px; order: 5; min-height: 40px; width: 80px; flex-grow: 1; height: max-content; margin: 32px 16px 16px; padding: 0px; cursor: pointer; background: none #FF4A17; border: none; text-align: center; font-family: Lato; font-size: 18px; font-weight: 400; color: rgb(255, 255, 255); line-height: 1; border-radius: 10px; opacity: 1;">Save info</button>
+       <p style="order:6; width: 100%; margin: 0 16px 16px;">Note: The changes will take effect, after clicking the 'Save Info' button</p>
+
+    </div>
+   </form>
+ </div>
+
+<script>
+   {
+      let button = '.addtional-buttonOpen';
+      let element1 = '#addtional-element-2';
+      let element2 = '#addtional-element-2';
+
+      $(button).on( "click", function() {
+         if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+
+            $(element1).css('border-radius', '10px');
+            $(element2).css('visibility', 'hidden');
+            $(element2).css('display', 'none');
+         } else {
+            $(this).addClass('active');
+
+            $(element1).css('border-radius', '10px 10px 0px 0px');
+            $(element2).css('visibility', '');
+            $(element2).css('display', '');
+         }
+      });
+   }
+</script>

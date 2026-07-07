@@ -1,0 +1,525 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block 'body' %}
+
+
+
+<div class="sectionTweek pickAthemeApp">
+
+    <div :class={showLoader:generateClicked} class="fScreenloader">
+        <div :class={showLoader:generateClicked} class="spinner"></div>
+    </div>
+
+
+    
+    <a href="{% url 'create' id=page.id %}">
+        <div class="backButton backbuttonTheme">
+            <svg viewBox="0 0 31 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1_24)">
+                <path d="M0.512054 18.9185C0.18683 18.6002 0 18.1712 0 17.7145C0 17.2578 0.18683 16.8288 0.512054 16.5105L12.6906 4.88546C13.3549 4.24885 14.4067 4.27653 15.0364 4.94081C15.6661 5.6051 15.6453 6.65689 14.981 7.28657L5.80558 16.0538H29.3393C30.2596 16.0538 31 16.7942 31 17.7145C31 18.6348 30.2596 19.3752 29.3393 19.3752H5.80558L14.9879 28.1355C15.6522 28.7721 15.673 29.8169 15.0433 30.4812C14.4136 31.1455 13.3618 31.1663 12.6975 30.5366L0.518973 18.9116L0.512054 18.9185Z" fill="black"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_1_24">
+                <rect width="31" height="35.4286" fill="white"/>
+                </clipPath>
+                </defs>
+            </svg>
+            <p>back</p>
+        </div>
+    </a>
+    
+    <div :style="{ background: filteredCards[cards.selected].accent }"  class="themebg"></div>
+
+    <div class=" themeBox onlyForPhone">
+        <div :style="{ color: filteredCards[cards.selected].type != 'l' ? '#fff' : '#181818' }" class="themeHeading">
+            <h2 class="themeBoxTitle">Pick a theme</h2>
+            <p class="themeBoxBody">Choose a theme. You can customize this later.</p>
+        </div>
+        <div class="pickTheme">            
+            <div class="cards"
+                :class="{ activeCard: index === cards.selected , [card.font]: true}" 
+                v-for="(card,index) in filteredCards" 
+                :key="index"  
+                :data-index="index"
+            >
+                <div :style="{ background: card.color}" class="cardColor">
+                    <div v-show="index === {{page.themeId|safe}} " class="currentTheme">current</div>
+                </div>
+                <div :style="{ background: card.bg , color: card.pfont }" class="cardText">
+                    <p class="cardTitle">[[card.title]]</p>
+                    <p class="cardBody">[[truncateText('This is body text. You can change your fonts, colors and images later in the theme editor.',50)]]</p>
+                </div>
+            </div>
+        </div>
+
+        <div @click="sendForm(filteredCards[cards.selected].id)" class="generateButton">
+            <div class="aiSvg">
+                <svg viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.6746 5.43714C20.3905 5.54446 20.2011 5.81591 20.2011 6.11893C20.2011 6.42194 20.3905 6.6934 20.6746 6.80072L24.2413 8.13904L25.5797 11.7058C25.687 11.9899 25.9584 12.1793 26.2614 12.1793C26.5645 12.1793 26.8359 11.9899 26.9432 11.7058L28.2816 8.13904L31.8483 6.80072C32.1324 6.6934 32.3218 6.42194 32.3218 6.11893C32.3218 5.81591 32.1324 5.54446 31.8483 5.43714L28.2816 4.09882L26.9432 0.532057C26.8359 0.247979 26.5645 0.0585938 26.2614 0.0585938C25.9584 0.0585938 25.687 0.247979 25.5797 0.532057L24.2413 4.09882L20.6746 5.43714ZM12.9477 4.68591C12.7835 4.32608 12.4237 4.09882 12.0323 4.09882C11.6409 4.09882 11.2811 4.32608 11.1169 4.68591L7.78374 11.8826L0.587095 15.2094C0.227263 15.3736 0 15.7334 0 16.1311C0 16.5288 0.227263 16.8823 0.587095 17.0465L7.79005 20.3733L11.1106 27.57C11.2747 27.9298 11.6346 28.1571 12.026 28.1571C12.4174 28.1571 12.7772 27.9298 12.9413 27.57L16.2682 20.367L23.4712 17.0402C23.831 16.876 24.0583 16.5162 24.0583 16.1248C24.0583 15.7334 23.831 15.3736 23.4712 15.2094L16.2745 11.8889L12.9477 4.68591ZM24.2413 24.2999L20.6746 25.6383C20.3905 25.7456 20.2011 26.017 20.2011 26.32C20.2011 26.6231 20.3905 26.8945 20.6746 27.0018L24.2413 28.3402L25.5797 31.9069C25.687 32.191 25.9584 32.3804 26.2614 32.3804C26.5645 32.3804 26.8359 32.191 26.9432 31.9069L28.2816 28.3402L31.8483 27.0018C32.1324 26.8945 32.3218 26.6231 32.3218 26.32C32.3218 26.017 32.1324 25.7456 31.8483 25.6383L28.2816 24.2999L26.9432 20.7332C26.8359 20.4491 26.5645 20.2597 26.2614 20.2597C25.9584 20.2597 25.687 20.4491 25.5797 20.7332L24.2413 24.2999Z" fill="#471C10"/>
+                </svg>                                               
+            </div>
+            <p>Generate</p>
+        </div>
+
+        <!-- <div class="themeFilterButtons">
+            <div class="shuffleIconCont">
+                <div class="shuffleIcon">
+                    <svg viewBox="0 0 38 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#fff" d="M31.5399 0.512991L37.4768 6.44991C38.1744 7.1475 38.1744 8.27551 37.4768 8.96568L31.5399 14.9026C30.8423 15.6002 29.7143 15.6002 29.0241 14.9026C28.334 14.205 28.3265 13.077 29.0241 12.3868L31.9184 9.49258H26.1225C25.1874 9.49258 24.3117 9.93043 23.7477 10.68L20.334 15.2291L18.1076 12.2607L20.898 8.54268C22.1299 6.89518 24.0668 5.93043 26.1225 5.93043H31.9184L29.0167 3.03618C28.3191 2.33859 28.3191 1.21058 29.0167 0.520412C29.7143 -0.169755 30.8423 -0.177176 31.5325 0.520412L31.5399 0.512991ZM15.1391 22.1605L12.3488 25.8785C11.1169 27.526 9.17996 28.4907 7.1243 28.4907H1.78108C0.794063 28.4907 0 27.6967 0 26.7097C0 25.7226 0.794063 24.9286 1.78108 24.9286H7.1243C8.05937 24.9286 8.93507 24.4907 9.49907 23.7412L12.9128 19.192L15.1391 22.1605ZM29.0167 19.5111C29.7143 18.8135 30.8423 18.8135 31.5325 19.5111L37.4694 25.4481C38.167 26.1456 38.167 27.2737 37.4694 27.9638L31.5325 33.9007C30.8349 34.5983 29.7069 34.5983 29.0167 33.9007C28.3265 33.2032 28.3191 32.0751 29.0167 31.385L31.9109 28.4907H26.1225C24.0668 28.4907 22.1299 27.526 20.898 25.8785L9.49907 10.68C8.93507 9.93043 8.05937 9.49258 7.1243 9.49258H1.78108C0.794063 9.49258 0 8.69852 0 7.71151C0 6.72449 0.794063 5.93043 1.78108 5.93043H7.1243C9.17996 5.93043 11.1169 6.89518 12.3488 8.54268L23.7477 23.7412C24.3117 24.4907 25.1874 24.9286 26.1225 24.9286H31.9184L29.0241 22.0343C28.3265 21.3367 28.3265 20.2087 29.0241 19.5186L29.0167 19.5111Z" ></path>
+                    </svg>
+                </div>
+            </div>
+            <button>dark</button>
+            <button>Light</button>
+            <button>Colorful</button>
+            <button>Professional</button>
+        </div> -->
+    </div>
+
+    <div class="onlyForLaptop">
+        <div class="pcThemeCont">
+            <div class="pcThemePreview">      
+                <div v-show="filteredCards[cards.selected].id === {{page.themeId|safe}} " class="currentPcBig">current</div>
+
+                <div :style="{ background: filteredCards[cards.selected].bg}" :class="{[filteredCards[cards.selected].font]: true}" class="pcThemePreviewLeft">
+                    <div class="">
+                        <p :style="{ color: filteredCards[cards.selected].pfont}" class="helloLine">Hello 👋</p>
+                        <p :style="{ color: filteredCards[cards.selected].pfont}" class="titleLine">This is a theme preview</p>
+                        <p :style="{ color: filteredCards[cards.selected].sfont}" class="bodyLine">This is body text. You can change your fonts, colors and images later in the theme editor. </p>
+                        <p :style="{ color: filteredCards[cards.selected].link}" class="linkLine"><b>Your accent color will be used for links.</b></p>                            
+                    </div>
+
+                    <div class="">
+                        <p :style="{ color: filteredCards[cards.selected].sfont}" class="ButtonLine">Here are your buttons:</p>
+                        <div class="lineButtonsCont">
+                            <p :style="{ background: filteredCards[cards.selected].buttons, borderColor: filteredCards[cards.selected].buttons,color: filteredCards[cards.selected].buttonText }"  class="linePButton">Primary Button</p>
+                            <p :style="{ color: filteredCards[cards.selected].buttons, borderColor: filteredCards[cards.selected].buttons }"  class="lineSButton">Secondary Button</p>
+                        </div>
+                    </div>
+                </div>
+                <div :style="{ background: filteredCards[cards.selected].color}" class="pcThemePreviewRight"></div>
+            </div>
+            <div class="pcThemePicker ">
+                <div class="themeHeadingPc ">
+                    <h2 class=" themeBoxTitlePc">Pick a theme</h2>
+                    <p class="themeBoxBodyPc">You can customize this later too</p>
+                </div>
+                <div @click="sendForm(filteredCards[cards.selected].id)" class="buttonPcThemePicker generateButtonPc ">
+                    <div class="aiSvg">
+                        <svg viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.6746 5.43714C20.3905 5.54446 20.2011 5.81591 20.2011 6.11893C20.2011 6.42194 20.3905 6.6934 20.6746 6.80072L24.2413 8.13904L25.5797 11.7058C25.687 11.9899 25.9584 12.1793 26.2614 12.1793C26.5645 12.1793 26.8359 11.9899 26.9432 11.7058L28.2816 8.13904L31.8483 6.80072C32.1324 6.6934 32.3218 6.42194 32.3218 6.11893C32.3218 5.81591 32.1324 5.54446 31.8483 5.43714L28.2816 4.09882L26.9432 0.532057C26.8359 0.247979 26.5645 0.0585938 26.2614 0.0585938C25.9584 0.0585938 25.687 0.247979 25.5797 0.532057L24.2413 4.09882L20.6746 5.43714ZM12.9477 4.68591C12.7835 4.32608 12.4237 4.09882 12.0323 4.09882C11.6409 4.09882 11.2811 4.32608 11.1169 4.68591L7.78374 11.8826L0.587095 15.2094C0.227263 15.3736 0 15.7334 0 16.1311C0 16.5288 0.227263 16.8823 0.587095 17.0465L7.79005 20.3733L11.1106 27.57C11.2747 27.9298 11.6346 28.1571 12.026 28.1571C12.4174 28.1571 12.7772 27.9298 12.9413 27.57L16.2682 20.367L23.4712 17.0402C23.831 16.876 24.0583 16.5162 24.0583 16.1248C24.0583 15.7334 23.831 15.3736 23.4712 15.2094L16.2745 11.8889L12.9477 4.68591ZM24.2413 24.2999L20.6746 25.6383C20.3905 25.7456 20.2011 26.017 20.2011 26.32C20.2011 26.6231 20.3905 26.8945 20.6746 27.0018L24.2413 28.3402L25.5797 31.9069C25.687 32.191 25.9584 32.3804 26.2614 32.3804C26.5645 32.3804 26.8359 32.191 26.9432 31.9069L28.2816 28.3402L31.8483 27.0018C32.1324 26.8945 32.3218 26.6231 32.3218 26.32C32.3218 26.017 32.1324 25.7456 31.8483 25.6383L28.2816 24.2999L26.9432 20.7332C26.8359 20.4491 26.5645 20.2597 26.2614 20.2597C25.9584 20.2597 25.687 20.4491 25.5797 20.7332L24.2413 24.2999Z" fill="#471C10"/>
+                        </svg>                                               
+                    </div>
+                    <p>Generate</p>
+                </div>
+
+                <div @click="shuffleCards()" class="buttonPcThemePicker shuffleButtonPc ">
+                    <div class="aiSvg">
+                        <svg  viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M25.4293 0.862654C26.185 0.547779 27.0478 0.724108 27.6271 1.29718L31.6575 5.32758C32.0354 5.70543 32.2495 6.21553 32.2495 6.75082C32.2495 7.28611 32.0354 7.7962 31.6575 8.17405L27.6271 12.2045C27.0478 12.7838 26.185 12.9539 25.4293 12.639C24.6736 12.3241 24.1824 11.5936 24.1824 10.7749V8.77232H22.1672C21.5312 8.77232 20.9329 9.0683 20.555 9.5784L17.8849 13.1365L15.3659 9.77992L17.3307 7.16016C18.4706 5.63616 20.2654 4.74191 22.1672 4.74191H24.1824V2.72671C24.1824 1.91434 24.6736 1.17753 25.4293 0.862654ZM10.3279 16.4994L12.8469 19.8559L10.8821 22.4757C9.74224 23.9997 7.94745 24.8939 6.0456 24.8939H2.0152C0.900543 24.8939 0 23.9934 0 22.8787C0 21.7641 0.900543 20.8635 2.0152 20.8635H6.0456C6.68165 20.8635 7.27991 20.5675 7.65776 20.0574L10.3279 16.4994ZM27.6208 28.3387C27.0415 28.918 26.1787 29.0881 25.423 28.7732C24.6673 28.4583 24.1761 27.7278 24.1761 26.9091V24.8939H22.1672C20.2654 24.8939 18.4706 23.9997 17.3307 22.4757L7.65776 9.5784C7.27991 9.0683 6.68165 8.77232 6.0456 8.77232H2.0152C0.900543 8.77232 0 7.87177 0 6.75712C0 5.64246 0.900543 4.74191 2.0152 4.74191H6.0456C7.94745 4.74191 9.74224 5.63616 10.8821 7.16016L20.555 20.0574C20.9329 20.5675 21.5312 20.8635 22.1672 20.8635H24.1824V18.8483C24.1824 18.0359 24.6736 17.2991 25.4293 16.9843C26.185 16.6694 27.0478 16.8457 27.6271 17.4188L31.6575 21.4492C32.0354 21.827 32.2495 22.3371 32.2495 22.8724C32.2495 23.4077 32.0354 23.9178 31.6575 24.2957L27.6271 28.3261L27.6208 28.3387Z" fill="#471C10"/>
+                        </svg>                                                                            
+                    </div>
+                    <p>Shuffle theme</p>
+                </div>
+                <div class="themeFilterButtons">                   
+                    <button :style="{ background: value === true ?  '#ffc8b9' : '' }" v-for="(value, key) in activeFilters" :key="key" @click="toggleFilter(key)">
+                        [[ key ]]
+                    </button>
+                </div>
+                <div class="cardsPcCont">
+                    <div class="cardsPc"
+                        :class="{ cardsPcActive: index === cards.selected}" 
+                        v-for="(card,index) in filteredCards" 
+                        :key="index"  
+                        :data-index="index"
+                        @click="cards.selected=index"
+                    >
+
+                        <div class="cardsPcInnerCont">
+                            <div class="cardColorPc" :style="{ background: card.color}" >
+                                <div v-show="index === {{page.themeId|safe}} " class="currentThemePc">current</div>
+                            </div>
+                            <div :class="{[card.font]: true}" class="cardTextPc" :style="{ background: card.type == 'l' ? '#fff' : '#000' , color: card.type != 'l' ? '#fff' : '#181818' }" >                                    
+                                <p class="cardMainPc">Title</p>
+                                <p class="cardBodyPc">Body & <span><b><u>link</u></b></span></p>
+                            </div>
+                        </div>
+                        <p class="cardTitlePc">[[card.title]]</p>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</div>
+
+<script>
+    const { createApp, ref , onMounted, computed } = Vue;
+
+    createApp({
+        delimiters: ['[[',']]'],
+        setup() {
+
+            // form
+
+            const sendForm = async(data) =>{
+                generateClicked.value=true
+                const formData = {
+                    themeId: data           
+                };
+                console.log(formData)
+                try {
+                    const response = await fetch('{% url 'updateTheme' id=page.id %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{csrf_token}}',
+    
+                        },
+                        body: JSON.stringify(formData),
+                    });
+            
+                    if (!response.ok) {
+    
+                        throw new Error('Network response was not ok');
+                    }
+            
+                    const data = await response.json();
+    
+                    if (data.status == 'ok'){
+                        console.log('updated')
+                    }
+
+                    window.location.href='{% url 'edit' id=page.id %}'
+    
+                } catch (error) {
+                    console.error('There was a problem with your fetch operation:', error);
+                }
+
+
+            }
+
+
+            // filter
+            const activeFilters = ref({
+                dark: false,
+                light: false,
+                professional: false,
+                colorful: false
+            });
+
+            const toggleFilter = (filter) => {
+                activeFilters.value[filter] = !activeFilters.value[filter];
+                cards.value.selected = 0
+                console.log(document.querySelector('.cardsPcCont'))
+                
+                setTimeout(() => {
+                    document.querySelector('.cardsPcCont').scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+                
+            };
+
+            const filteredCards = computed(() => {
+                const isAnyFilterActive = Object.values(activeFilters.value).some(value => value === true);
+
+                if (!isAnyFilterActive) {
+                    return cards.value.all;
+                }
+
+                return cards.value.all.filter(card => {
+                    if (activeFilters.value.dark && card.type === 'd') return true;
+                    if (activeFilters.value.light && card.type === 'l') return true;
+                    if (activeFilters.value.professional && card.tags === 'Professional') return true;
+                    if (activeFilters.value.colorful && card.tags === 'Colorful') return true;
+                    return false;
+                });
+            });
+            
+            // shuffle
+            const shuffleArray = (array) => {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            };
+
+            const shuffleCards = () => {
+                shuffleArray(cards.value.all);
+                cards.value.selected = 0
+                setTimeout(() => {
+                    document.querySelector('.cardsPcCont').scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+            };
+
+
+            // main
+            const cards = ref({
+                all:[
+                    {
+                        id:0,
+                        color: 'linear-gradient(-230.41deg, #FFEFBA 35.08%, #FFFDF8 101.34%)',
+                        title: 'Topaz',
+                        accent: '#fffdf3',
+                        type:'l',
+                        font:'monda',
+                        tags:'Professional',
+                        pfont:'#1e1e1e',
+                        sfont:'#202020',
+                        link:'#1e1e1e',
+                        buttons:'#202020',
+                        buttonText:'white',
+                        bg:'white'
+                    },
+                    {
+                        id:1,
+                        color: 'linear-gradient(203.35deg, #E1EEC3 31.47%, #F05053 154.42%)',
+                        title: 'Sapphire',
+                        accent: '#ffe9e0',
+                        type:'l',
+                        font:'montserrat',
+                        tags:'Colorful',
+                        pfont:'#1e1e1e',
+                        sfont:'#202020',
+                        link:'#1e1e1e',
+                        buttons:'#202020',
+                        buttonText:'white',
+                        bg:'white'
+                    },
+                    {
+                        id:2,
+                        color:'linear-gradient(191.73deg, rgba(15, 12, 41, 0.992157) -0.4%, rgba(48, 43, 99, 0.996376) 47.96%, #24243E 89.5%)',
+                        title: 'Coral',
+                        accent: '#0d051e',
+                        type:'d',
+                        font:'poppins',
+                        tags:'Colorful',
+                        pfont:'#FFFFFF',
+                        sfont:'#D7D7D7',
+                        link:'#CECBEC',
+                        buttons:'#FFFFFF',
+                        buttonText:'#11101D',
+                        bg:'#11101D'
+                    },
+                    {
+                        id:3,
+                        color:'linear-gradient(185.41deg, #BDC3C7 35.08%, #2C3E50 101.34%)',
+                        title: 'Onyx',
+                        accent: '#d6dadd',
+                        type:'l',
+                        font:'roboto',
+                        tags:'Professional',
+                        pfont:'#000',
+                        sfont:'#202020',
+                        link:'#000',
+                        buttons:'#000',
+                        buttonText:'#fff',
+                        bg:'#fff'
+                    },                
+                    {
+                        id:4,
+                        color:'linear-gradient(196.39deg, #2980B9 -5.87%, #6DD5FA 40.07%, #FFFFFF 111.01%)',
+                        title: 'Opal',
+                        accent: '#dbf6ff',
+                        type:'l',
+                        font:'open-sans',
+                        tags:'Colorful',
+                        pfont:'#000',
+                        sfont:'#202020',
+                        link:'#000',
+                        buttons:'#000',
+                        buttonText:'#fff',
+                        bg:'#fff'
+                        
+                    },
+                    {
+                        id:5,
+                        color:'linear-gradient(203.35deg, #0F2027 31.47%, #F05053 154.42%)',
+                        title: 'Garnet',
+                        accent: '#11101D',
+                        type:'d',
+                        font:'monda',
+                        tags:'Professional',
+                        pfont:'#FFFFFF',
+                        sfont:'#D7D7D7',
+                        link:'#ECCBCB',
+                        buttons:'#FFFFFF',
+                        buttonText:'#060d10',
+                        bg:'#060d10'
+                    },
+                    {
+                        id:6,
+                        color:'linear-gradient(196.39deg, #1F4037 -5.87%, #99F2C8 111.01%)',
+                        title: 'Jade',
+                        accent: '#dffff0',
+                        type:'l',
+                        font:'montserrat',
+                        tags:'Colorful',
+                        pfont:'#000',
+                        sfont:'#202020',
+                        link:'#000',
+                        buttons:'#000',
+                        buttonText:'#fff',
+                        bg:'#fff'
+                    },
+                    {
+                        id:7,
+                        color:'linear-gradient(196.39deg, #7F7FD5 -5.87%, #86A8E7 46.66%, #91EAE4 111.01%)',
+                        title: 'Agate',
+                        accent: '#bdc8ff',
+                        type:'l',
+                        font:'poppins',
+                        tags:'Colorful',
+                        pfont:'#000',
+                        sfont:'#202020',
+                        link:'#000',
+                        buttons:'#000',
+                        buttonText:'#fff',
+                        bg:'#fff'
+                    },
+                    {
+                        id:8,
+                        color:'linear-gradient(188.58deg, rgba(60, 59, 63, 0.992157) 12.58%, #605C3C 88%)',
+                        title: 'Quartz',
+                        accent: '#101011',
+                        type:'d',
+                        font:'roboto',
+                        tags:'Professional',
+                        pfont:'#FFFFFF',
+                        sfont:'#D7D7D7',
+                        link:'#D7D4C2',
+                        buttons:'#FFFFFF',
+                        buttonText:'#0f0e09',
+                        bg:'#0f0e09'
+                    },
+                    {
+                        id:9,
+                        color:' linear-gradient(196.39deg, rgba(241, 39, 17, 0.992157) -5.87%, #F5AF19 111.01%)',
+                        title: 'Citrine',
+                        accent: '#ffc09f',
+                        type:'l',
+                        font:'open-sans',
+                        tags:'Colorful',
+                        pfont:'#000',
+                        sfont:'#202020',
+                        link:'#000',
+                        buttons:'#000',
+                        buttonText:'#fff',
+                        bg:'#fff'
+                    },
+                
+                    
+                    
+                ],
+                selected:0
+
+            })
+
+            if(cards.value.all.findIndex(item => item.id === {{page.themeId|safe}}) != -1){
+                cards.value.selected = cards.value.all.findIndex(item => item.id === {{page.themeId|safe}})
+            }
+
+            console.log(cards.value.selected)
+
+            const truncateText = (text, maxLength) => {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + '...';
+                }
+                return text;
+            };
+
+            // Map to store the indices of the cards
+            const cardIndices = new Map();
+
+            const handleCardInView = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = cardIndices.get(entry.target);
+                        cards.selected = index
+                        cards.value.selected = index
+                    }
+                });
+            };
+
+            onMounted(() => {
+
+
+
+                const observer = new IntersectionObserver(handleCardInView, {
+                    root: null, // Observes intersections relative to the viewport
+                    rootMargin: '0px',
+                    threshold: 0.5 // Trigger the callback when 50% of the target is visible
+                });
+
+                cards.value.all.forEach((card, index) => {
+                    const cardElement = document.querySelector(`.cards[data-index="${index}"]`);
+                    if (cardElement) {
+                        observer.observe(cardElement);
+                        // Store the index of the card element in the Map
+                        cardIndices.set(cardElement, index);
+                    }
+                });
+
+                if (cards.value.selected !== 0) {
+                    const selectedCardElement = document.querySelector(`.cards[data-index="${cards.value.selected}"]`);
+                    if (selectedCardElement) {
+                        selectedCardElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                const cardsPcActive = document.querySelector(`.cardsPcActive`);
+                if(cardsPcActive){
+                    setTimeout(()=>{
+                        cardsPcActive.scrollIntoView({ behavior: "smooth", block: "start", inline: "start"  });
+                    },20)
+                        
+                }
+
+
+            });
+
+
+
+
+            const generateClicked = ref(false);
+
+
+            return {
+                cards,
+                truncateText,
+                toggleFilter,
+                filteredCards,
+                activeFilters,
+                shuffleCards,
+                sendForm,
+                generateClicked
+            };
+
+        }
+    }).mount('.pickAthemeApp');
+
+
+
+</script>
+
+{% endblock %}

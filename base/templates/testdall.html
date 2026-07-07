@@ -1,0 +1,29 @@
+<div class="">
+    <form action="" method="POST">
+
+        {% csrf_token %}
+        <input class="inputText"  type="text" name="user_input" placeholder="Describe Your topic">
+        <input class="submitButton" type="submit" value="send">
+
+    </form>
+
+</div>
+
+
+<script>
+    let user_input = document.querySelector('.inputText');
+    
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+        const response = await fetch('/testdallreq/', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken },
+            body: JSON.stringify({ user_input: user_input.value })
+        });
+
+        const data = await response.json();
+
+        console.log(data)
+    })
+</script>

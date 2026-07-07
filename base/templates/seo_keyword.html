@@ -1,0 +1,172 @@
+{% extends 'layout/layoutNew.html' %}
+{% load static %}
+
+{% block 'head' %}
+<title>LandlyAi | SEO Keyword Generator Tool for Online Visibility</title>
+<meta name="description" content="Enhance online visibility effortlessly with LandlyAi's SEO Keyword Generator Tool, optimizing content with targeted keywords for higher search engine rankings.">
+<meta name="keywords" content="keyword research tools, keyword tool website, keywords generator">
+{% endblock %}
+
+{% block 'body' %}
+
+
+<style>
+
+
+
+  #response p {
+    text-align: left!important;
+    padding: 1em!important;
+  }
+
+  
+#response{
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 1em auto;
+}
+
+#response p{
+  background-color: #242424;
+  padding: 0.41em 2em;
+  border-radius: 0.41em;
+  margin: 0;
+}
+
+.submitButton{
+  all:unset;
+  background-color: #aaff79;
+  padding: 0.41em 1.3em;
+  border-radius: 0.41em;
+  margin: 0;
+  color:#000000;
+}
+
+.inputText{
+  all:unset;
+  width:25%;
+  text-align:left;
+
+  background-color: #ffffff;
+  padding: 0.41em 2em;
+  border-radius: 0.41em;
+  margin: 0;
+  color:rgb(0, 0, 0);
+}
+
+.gptForm{
+  display: flex;
+  gap:0.8em;
+  justify-content: center;
+  width:100%;
+}
+
+.formHeading{
+  margin: 0.3em 0;
+  font-size: 4.9em;
+  text-align:center;
+}
+
+.gptFormHeightAdj{
+  height:70vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+
+
+@media (max-width:633px){
+  .gptForm{
+    flex-direction: column;
+  }
+  .gptForm .submitButton{
+      text-align: center;
+  }
+
+  .inputText{
+    width:auto;  
+    text-align:center;
+
+  }
+
+}
+
+  
+</style>
+
+
+
+
+<!-- Start Hero -->
+<div class="cs-page_heading cs-style1 cs-center text-center cs-bg">
+  <div class="newContainer gptFormHeightAdj">
+    
+
+
+    <h1 class="formHeading">AI SEO tool</h1>
+    <form class="gptForm" method="post">
+        {% csrf_token %}
+        <input class="inputText"  type="text" name="user_input" placeholder="Describe Your Business">
+        <input class="submitButton" type="submit" value="Generate keywords">
+    </form>
+    <div id="response">
+    </div>
+
+
+
+
+
+  </div>
+</div>
+
+<script>
+
+
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const responseContainer = document.querySelector('#response');
+
+    responseContainer.innerHTML=''
+
+    if(responseContainer.innerHTML.replace(/\s+/g, ' ').trim() ===""){
+      responseContainer.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block; shape-rendering: auto;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><path d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#ffffff" stroke="none">  <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" keyTimes="0;1" values="0 50 51;360 50 51"></animateTransform></path>'
+    }
+
+    // console.log(responseContainer.textContent.replace(/\s+/g, ' ').trim())
+
+    let user_input = document.querySelector('input[name="user_input"]').value;
+    user_input = `get 10 possible SEO optimizing keywords for ${user_input} seperated with ',' and without numbering `
+
+    const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    const response = await fetch('/seo_keyword/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        body: JSON.stringify({ user_input: user_input })
+    });
+
+    const data = await response.json();
+
+  // Split the response by commas and trim whitespace
+  const responseParts = data.response.split(',').map(part => part.trim());
+
+  // Create a new HTML element for each part with the desired styling
+  const styledResponse = responseParts.map(part => {
+      const partElement = document.createElement('p');
+      partElement.innerHTML = part;
+      return partElement;
+  });
+
+  // Clear the container and append the styled elements
+  responseContainer.innerHTML = ''; // Clear the container
+  styledResponse.forEach(partElement => responseContainer.appendChild(partElement));
+});
+
+</script>
+{% endblock %}

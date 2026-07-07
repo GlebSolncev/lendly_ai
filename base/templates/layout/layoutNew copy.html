@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <!-- Meta Tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon Icon -->
+  <link rel="icon" href="{% static 'assets/img/favicon.png' %}">
+  <!-- Site Title -->
+  <title>{% block 'title' %}LandlyAI{% endblock %}</title>
+  <!-- <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/lightgallery.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'assets/css/newStyle.css' %}">
+  <style type="text/css">
+    .cs-iconbox_3_list {
+        padding-top: 0px !important;
+    }
+
+    .login_button {
+        z-index: 10;
+        padding: 7px 25px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: #FF4A17;
+        border: none;
+        overflow: hidden;
+    }
+
+    .login_button:hover {
+      color: white;
+    }
+
+    .btn-beta-logo{ margin-left: 37px!important; color: white; font-size: 14px; background-color: #bf360f; }
+  </style>
+        <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '6426148630772792');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=6426148630772792&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="cs-preloader cs-center">
+    <div class="cs-preloader_in"></div>
+  </div>
+
+    <!-- Start Header Section -->
+<header class="cs-site_header cs-style1 text-uppercase cs-sticky_header">
+  <div class="cs-main_header">
+    <div class="container">
+      <div class="cs-main_header_in">
+        <div class="cs-main_header_left">
+          <a class="cs-site_branding" href="{% url 'index' %}">
+            <span
+              style="text-transform: capitalize"
+              class="company-name-header"
+            >
+              <h4>
+                Landly
+                <span class="cs-accent_color"> AI </span>
+                <span
+                  class="position-absolute translate-middle badge btn-beta-logo"
+                 
+                >
+                  BETA
+                </span>
+              </h4>
+            </span>
+          </a>
+        </div>
+        <!-- <div class="cs-main_header_center">
+          <div class="cs-nav cs-primary_font cs-medium">
+            <ul class="cs-nav_list">
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'support' %}">Support</a></li>
+            </ul>
+          </div>
+        </div> -->
+        <div class="cs-main_header_right">
+          <a style="margin-right: 35px;" href="{% if user.is_subscribe %}{% url 'allProjects' %}{% else %}{% url 'login' %}{% endif %}" class="login_button login-create-landing-btn"><span>Create a landing page</span></a>
+          <div class="cs-nav cs-primary_font cs-medium">
+              <ul class="cs-nav_list">
+                  <li class="create-landing-btn">
+                      <a style="margin-right: 35px;" href="{% if user.is_subscribe %}{% url 'allProjects' %}{% else %}{% url 'login' %}{% endif %}">Create a landing page</a>
+                  </li>
+                  <li>
+                      {% if user.is_authenticated %}
+                        <a style="margin-right: 35px;" href="{% url 'logout' %}">Logout</a>
+                      {% else %}
+                          <a style="margin-right: 35px;" href="{% url 'login' %}">Login</a>
+                      {% endif %}
+                </li>
+              </ul>
+            <span class="cs-munu_toggle"><span></span></span>
+          </div>
+          <div class="cs-toolbox">
+            <span class="cs-icon_btn">
+              <span class="cs-icon_btn_in">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="cs-side_header">
+  <button class="cs-close"></button>
+  <div class="cs-side_header_overlay"></div>
+  <div class="cs-side_header_in">
+    <div class="cs-side_header_shape"></div>
+    <a class="cs-site_branding" href="{% url 'index' %}">
+      <span style="text-transform: capitalize;" class="company-name-header"><h4>Landly<span class="cs-accent_color">AI</span></h4></span>
+    </a>
+    <div class="cs-side_header_box">
+      <h2 class="cs-side_header_heading" style="margin-bottom: 10px;">Do you have a project in your  <br> mind? Keep connect us.</h2>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="login_button"><span>Logout</span></a>
+        {% else %}
+        <a href="{% url 'login' %}" class="login_button"><span>Login</span></a>
+        <a href="{% url 'sign_up' %}" class="login_button"><span>SingUp</span></a>
+        {% endif %}
+      
+    </div>
+    <div class="cs-side_header_box">
+      <h3 class="cs-side_header_title cs-primary_color">Contact Us</h3>
+      <ul class="cs-contact_info cs-style1 cs-mp0">
+        {% include 'partials/contacts.html' %}
+      </ul>
+    </div>
+    <div class="cs-side_header_box">
+      <div class="cs-social_btns cs-style1">
+        {% include 'partials/social.html' %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Header Section -->
+
+{% block 'body' %}{% endblock %}
+
+<!-- Start Footer -->
+
+
+
+  <footer class="cs-fooer">
+    <div class="cs-fooer_main">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-sm-6">
+            <div class="cs-footer_item">
+              <div class="cs-text_widget">
+                <span style="text-transform: capitalize;" class="company-name-header"><h4>Landly<span class="cs-accent_color">AI</span></h4></span>
+                <p>{{settings.footer_text}}</p>
+              </div>
+              <div class="cs-social_btns cs-style1">
+                {% include 'partials/social.html' %}
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-sm-6">
+            <div class="cs-footer_item">
+              <h2 class="cs-widget_title">Contact Us</h2>
+              <ul class="cs-menu_widget cs-mp0">
+                {% include 'partials/contacts.html' %}
+              </ul>
+            </div>
+          </div>
+{#          <div class="col-lg-3 col-sm-6">#}
+{#            <div class="cs-footer_item">#}
+{#              <h2 class="cs-widget_title">Pages</h2>#}
+{#              <ul class="cs-menu_widget cs-mp0">#}
+{#                <li><a href="#home">Main</a></li>#}
+{#                <li><a href="#services-scroll">Services</a></li>#}
+{#                <li><a href="#statistics-scroll">Statistics</a></li>#}
+{#                <li><a href="#testimonials-scroll">Testimonials</a></li>#}
+{#              </ul>#}
+{#            </div>#}
+{#          </div>#}
+            <div class="col-lg-6">
+        <form id="cs-form" data-url="{% url 'contact_us' %}" method="POST" class="row">
+
+          <input type="hidden" name="access_key" value="6d7bc3fc-6190-43c5-8298-89ac5ef74213" />
+          <input type="checkbox" name="botcheck" style="display: none;" />
+          <!-- Optional: Can be type="hidden" or type="text" for subject -->
+          <input type="hidden" name="subject" value="Submission from Laralink Template">
+
+          <div class="col-sm-6">
+            <label class="cs-primary_color">Full Name*</label>
+            <input type="text" class="cs-form_field" name="full-name" required>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+          </div>
+          <div class="col-sm-6">
+            <label class="cs-primary_color">Email*</label>
+            <input type="text" class="cs-form_field" name="email" required>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+          </div>
+          <div class="col-sm-6">
+            <label class="cs-primary_color">Subject*</label>
+            <input type="text" class="cs-form_field" name="subject" required>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+          </div>
+          <div class="col-sm-6">
+            <label class="cs-primary_color">Mobile*</label>
+            <input type="text" class="cs-form_field" name="number" required>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+          </div>
+          <div class="col-lg-12">
+            <label class="cs-primary_color">Message*</label>
+            <textarea cols="30" rows="7" class="cs-form_field" name="message" required></textarea>
+            <div class="cs-height_25 cs-height_lg_25"></div>
+          </div>
+          <div class="col-lg-12">
+            <button class="cs-btn cs-style1" type="submit">
+              <span>Send Message</span>
+              <svg width="26" height="12" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.5303 6.53033C25.8232 6.23744 25.8232 5.76256 25.5303 5.46967L20.7574 0.696699C20.4645 0.403806 19.9896 0.403806 19.6967 0.696699C19.4038 0.989593 19.4038 1.46447 19.6967 1.75736L23.9393 6L19.6967 10.2426C19.4038 10.5355 19.4038 11.0104 19.6967 11.3033C19.9896 11.5962 20.4645 11.5962 20.7574 11.3033L25.5303 6.53033ZM0 6.75H25V5.25H0V6.75Z" fill="currentColor"/>
+              </svg>
+            </button>
+            <div id="cs-result"></div>
+          </div>
+        </form>
+      </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="cs-bottom_footer">
+        <div class="cs-bottom_footer_left">
+          <div class="cs-copyright">{{settings.copyright}}</div>
+        </div>
+        <div class="cs-bottom_footer_right">
+          <ul class="cs-footer_links cs-mp0">
+            <li><a href="{% url 'page' slug='terms' %}">Terms & Conditions</a></li>
+            <li><a href="{% url 'page' slug='privacy' %}">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <span class="cs-scrollup">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10L1.7625 11.7625L8.75 4.7875V20H11.25V4.7875L18.225 11.775L20 10L10 0L0 10Z" fill="currentColor"/>
+    </svg>
+  </span>
+
+  <!-- Start Video Popup -->
+  <div class="cs-video_popup">
+    <div class="cs-video_popup_overlay"></div>
+    <div class="cs-video_popup_content">
+      <div class="cs-video_popup_layer"></div>
+      <div class="cs-video_popup_container">
+        <div class="cs-video_popup_align">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="about:blank"></iframe>
+          </div>
+        </div>
+        <div class="cs-video_popup_close"></div>
+      </div>
+    </div>
+  </div>
+  <!-- End Video Popup -->
+
+  <!-- Script -->
+  <script src="{% static 'assets/js/plugins/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/isotope.pkg.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery.slick.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery.counter.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/lightgallery.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/wow.min.js' %}"></script>
+  {% comment %} <script src="{% static 'assets/js/plugins/gsap.min.js' %}"></script> {% endcomment %}
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

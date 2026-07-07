@@ -1,0 +1,531 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+   
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="description" content="{{landing.meta.2.data}}">
+    <meta name="keywords" content="{{landing.meta.1.data}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!--====== Title ======-->
+    <title>{% if landing.meta.0.data %} {{landing.meta.0.data}} {% else %} {{landing.get_company_name.text}} {% endif %}</title>
+    
+    <!--====== Favicon Icon ======-->
+    <link rel="icon" href="{{ images.favIcon.img_url }}">
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/bootstrap.min.css' %}">
+    
+    <!--====== Fontawesome css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/font-awesome.min.css' %}">
+    
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/magnific-popup.css' %}">
+    
+    <!--====== animate css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/animate.min.css' %}">
+    
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/slick.css' %}">
+    
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/default.css' %}">
+    
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="{% static 'template_3/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'allTemplateFiles/css/main.css' %}">
+
+   
+    <style type="text/css">
+        html {
+          scroll-behavior: smooth;
+        }
+
+        {% if not landing.SecondaryFont == 'default' %}
+        body{
+            font-family: {{landing.SecondaryFont}}; 
+        }
+        {% endif %}
+        
+        {% if not landing.PrimaryFont == 'default' %}
+    
+        h1, h2, h3,
+        h4, h5, h6 {
+            font-family:{{landing.PrimaryFont}};
+    
+        }
+        
+        .h1, .h2, .h3,
+        .h4, .h5, .h6 {
+    
+            font-family: {{landing.PrimaryFont}};
+        
+        }
+        {% endif %}
+      
+
+
+
+
+
+
+
+
+
+
+
+        
+        *[data-field='hero']{
+            {% if not landing.hero_colors.bgColor == 'default' %}
+            background:{{landing.hero_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.hero_colors.fontColor == 'default' %}
+            color:{{landing.hero_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+        *[data-field='hero_long']{
+            {% if not landing.hero_long_colors.bgColor == 'default' %}
+            background:{{landing.hero_long_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.hero_long_colors.fontColor == 'default' %}
+            color:{{landing.hero_long_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        .service-2-item{
+            {% if not landing.services_colors.bgColor == 'default' %}
+            background:{{landing.services_colors.bgColor}} !important;
+            {% endif %}
+        
+        }
+
+        #service p, #service h4, #service h3  {
+            {% if not landing.services_colors.fontColor == 'default' %}
+            color:{{landing.services_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+
+
+        
+
+        #testimonials{
+            {% if not landing.testimonials_colors.bgColor == 'default' %}
+            background:{{landing.testimonials_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        #testimonials h1, #testimonials h3, #testimonials p {
+            {% if not landing.testimonials_colors.fontColor == 'default' %}
+            color:{{landing.testimonials_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        *[data-field='cta']{
+            {% if not landing.cta_colors.bgColor == 'default' %}
+            background:{{landing.cta_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        *[data-field='cta']{
+            {% if not landing.cta_colors.fontColor == 'default' %}
+            color:{{landing.cta_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        #about{
+            {% if not landing.about_us_colors.bgColor == 'default' %}
+            background:{{landing.about_us_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        #about h3, #about h4, #about p{
+            {% if not landing.about_us_colors.fontColor == 'default' %}
+            color:{{landing.about_us_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+  
+        .mapCont{
+            width: 100%;
+            height: 100%;
+        }
+        
+        .mapCont iframe{
+            width: 100%;
+            height: 100%;
+        }
+
+
+        *[data-field='desc'], *[data-field='desc'] h4{
+            {% if not landing.desc_colors.bgColor == 'default' %}
+                background:{{landing.desc_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.desc_colors.fontColor == 'default' %}
+                color:{{landing.desc_colors.fontColor}} !important;
+            {% endif %}
+        }
+    </style>
+  
+  
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div class="preloader">
+        <div class="lds-ellipsis">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- END LOADER -->
+   
+    <!--====== HEADER PART START ======-->
+
+    <header class="header-area header-14-area">
+        <div class="header-nav" style="margin: 0 !important; height: 80px !important; padding-left: 55px; display: flex; align-items: center;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="navigation">
+                            <nav class="navbar navbar-expand-lg navbar-light ">
+
+                                <p class="iframeClickable" data-companyname='true' data-field="desc" data-id="{{landing.get_company_name.id}}" style="color: black; font-size: 40px;">{{landing.get_company_name.text}}</p>
+
+                            </nav>
+                        </div> <!-- navigation -->
+                    </div>
+                </div> <!-- row -->
+            </div>
+        </div>
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+
+    <!--====== HERO PART START ======-->
+    
+    <section class="hero-slider-2" id="home">
+        <div class="hero-14-area">
+            <div class="section__bg">
+                <div class="shape-1">
+                    <img src="{% static 'template_3/assets/images/hero-shape-14.png' %}" alt="">
+                </div>
+                <div class="shape-2">
+                    <img src="{% static 'template_3/assets/images/hero-shape-15.png' %}" alt="">
+                </div>
+                <div class="scroll-to-down">
+                    <a href="#"><i class="fal fa-arrow-down"></i></a>
+                </div>
+                <div class="hero-line">
+                    <img src="{% static 'template_3/assets/images/hero-line-8.png' %}" alt="">
+                </div>
+                <div style="opacity: 0; pointer-events: none;" class="hero-slider-counter">
+                    <span>01<span>/03</span></span>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="hero-14-content">
+                            {% if 'hero' in landing.active_elements %}
+                            
+                            <h1 data-animation="fadeInLeft" data-delay="0.7s" class="title iframeClickable"  data-field="hero" data-id="{{landing.get_active_hero.id}}">{{landing.get_active_hero.text}}</h1>
+                            {% endif %}
+                            
+                            <div data-animation="fadeInLeft" data-delay="0.9s" class="text">
+                                {% if 'hero_long' in landing.active_elements %}
+                                
+                                <p class="iframeClickable"  data-id="{{landing.get_active_hero_long.id}}" data-field="hero_long">{{landing.get_active_hero_long.text}}</p>
+                                {% endif %}
+                            
+                            </div>
+
+                            <ul class="nav">
+                                {% if landing.facebook %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.facebook.text}}" data-id="{{landing.get_additional.facebook.id}}" contenteditable="false" class="iframeClickable">fb</a></li>
+                                {% endif %}
+                                {% if landing.twitter %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}" contenteditable="false" class="iframeClickable">tw</a></li>
+                                {% endif %}
+                                {% if landing.instagram %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.instagram.text}}" data-id="{{landing.get_additional.instagram.id}}" contenteditable="false" class="iframeClickable">in</a></li>
+                                {% endif %}
+                                {% if landing.youtube %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.youtube.text}}" data-id="{{landing.get_additional.youtube.id}}" contenteditable="false" class="iframeClickable">yt</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--====== HERO PART ENDS ======-->
+
+
+    {% if 'about_us' in landing.active_elements %}
+
+
+    <!--====== ABOUT 2 PART START ======-->
+    
+    <section class="about-2-area about-14-area" style="margin-top: 150px;" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-9" {% if landing.text_only %}style="max-width: 100%; flex: 0 0 100%;"{% endif %}>
+                    <div class="about-2-content mt-30">
+                        <span>About us</span>
+                        <h3 class="title">About us</h3>
+                        {% for about in landing.get_about_us_objects %}
+                        <div class="item active mt-60">
+                            <h4 data-service='true' data-field="about_us" data-id={{about.id}} class="iframeClickable title">{{about.title}}</h4>
+                            <p data-service='true' data-field="about_us" data-id={{about.id}} class="iframeClickable" >{{about.text}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if not landing.text_only %}
+                    <div class="col-lg-7 col-md-3 d-flex justify-content-center align-items-center">
+                        <img alt="{% if images.t3_about %}{{ images.t3_about.alt }}{% endif %}" data-field="about_us" data-id="temp3aboutImg" class="iframeClickable w-100" src="{% if images.t3_about %}{{ images.t3_about.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}"/>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    
+    <!--====== ABOUT 2 PART ENDS ======-->
+
+    {% endif %}
+
+
+
+    {% if 'services' in landing.active_elements %}
+
+    <!--====== SERVICE 2 PART START ======-->
+    
+    <section class="service-2-area" id="service">
+        <div contenteditable="false" data-id="temp3servImg" data-field="services" class="section__bg iframeClickable"
+             {% if not landing.text_only %}
+                 style="{% if images.t3_service_back %}background-position: center{% else %}background-position: top{% endif %};
+                 background-image: url('{% if images.t3_service_back %}{{ images.t3_service_back.img_url }}{% else %}{% static 'assets/img/placeholderNew.jpg' %}{% endif %}')"
+             {% endif %}
+        ></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-3 section-title-4 text-center">
+                        <span>Our Services</span>
+                        <h3 class="title">Our Service</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                {% for service in landing.get_service_objects %}
+                <div class="col-lg-4 col-md-6 col-sm-11">
+                    <div class="service-2-item text-center mt-30 animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="0ms">
+                        <h4 data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable title">{{service.title}}</h4>
+                        <p data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable">{{service.text}}</p>
+                        <div class="service-dot">
+                            <img src="{% static 'template_3/assets/images/service-dot-2.png' %}" alt="">
+                            <div class="item">
+                                <img src="{% static 'template_3/assets/images/icon/service-icon-1.png' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+    <!--====== SERVICE 2 PART ENDS ======-->
+    {% endif %}
+
+
+    {% if 'testimonials' in landing.active_elements %}
+
+    <!--====== TESTIMONIAL PART START ======-->
+    
+    <section class="testimonial-3-area testimonial-14-area" id="testimonials">
+        <div class="container">
+            <div class="testimonial-3-active">
+                {% for testimonial in landing.get_testimonials_objects %}
+                <div class="testimonial-items">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6" style="max-width: 100%; flex: 0 0 100%;">
+                            <div class="testimonial-3-content">
+                                <h3 class="title">What our clients say <br> about our studio.</h3>
+                                <img src="{% static 'template_3/assets/images/icon/quote.png' %}" alt="">
+                                <p data-field="testimonials" data-id={{testimonial.id}} class="iframeClickable">{{testimonial.text}}</p>
+                                <div class="info">
+                                    <h5 class="title">{{testimonial.title}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+    <!--====== TESTIMONIAL PART ENDS ======-->
+    {% endif %}
+
+
+    <!--====== FOOTER PART START ======-->
+    
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-top d-block d-sm-flex  justify-content-between align-items-center">
+                        <div class="footer-logo">
+                            <p dataCompanyname="true" data-field="desc" data-id="{{landing.get_company_name.id}}" style="color: white; font-size: 40px;">{{landing.get_company_name.text}}</p>
+                        </div>
+                        <div class="footer-social">
+                            <ul>
+                                {% if landing.facebook %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.facebook.text}}" data-id="{{landing.get_additional.facebook.id}}" contenteditable="false" class="iframeClickable"><i class="fab fa-facebook-f"></i></a></li>
+                                {% endif %}
+                                {% if landing.twitter %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}" contenteditable="false" class="iframeClickable"><i class="fab fa-twitter"></i></a></li>
+                                {% endif %}
+                                {% if landing.instagram %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.instagram.text}}" data-id="{{landing.get_additional.instagram.id}}" contenteditable="false" class="iframeClickable"><i class="fab fa-instagram"></i></a></li>
+                                {% endif %}
+                                {% if landing.youtube %}
+                                <li><a data-field="addtional" href="{{landing.get_additional.youtube.text}}" data-id="{{landing.get_additional.youtube.id}}" contenteditable="false" class="iframeClickable"><i class="fab fa-youtube"></i></a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-item">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-about mt-30">
+                            <h4 class="title">Company</h4>
+                            <pclass="iframeClickable"  data-id="{{landing.get_active_hero_long.id}}" data-field="hero_long">{{landing.get_active_hero_long.text}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer-list mt-30 ml-95">
+                            <h4 class="title">Pages</h4>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#about">About us</a></li>
+                                <li><a href="#service">Service</a></li>
+                                <li><a href="#testimonials">Testimonials</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info mt-30">
+                            <h3 class="title">Contacts</h3>
+                            <ul>
+                                {% if landing.address %}
+                                <li > <i class="fal fa-map-marker-alt"></i> <span class="iframeClickable" data-field="addtional" data-id="{{landing.get_additional.address.id}}">{{landing.get_additional.address.text}}</span></li>
+                                {% endif %}
+                                {% if landing.phone %}
+                                <li><i class="fal fa-phone"></i><a style="color: #E0E0E0" class="iframeClickable" data-id="{{landing.get_additional.phone.id}}" data-field="addtional" href="tel:{{landing.get_additional.phone.text}}">{{landing.get_additional.phone.text}}</a></li>
+                                {% endif %}
+                                {% if landing.email %}
+                                <li><i class="fal fa-envelope"></i> <a style="color: #E0E0E0" class="iframeClickable" data-id="{{landing.get_additional.email.id}}" data-field="addtional" href="mailto:{{landing.get_additional.email.text}}">{{landing.get_additional.email.text}}</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    {% if landing.get_additional.map.text %}
+                    <div class="col-lg-3 col-sm-6">
+                      <div contenteditable='false' data-field="addtional" data-id="{{landing.get_additional.address.id}}" class="mapCont iframeClickable cs-footer_item">
+                        {{landing.get_additional.map.text | safe }}
+                      </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copyright">
+                        <p>Copyright © 2023 All rights reserved to Powered by <a href="{{request.scheme}}://{{ request.get_host }}">LandlyAI</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TO TOP START ======-->
+
+    <a class="back-to-top">
+        <i class="fal fa-angle-up"></i>
+    </a>
+
+    <!--====== BACK TO TOP ENDS ======-->
+
+
+    <!--====== jquery js ======-->
+    <script src="{% static 'template_3/assets/js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'template_3/assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="{% static 'template_3/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'template_3/assets/js/popper.min.js' %}"></script>
+    
+    <!--====== appear js ======-->
+    <script src="{% static 'template_3/assets/js/jquery.appear.min.js' %}"></script>
+    
+    <!--====== Slick js ======-->
+    <script src="{% static 'template_3/assets/js/slick.min.js' %}"></script>
+    
+    <!--====== wow js ======-->
+    <script src="{% static 'template_3/assets/js/wow.js' %}"></script>
+    
+    <!--====== Isotope js ======-->
+    <script src="{% static 'template_3/assets/js/isotope.pkgd.min.js' %}"></script>
+    
+    <!--====== Images Loaded js ======-->
+    <script src="{% static 'template_3/assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    
+    <!--====== Magnific Popup js ======-->
+    <script src="{% static 'template_3/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    
+    <!--====== Main js ======-->
+    <script src="{% static 'template_3/assets/js/main.js' %}"></script>
+
+    <script>
+        // Save scroll position to sessionStorage
+        window.addEventListener('unload', function() {
+            sessionStorage.setItem('iframeScrollTop', window.scrollY);
+        });
+    
+        // Restore scroll position from sessionStorage
+        window.addEventListener('load', function() {
+            var savedScrollTop = sessionStorage.getItem('iframeScrollTop');
+            if (savedScrollTop !== null) {
+                window.scrollTo(0, savedScrollTop);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,594 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+
+    <!--new Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16571818622">
+    </script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-16571818622');
+    </script>
+
+  <!-- Meta Tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon Icon -->
+  <link rel="icon" href="{% static 'assets/img/favicon.png' %}">
+  <!-- Site Title -->
+  {% block 'head' %}
+  <title>LandlyAi | The Best Platform To Create Landing Pages With AI</title>
+  <meta name="description" content="LandlyAi: Create stunning landing pages with AI, optimize design for maximum engagement and conversions effortlessly. Transform your digital presence today!">
+  <meta name="keywords" content="Create Landing Pages With AI, best landing page platform, landing page builder, landing page with ai, ai landing page generator">
+  {% endblock %}
+
+   <!-- slickslider css -->
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"/>
+ 
+   <!-- Add jQuery -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <!-- Add Slick Slider JS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+
+  <!-- <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/lightgallery.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.css' %}"> -->
+  <link rel="stylesheet" href="{% static 'assets/css/newStyle.css' %}">
+  <style type="text/css">
+    .cs-iconbox_3_list {
+        padding-top: 0px !important;
+    }
+
+    .login_button {
+        z-index: 10;
+        padding: 7px 25px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: #FF4A17;
+        border: none;
+        overflow: hidden;
+    }
+
+    .login_button:hover {
+      color: white;
+    }
+
+    .btn-beta-logo{ margin-left: 37px!important; color: white; font-size: 14px; background-color: #bf360f; }
+  </style>
+        <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '6426148630772792');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=6426148630772792&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="cs-preloader cs-center">
+    <div class="cs-preloader_in"></div>
+  </div>
+
+    <!-- Start Header Section -->
+    <div class="headerDummy"></div>
+
+
+    <div class="newContainer">
+        <div class="newHeader"> 
+            <div class="newHeaderCont">
+                <div class="newHeaderInnerCont">
+                    <div class="headerLogo">
+                        <div class="logo">
+                            <a class="logoAtagAdjust" href="{% url 'index' %}">
+                                <div class="newLogoContainer"><img class="fullWidthImages" src="{% static "assets/img/newLogoDark.svg" %}" alt=""></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menuButton ">
+                        <div class="burgerLine lineone"></div>
+                        <div class="burgerLine linetwo"></div>
+                        <div class="burgerLine linethree"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menuOnShow displayNone">
+                <div class="menuInnerCont">
+                    <div class="menuInnerDropdownCont ">
+                        <div class="orangeMenuItem">
+                            <p>ai</p> 
+
+                            <div class="menuDropIcon ">
+                                <svg width="100%" height="100%" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.99219 1.77942L8.54924 10.1959L15.1063 1.77942" stroke="#919191" stroke-width="2.3488" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="menuInnerDropdown displayNone">
+                            <div class="">
+                                <h4 class="greyMenuItem">our ai tools</h4>
+                                <a href="{% url 'logo_generator'%}">
+                                    <p>logo generator</p>
+                                </a>
+                                <a href="{% url 'image_generator'%}">
+                                    <p>image generator</p>
+                                </a>
+                                <a href="{% url 'seo_keyword'%}">
+                                    <p>seo keyword tool</p>
+                                </a>
+                                <a href="{% url 'content_creator'%}">
+                                    <p>content creator</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menuInnerDropdownCont ">
+                        <div class="orangeMenuItem">
+                            <p>solutions</p>
+                            <div class="menuDropIcon ">
+                                <svg width="100%" height="100%" viewBox="0 0 17 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.99219 1.77942L8.54924 10.1959L15.1063 1.77942" stroke="#919191" stroke-width="2.3488" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="menuInnerDropdown displayNone">
+                            <div class="">
+                                <h4 class="greyMenuItem">By Channel</h4>
+                                <a href="{% url 'search_ads'%}">
+                                    <p>SEARCH ADS</p>
+                                </a>
+                                <a href="{% url 'social_ads'%}">
+                                    <p>SOCIAL ADS</p>
+                                </a>
+                                <a href="{% url 'display_ads'%}">
+                                    <p>DISPLAY ADS</p>
+                                </a>
+                            </div>
+                            <div class="greyPartition"></div>
+                            <div class="">
+                                <h4 class="greyMenuItem">By Use Case</h4>
+                                <a href="{% url 'ecommerce_sales'%}">
+                                    <p>ECOMMERCE SALES</p>
+                                </a>
+                                <a href="{% url 'retargeting'%}">
+                                    <p>RETARGETING</p>
+                                </a>
+                                <a href="{% url 'lead_generation'%}">
+                                    <p>LEAD GENERATION</p>
+                                </a>
+                            </div>                         
+                            <div class="greyPartition"></div>
+                            
+                            
+                            <div class="">
+                                <h4 class="greyMenuItem">By Industry</h4>
+                                <a href="{% url 'education'%}">
+                                    <p>EDUCATION</p>
+                                </a>
+                                <a href="{% url 'finance'%}">
+                                    <p>FINANCE</p>
+                                </a>
+                                <a href="{% url 'real_estate'%}">
+                                    <p>REAL ESTATE</p>
+                                </a>
+                                <a href="{% url 'insurance'%}">
+                                    <p>INSURANCE</p>
+                                </a>
+                                <a href="{% url 'sports_and_events'%}">
+                                    <p>SPORTS AND EVENTS</p>
+                                </a>
+                                <a href="{% url 'software_and_tech'%}">
+                                    <p>SOFTWARE AND TECH</p>
+                                </a>
+                                <a href="{% url 'car_dealership'%}">
+                                    <p>CAR DEALERSHIP</p>
+                                </a>
+                                <a href="{% url 'health_and_beauty'%}">
+                                    <p>HEALTH AND BEAUTY</p>
+                                </a>
+                                <a href="{% url 'games_and_entertainment'%}">
+                                    <p>GAMES AND ENTERTAINMENT</p>
+                                </a>
+                                <a href="{% url 'marketing_and_advertising'%}">
+                                    <p>MARKETING AND ADVERTISING</p>
+                                </a>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="orangeMenuItem">
+                            <a href="https://landlyai.com/#pricingSection">
+                                <p>pricing</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="orangeMenuItem">
+                            <a href="https://landlyai.com/blogs/">
+                                <p>blog</p>
+                            </a>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}                    
+                        <div class="profileIcon profileIconDesk">
+                            <svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>user-profile-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="drop" fill="#f9f9f9" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C269.912851,3.55271368e-14 324.175019,22.4761259 364.18278,62.4838867 C404.190541,102.491647 426.666667,156.753816 426.666667,213.333333 C426.666667,331.15408 331.15408,426.666667 213.333333,426.666667 C95.5125867,426.666667 2.84217094e-14,331.15408 2.84217094e-14,213.333333 C2.84217094e-14,95.5125867 95.5125867,3.55271368e-14 213.333333,3.55271368e-14 Z M234.666667,234.666667 L192,234.666667 C139.18529,234.666667 93.8415802,266.653822 74.285337,312.314895 C105.229171,355.70638 155.977088,384 213.333333,384 C270.689579,384 321.437496,355.70638 352.381644,312.31198 C332.825087,266.653822 287.481377,234.666667 234.666667,234.666667 L234.666667,234.666667 Z M213.333333,64 C177.987109,64 149.333333,92.653776 149.333333,128 C149.333333,163.346224 177.987109,192 213.333333,192 C248.679557,192 277.333333,163.346224 277.333333,128 C277.333333,92.653776 248.679557,64 213.333333,64 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
+                            <div class="profileIconDetail">
+                                <p class="profButton profEmail">
+                                    {% if user.email|length > 13 %}
+                                        <p>{{ user.email|slice:"13" }}...</p>
+                                    {% else %}
+                                        <p>{{ user.email }}</p>
+                                    {% endif %}
+                                </p>
+                                <p onclick="location.href='{% url 'allProjects' %}'" class="profButton profClickable">projects</p>
+                                <p onclick="location.href='{% url 'logout' %}'"  class="profButton profClickable">logout</p>
+                                <p class="insignific">For any inquiries or assistance, feel free to contact us.</p>
+                            </div>                   
+                        </div>
+
+                        <div class="profileIconPhone">
+                            <p class="profButton profEmail">
+                                {% if user.email|length > 13 %}
+                                    <p>{{ user.email|slice:"13" }}...</p>
+                                {% else %}
+                                    <p>{{ user.email }}</p>
+                                {% endif %}
+                            </p>
+                            <p onclick="location.href='{% url 'allProjects' %}'" class="profButton profClickable">projects</p>
+                            <p onclick="location.href='{% url 'logout' %}'"  class="profButton profClickable">logout</p>
+                            <p class="insignific">For any inquiries or assistance, feel free to contact us.</p>
+                        </div>
+
+
+                    {% else %}
+                        <a class="tryOurServiceButtonAtag" href="{% if user.is_subscribe %}{% url 'allProjects' %}{% else %}{% url 'login' %}{% endif %}">
+                            <button type="button" class="tryOurServiceButton">                            
+                                try our service                            
+                            </button>
+                        </a>
+                    {% endif %}
+                    {% comment %} acc button {% endcomment %}
+                   
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+<!-- End Header Section -->
+</div>
+{% block 'body' %}{% endblock %}
+
+<!-- Start Footer -->
+<div class="newContainer">
+
+<div id="contact" class="ContactUsContainer">
+    <h4>Contact Us</h4>
+    <div class="ContactformContainer">
+    <form id="cs-form" data-url="{% url 'contact_us' %}"  method="POST"  action="">
+        <input type="hidden" name="access_key" value="6d7bc3fc-6190-43c5-8298-89ac5ef74213" />
+        <input type="checkbox" name="botcheck" style="display: none;" />
+        <!-- Optional: Can be type="hidden" or type="text" for subject -->
+        <input type="hidden" name="subject" value="Submission from Laralink Template">
+
+        <div class="allInputsContainer">
+            <div class="allInputs">
+                <input name="full-name" required type="text" placeholder="full name*">
+                <input name="number" required type="text" placeholder="MOBILE*">
+                <input name="email" required id="email" type="text" placeholder="email*">
+                <input name="subject" required id="subject" type="text" placeholder="subject*">
+            </div>
+            <textarea name="message" required id="message" placeholder="message*" resize rows="4" cols="50"></textarea> 
+        </div>
+        <button class="allCLickableElements" id="submit" type="submit">send</button>
+        <div id="cs-result"></div>
+
+    </form>
+    </div>
+</div>
+
+
+
+<div class="newFooterContainer">
+    <div class="pcViewFooterContainer">
+        <div class="">
+            <div class="footerAbout">
+                
+                <div class="footerlogoNew">
+                    <a class="logoAtagAdjust" href="{% url 'index' %}">
+                        <div class="newLogoContainer newLogoContainerFooter"><img class="fullWidthImages" src="{% static "assets/img/newLogoDark.svg" %}" alt=""></div>
+                    </a>
+                </div>
+                
+                <p>LandlyAI, our revolutionary AI-based landing page builder, streamlines the process and empowers you to craft tailor-made landing pages for your business.</p>
+            </div>
+            <div class="footerContact">
+                <h4>Contact Us</h4>
+                <div class="footerInfo">
+                    <div class="footerIcon">
+                        <svg width="100%" height="100%" viewBox="0 0 25 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_21_2)">
+                            <path d="M12.469 0.148438C5.92921 0.148438 0.639893 4.91343 0.639893 10.805C0.639893 18.7974 12.469 30.5957 12.469 30.5957C12.469 30.5957 24.2982 18.7974 24.2982 10.805C24.2982 4.91343 19.0089 0.148438 12.469 0.148438ZM12.469 14.6109C10.137 14.6109 8.24434 12.9058 8.24434 10.805C8.24434 8.70412 10.137 6.99907 12.469 6.99907C14.8011 6.99907 16.6937 8.70412 16.6937 10.805C16.6937 12.9058 14.8011 14.6109 12.469 14.6109Z" fill="#FF4A17"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_21_2">
+                            <rect width="23.6583" height="30.4473" fill="white" transform="translate(0.639893 0.148438)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <p>LANDLYAI s.r.o., Identifikační číslo 19518803, Pod Habrovou 445/3, Hlubočepy, 152 00 Praha 5</p>
+                </div>
+        
+                <a href="mailto:{{contact.text}}">
+                    <div class="footerInfo">
+                        <div class="footerIcon">
+                            <svg width="100%" height="100%" viewBox="0 0 31 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_21_4)">
+                                <path d="M30.0278 10.3367V23.1165C30.0278 24.675 28.7175 25.9501 27.116 25.9501H3.8217C2.22022 25.9501 0.909912 24.675 0.909912 23.1165V6.11456C0.909912 4.55606 2.22022 3.28091 3.8217 3.28091H18.5262C18.4389 3.7343 18.3807 4.21602 18.3807 4.69774C18.3807 6.79464 19.327 8.65068 20.812 9.95416L15.4689 13.1987L3.8217 6.11456V8.94821L15.4689 16.0323L23.1851 11.3285C23.9713 11.6118 24.7866 11.7819 25.6601 11.7819C27.3053 11.7819 28.8049 11.2293 30.0278 10.3367ZM21.2924 4.69774C21.2924 7.04967 23.2433 8.94821 25.6601 8.94821C28.0769 8.94821 30.0278 7.04967 30.0278 4.69774C30.0278 2.34581 28.0769 0.447266 25.6601 0.447266C23.2433 0.447266 21.2924 2.34581 21.2924 4.69774Z" fill="#FF4A17"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_21_4">
+                                <rect width="29.1179" height="25.5028" fill="white" transform="translate(0.909912 0.447266)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <p>landlyai.sro@gmail.com</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footerMobView">
+            <div class="footerLinks">
+                <a href="">ai</a>
+                <a href="">Solutions</a>
+                <a href="https://landlyai.com/#pricingSection">pricing</a>
+                <a href="https://landlyai.com/blogs/">blog</a>
+            </div>
+            <div class="footerSocial">
+              
+                <svg style="cursor: pointer;" onclick="window.open('{{settings.youtube}}', '_blank')" width="100%" height="100%" viewBox="0 0 74 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M66.0774 8.42591C65.4901 5.18092 62.6916 2.81778 59.444 2.08002C54.5841 1.04831 45.5898 0.310547 35.8585 0.310547C26.1329 0.310547 16.9947 1.04831 12.129 2.08002C8.88718 2.81778 6.08295 5.03106 5.49561 8.42591C4.90252 12.1147 4.31519 17.279 4.31519 23.9189C4.31519 30.5587 4.90252 35.7231 5.63957 39.4119C6.23266 42.6568 9.03113 45.02 12.273 45.7577C17.4323 46.7895 26.2769 47.5272 36.0082 47.5272C45.7395 47.5272 54.5841 46.7895 59.7434 45.7577C62.9853 45.02 65.7837 42.8067 66.3768 39.4119C66.9642 35.7231 67.7012 30.4089 67.8509 23.9189C67.5515 17.279 66.8144 12.1147 66.0774 8.42591ZM27.9007 34.2475V13.5902L45.8835 23.9189L27.9007 34.2475Z" fill="#FF4A17"/>
+                </svg>
+               
+                <svg style="cursor: pointer;" onclick="window.open('{{settings.instagram}}', '_blank')" width="100%" height="100%" viewBox="0 0 53 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.1843 0.821289C9.66383 0.821289 3.54889 6.94215 3.54889 14.4699V33.3679C3.54889 40.8956 9.66383 47.0164 17.1843 47.0164H36.064C43.5844 47.0164 49.6994 40.8956 49.6994 33.3679V14.4699C49.6994 6.94215 43.5844 0.821289 36.064 0.821289H17.1843ZM39.2106 9.22041C40.3644 9.22041 41.3084 10.1653 41.3084 11.3202C41.3084 12.4751 40.3644 13.42 39.2106 13.42C38.0568 13.42 37.1129 12.4751 37.1129 11.3202C37.1129 10.1653 38.0568 9.22041 39.2106 9.22041ZM26.6241 12.3701C32.9908 12.3701 38.1617 17.546 38.1617 23.9189C38.1617 30.2917 32.9908 35.4677 26.6241 35.4677C20.2575 35.4677 15.0865 30.2917 15.0865 23.9189C15.0865 17.546 20.2575 12.3701 26.6241 12.3701ZM26.6241 14.4699C21.4217 14.4699 17.1843 18.7114 17.1843 23.9189C17.1843 29.1263 21.4217 33.3679 26.6241 33.3679C31.8265 33.3679 36.064 29.1263 36.064 23.9189C36.064 18.7114 31.8265 14.4699 26.6241 14.4699Z" fill="#FF4A17"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="footerLine"></div>
+
+
+    <div class="footerCopyright">
+        <h4>{{settings.copyright}}</h4>
+        <h4 class="footerTerms">
+            <span><a href="{% url 'page' slug='terms' %}">Terms & Conditions</a></span> 
+            <span class="desktopOnly">|</span>
+            <span><a href="{% url 'page' slug='privacy' %}">Privacy Policy</a></span>
+        </h4>
+    </div>
+</div>
+
+
+</div>
+
+  <!-- Script -->
+  <script>
+    let allMenuDrop = document.querySelectorAll('.menuDropIcon')
+    let menuInner = document.querySelectorAll('.menuInnerDropdown')
+    let menuButton = document.querySelector('.menuButton')
+    let menuOnShow = document.querySelector('.menuOnShow')
+    let menuInnerDropdownCont = document.querySelectorAll('.menuInnerDropdownCont')
+    let landlyTutorialSecImg = document.querySelector('.landlyTutorialSecImg')
+    let tutorialVideoPopup = document.querySelector('.tutorialVideoPopup')
+    let tutorialVideoiframe = document.querySelector('.tutorialVideoPopup iframe')
+    let videoCloseButton = document.querySelector('.videoCloseButton')
+    let newHeaderCont = document.querySelector('.newHeaderCont')
+
+
+    menuInnerDropdownCont.forEach(item => {
+        
+        let menuInnerDropdown =  item.querySelector('.menuInnerDropdown')
+        let menuDropIcon =  item.querySelector('.menuDropIcon')
+        
+        
+        
+        item.addEventListener('click',()=>{
+            menuInnerDropdown.classList.toggle('displayNone')
+            menuDropIcon.classList.toggle('dropRotate')
+            
+            menuInnerDropdownCont.forEach(otherItem => {
+                if (otherItem !== item) {
+                    let otherMenuInnerDropdown =  otherItem.querySelector('.menuInnerDropdown')
+                    let otherMenuDropIcon =  otherItem.querySelector('.menuDropIcon')
+                    
+                    otherMenuInnerDropdown.classList.add('displayNone')
+                    otherMenuDropIcon.classList.remove('dropRotate')
+                    
+                }
+            })                
+        
+        })
+    });
+
+    menuButton.addEventListener('click',()=>{
+        menuOnShow.classList.toggle('displayNone')
+        menuButton.classList.toggle('menubuttonHover')
+    })
+
+    if(landlyTutorialSecImg){
+        landlyTutorialSecImg.addEventListener('click',()=>{
+            tutorialVideoPopup.classList.add('tutorialVideoPopupActive')
+            videoCloseButton.classList.remove('displayCloseNone')
+        })
+    }
+
+    document.addEventListener('click',(event)=>{
+        
+        if(landlyTutorialSecImg){
+            if (!event.target.closest('.landlyTutorialSecImg') && tutorialVideoPopup.classList.contains('tutorialVideoPopupActive')) {
+                tutorialVideoPopup.classList.remove('tutorialVideoPopupActive');
+                videoCloseButton.classList.add('displayCloseNone')
+
+            }
+        }
+
+        if (!menuOnShow.contains(event.target) && !newHeaderCont.contains(event.target)) {
+            menuOnShow.classList.add('displayNone');
+            menuInner[0].classList.add('displayNone');
+            menuInner[1].classList.add('displayNone');
+            menuButton.classList.remove('menubuttonHover')
+            allMenuDrop[0].classList.remove('dropRotate')
+            allMenuDrop[1].classList.remove('dropRotate')
+
+        }
+
+        // menuInnerDropdownCont.forEach(menuInnerDropdownC => {
+            
+        //     let menuInnerDropdown = menuInnerDropdownC.querySelector('.menuInnerDropdown')
+
+        //     if (!menuInnerDropdown.contains(event.target) && !newHeaderCont.contains(event.target) && !menuOnShow.classList.contains('displayNone')  ) {
+        //         console.log('222')
+        //     }
+        // });
+        
+        
+    })
+
+
+    if(videoCloseButton){
+        videoCloseButton.addEventListener('click', () =>{
+            tutorialVideoiframe.setAttribute('src', 'https://www.youtube.com/embed/WSjd2H1rKY4');
+        })
+    }
+
+
+
+
+
+    // AI POWERED SEC 
+
+    let contentCreator = document.querySelector('.contentCreator')
+    let seoKeyword = document.querySelector('.seoKeyword')
+    let imageGen = document.querySelector('.imageGen')
+    let logoGen = document.querySelector('.logoGen')
+    
+    let aiToolDisplaySvg = document.querySelector('.aiToolDisplaySvg')
+    let aiToolDisplayParagraph   = document.querySelector('.aiToolDisplayFlex p')
+    let aiToolSelection   = document.querySelectorAll('.aiToolSelection p')
+    let aiToolSelectionButton   = document.querySelector('.tryOutButton')
+
+
+    aiToolSelection.forEach(allTool => {
+        allTool.addEventListener('click', () =>{
+            // cosole.log('hee')
+            allTool.classList.add('aiToolSelectionActive')
+            aiToolSelection.forEach(rest => {
+                if(rest !== allTool ){
+                    rest.classList.remove('aiToolSelectionActive')
+                }
+            })
+        })
+
+    });
+
+    logoGen.addEventListener('click', () =>{
+        aiToolDisplayParagraph.textContent="Our AI tool generates professional logos in seconds"
+        aiToolSelectionButton.href="{% url 'logo_generator' %}"
+    })
+    seoKeyword.addEventListener('click', () =>{
+        aiToolDisplayParagraph.textContent="Instantly elevate your SEO strategy with our AI-powered keyword research tool"
+        aiToolSelectionButton.href="{% url 'seo_keyword' %}"
+        
+    })
+    imageGen.addEventListener('click', () =>{
+        aiToolDisplayParagraph.textContent="Generate customized images with our AI tool to meet your needs"
+        aiToolSelectionButton.href="{% url 'image_generator' %}"
+    })
+    contentCreator.addEventListener('click', () =>{
+        aiToolDisplayParagraph.textContent=" Generate high-quality written material for pages, blog posts, and articles"
+        aiToolSelectionButton.href="{% url 'content_creator' %}"
+    })
+
+
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.slick-slider').slick({
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+
+        prevArrow: $('.reviewButtons .left'),
+        nextArrow: $('.reviewButtons .right'),
+        
+            responsive: [
+                {
+                    breakpoint: 980, // breakpoint for phones
+                    settings: {
+                        slidesToShow: 1, // Number of slides shown on phones
+                        slidesToScroll: 1, // Number of slides to scroll on phones
+                    
+                    }
+                }
+            ]
+    
+        });
+    });
+</script>
+
+<script>
+    tryOurServiceButtons = document.querySelectorAll('.tryOurServiceButton')
+
+    tryOurServiceButtons.onclick = "hello"
+
+    tryOurServiceButtons.forEach(function(tryOurServiceButton) {
+        tryOurServiceButton.onclick = function() {
+            location.href="{% if user.is_authenticated %}{% url 'allProjects' %}{% else %}{% url 'login' %}{% endif %}"
+        };
+    });
+
+    console.log(tryOurServiceButtons)
+</script>
+
+
+  <script src="{% static 'assets/js/plugins/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/isotope.pkg.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery.slick.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery.counter.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/lightgallery.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/wow.min.js' %}"></script>
+  {% comment %} <script src="{% static 'assets/js/plugins/gsap.min.js' %}"></script> {% endcomment %}
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

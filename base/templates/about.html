@@ -1,0 +1,58 @@
+{% extends 'layout/layout.html' %}
+{% load static %}
+
+{% block 'head' %}
+<title>LandlyAi Enhance Your Landing Pages with Artificial Intelligence</title>
+<meta name="description" content="LandlyAi's revolutionizes landing page creation, utilizing advanced AI technology for seamless and efficient generation of highly optimized landing pages.">
+<meta name="keywords" content="Landing Pages with Artificial Intelligence, landing page ai, best landing page builder">
+{% endblock %}
+
+
+
+{% block 'body' %}
+<!-- Start Hero -->
+<div class="cs-page_heading cs-style1 cs-center text-center cs-bg" data-src="{% static 'assets/img/about_hero_bg.jpeg' %}">
+  <div class="container">
+    <div class="cs-page_heading_in">
+      <h1 class="cs-page_title cs-font_50 cs-white_color">About Us</h1>
+      <ol class="breadcrumb text-uppercase">
+        <li class="breadcrumb-item">
+          <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active">About Us</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<!-- End Hero -->
+<div class="cs-height_150 cs-height_lg_80"></div>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-5 col-lg-7">
+        <div class="cs-section_heading cs-style1">
+          <h3 class="cs-section_subtitle">{{settings.about_sub_title}}</h3>
+          <h2 class="cs-section_title">{{settings.about_title}}</h2>
+          <div class="cs-height_30 cs-height_lg_20"></div>
+          <p class="cs-m0">{{settings.about_text}}</p>
+          <div class="cs-height_30 cs-height_lg_30"></div>
+          <div class="cs-separator cs-accent_bg"></div>
+          <div class="cs-height_25 cs-height_lg_40"></div>
+        </div>
+      </div>
+      <div class="col-lg-5 offset-xl-2">
+        <img src="{% static 'assets/img/about_img_1.jpeg' %}" alt="" class="w-100 cs-radius_15">
+        <div class="cs-height_25 cs-height_lg_25"></div>
+      </div>
+      <div class="col-lg-7">
+        <img src="{% static 'assets/img/about_img_2.jpeg' %}" alt="" class="w-100 cs-radius_15">
+        <div class="cs-height_25 cs-height_lg_25"></div>
+      </div>
+      <div class="col-lg-5">
+        <img src="{% static 'assets/img/about_img_3.jpeg' %}" alt="" class="w-100 cs-radius_15">
+        <div class="cs-height_25 cs-height_lg_25"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

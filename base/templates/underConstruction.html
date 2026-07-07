@@ -1,0 +1,89 @@
+{% extends 'layout/layoutAI.html' %}
+{% load static %}
+{% block 'body' %}
+<!-- Start Hero -->
+
+<div class="cs-page_heading cs-style1 cs-center text-center cs-bg" data-src="{% static 'assets/img/about_hero_bg.jpeg' %}">
+  <div class="container">
+    <!-- <h1>The Future of Writing is Here</h1> -->
+    <h2>The Future of <span class="cs-accent_color">AI</span> Landing Page Builder is Here</h2>
+    <!-- <h4>The Future of Writing is Here</h4> -->
+    <!-- <h4><span class="cs-accent_color">AI</span> Content Automation At Its Best</h4> -->
+    <h4>One-Stop Solution for Custom <span class="cs-accent_color">AI</span> Based Landing Pages Builder</h4>
+    <h4><span class="cs-accent_color">AI</span> Based Content Creator</h4>
+    <h4><span class="cs-accent_color">AI</span> Based SEO Keywords Generator</h4>
+    <h4><span class="cs-accent_color">AI</span> Based Logo Generator</h4>
+    <h4><span class="cs-accent_color">AI</span> Based Image Generator</h4>
+    <div class="cs-height_30 cs-height_lg_30"></div>
+    <h5><span style="font-size: 22px;">We Will Be Back Soon!</span><br><span class="cs-accent_color" >Subscribe Below to Get an Early Bird Access and Discount Offers</span></h5>
+    <!-- <p>We are using this time to give our website a revamp! Please leave us your email and we will let you know when we are back.</p> -->
+    <form class="SubscriptionForm" method="post">
+      {% csrf_token %}
+      <input class="inputText"  type="email" name="email" placeholder="Your Email" required>
+      <input class="login_button submitButton" type="submit" value="NOTIFY ME!">
+   </form>
+  <div id="response">
+  </div>
+    <!-- <h4><span class="cs-accent_color">AI</span> Content Creation, <span class="cs-accent_color">AI</span> SEO Writer & <span class="cs-accent_color">AI</span> Image Crafting <span class="cs-accent_color"> Launching Soon </span>.</h4> -->
+  </div>
+</div>
+<!-- End Hero -->
+
+<!-- Start services Project -->
+<section id="services-scroll">
+
+   <div class="container">
+     <div class="cs-iconbox_3_list" style="padding-left: 0px;">
+      <div class="cs-hover_tab active">
+         <a class="cs-iconbox cs-style3 cs-style3-row">
+               <img class="imagesAi" src="{% static 'assets/img/mobile_landing_images.png' %}">
+           <div class="cs-iconbox_in">
+             <h2 class="cs-iconbox_title">Create a stunning landing page with <span class="cs-accent_color">AI</span> effortlessly</h2>
+             <div class="cs-iconbox_subtitle"><span class="cs-accent_color">Landly AI</span> is intuitive platform, enabling you to effortlessly craft visually stunning, conversion-focused landing pages without the need for coding, design, or copywriting skills</div>
+           </div>
+         </a>
+       </div>
+       <div class="cs-hover_tab">
+         <a class="cs-iconbox cs-style3 cs-style3-row second">
+            <img class="imagesAi2" src="{% static 'assets/img/ai_images.png' %}">
+           <div class="cs-iconbox_in">
+             <h2 class="cs-iconbox_title">Get Simple to Complex Content and Images in seconds</h2>
+             <div class="cs-iconbox_subtitle">Say goodbye to manual content planning and image creation with our new AI Based Content Creator, AI Based SEO Keywords Generator and AI Based Logos and Images Creation feature. We're putting you in the best position to create complex content plans with crisp images and logos with just a few simple clicks. <span class="cs-accent_color">Landly AI</span> is designed to help streamline your landing pages creation process and save marketers hours. Your content and images will always be targeted, relevant, and engaging.</div>
+           </div>
+         </a>
+       </div>
+     </div>
+     <div class="cs-height_50 cs-height_lg_50"></div>
+   </div>
+ </section>
+ <!-- End services Project -->
+ <script>
+
+
+   document.querySelector('form').addEventListener('submit', async (e) => {
+       e.preventDefault();
+       const responseContainer = document.querySelector('#response');
+   
+       responseContainer.innerHTML=''
+   
+       if(responseContainer.innerHTML.replace(/\s+/g, ' ').trim() ===""){
+         responseContainer.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block; shape-rendering: auto;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><path d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#ffffff" stroke="none">  <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" keyTimes="0;1" values="0 50 51;360 50 51"></animateTransform></path>'
+       }
+       let user_input = document.querySelector('input[name="email"]').value;
+       
+       const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+       const response = await fetch('/subscription/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        body: JSON.stringify({ email: user_input })
+       });
+       const data = await response.json();
+       console.log(data);
+
+        // Clear the container and append the styled elements
+        responseContainer.innerHTML = 'Early Bird Access Request Submitted Successfully.'; // Clear the container
+        document.querySelector('input[name="email"]').value="";
+      });
+  </script>
+{% endblock %}

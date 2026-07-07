@@ -1,0 +1,22 @@
+
+server {
+    listen 443;
+    server_name DOMAIN;
+    root ROOT;
+    index FILENAME;
+
+    {% comment %} ssl_certificate "/etc/letsencrypt/live/DOMAIN/fullchain.pem";
+    ssl_certificate_key "/etc/letsencrypt/live/DOMAIN/privkey.pem";
+    ssl_session_cache shared:SSL:1m;
+    ssl_session_timeout  10m;
+    ssl_ciphers PROFILE=SYSTEM;
+    ssl_prefer_server_ciphers on; {% endcomment %}
+
+    location /static/ {
+        alias /var/www/landing_ai/static/;
+    }
+
+    location /media/ {
+        alias /var/www/landing_ai/media/;
+    }
+}

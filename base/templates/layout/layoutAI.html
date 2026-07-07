@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <!-- Meta Tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon Icon -->
+  <link rel="icon" href="{% static 'assets/img/favicon.png' %}">
+  <!-- Site Title -->
+  <title>LandlyAI</title>
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/lightgallery.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/plugins/animate.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <style type="text/css">
+    .cs-iconbox_3_list {
+        padding-top: 0px !important;
+    }
+
+    .login_button {
+        z-index: 10;
+        padding: 7px 25px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: #FF4A17;
+        border: none;
+        overflow: hidden;
+    }
+
+    .login_button:hover {
+      color: white;
+    }
+
+    .btn-beta-logo{ margin-left: 37px!important; color: white; font-size: 14px; background-color: #bf360f; }
+  </style>
+        <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '6426148630772792');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=6426148630772792&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="cs-preloader cs-center">
+    <div class="cs-preloader_in"></div>
+  </div>
+
+    <!-- Start Header Section -->
+<header class="cs-site_header cs-style1 text-uppercase cs-sticky_header">
+  <div class="cs-main_header">
+    <div class="container">
+      <div class="cs-main_header_in">
+        <div class="cs-main_header_left">
+          <a class="cs-site_branding" href="{% url 'index' %}">
+            <span
+              style="text-transform: capitalize"
+              class="company-name-header"
+            >
+              <h4>
+                Landly
+                <span class="cs-accent_color"> AI </span>
+                <!-- <span
+                  class="position-absolute translate-middle badge btn-beta-logo"
+                 
+                >
+                  BETA
+                </span> -->
+              </h4>
+            </span>
+          </a>
+        </div>
+        <div class="cs-main_header_right">
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- End Header Section -->
+
+{% block 'body' %}{% endblock %}
+
+<!-- Start Footer -->
+  <footer class="cs-fooer">
+    <div class="container">
+      <div class="cs-bottom_footer">
+        <div class="cs-bottom_footer_left">
+          <div class="cs-copyright">{{settings.copyright}}</div>
+        </div>
+        <div class="cs-bottom_footer_right">
+          <ul class="cs-footer_links cs-mp0">
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <span class="cs-scrollup">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 10L1.7625 11.7625L8.75 4.7875V20H11.25V4.7875L18.225 11.775L20 10L10 0L0 10Z" fill="currentColor"/>
+    </svg>
+  </span>
+
+  <!-- Start Video Popup -->
+  <div class="cs-video_popup">
+    <div class="cs-video_popup_overlay"></div>
+    <div class="cs-video_popup_content">
+      <div class="cs-video_popup_layer"></div>
+      <div class="cs-video_popup_container">
+        <div class="cs-video_popup_align">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="about:blank"></iframe>
+          </div>
+        </div>
+        <div class="cs-video_popup_close"></div>
+      </div>
+    </div>
+  </div>
+  <!-- End Video Popup -->
+
+  <!-- Script -->
+  <script src="{% static 'assets/js/plugins/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/isotope.pkg.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery.slick.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery.counter.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/lightgallery.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/wow.min.js' %}"></script>
+  {% comment %} <script src="{% static 'assets/js/plugins/gsap.min.js' %}"></script> {% endcomment %}
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

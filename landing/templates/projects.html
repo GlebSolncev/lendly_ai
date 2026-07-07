@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html style='background:white;' lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Barlow:regular%7CBarlow:500%7CBarlow:600%7CBarlow:700%7CBarlow:800%7CLato:300%7CLato:regular%7CLato:regular%7CLato%7CLato%7CLato:900%7CLato:900%7CLato:700%7CLato:900%7CLato:900">
+    <link rel="stylesheet"
+          href="http://fonts.googleapis.com/css?family=Barlow:regular%7CBarlow:500%7CBarlow:600%7CBarlow:700%7CBarlow:800%7CLato:300%7CLato:regular%7CLato:regular%7CLato%7CLato%7CLato:900%7CLato:900%7CLato:700%7CLato:900%7CLato:900">
+    <link type="text/css"
+          href="/static/editor/package/run_css/10d8f190e26c18ca7d5da8683bf4c73277463f0205c01c25da68ad5bfa6d06f1/slidekick/live/editor/xfalse/xfalse/run.css"
+          rel="stylesheet">
+        <!-- Meta Pixel Code -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '6426148630772792');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=6426148630772792&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body style='background:white;'>
+
+<a style='color: black;
+position: fixed;
+top: 1em;
+left: 1em;'
+
+href="{% url 'index' %}">
+    <span style="text-transform: capitalize;" class="company-name-header"><h4 style="color: black">Landly<span class="cs-accent_color">AI</span></h4></span>
+</a>
+
+<form action="{% url 'project_add' %}" method="POST">
+    {% csrf_token %}
+    <div class="bubble-element Popup bubble-r-container flex column"
+         style="top: 50px; left: 0px; right: 0px; position: absolute; margin-left: auto; margin-right: auto; width: calc(100% - 20px); min-width: 280px; max-width: 474px; min-height: 50px; height: auto; overflow-y: auto; z-index: 2002; justify-content: flex-start; filter: none; border-radius: 4px; background-color: rgb(255, 255, 255); opacity: 1;">
+        <div class="bubble-element Group bubble-r-container flex column"
+             style="z-index: 6; align-self: center; min-width: 280px; order: 3; min-height: 50px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 32px); margin: 0px 16px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">
+            <div class="bubble-element Text bubble-r-vertical-center"
+                 style="z-index: 9; align-self: center; min-width: 80%; max-width: 380px; order: 1; min-height: 46px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 0px); margin: 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 24px; font-weight: bold; color: rgb(0, 0, 0); text-align: center; line-height: 1; border-radius: 0px; opacity: 1;">
+                <div>Choose project or create a new one</div>
+            </div>
+        </div>
+        <div class="bubble-element RepeatingGroup bubble-rg"
+             style="align-self: flex-start; min-width: 80%; order: 6; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 32px); margin: 16px 16px 0px; gap: 0px; grid-auto-rows: minmax(max-content, 40px); grid-template-columns: repeat(1, minmax(0px, 1fr)); grid-auto-flow: row; overflow: auto; border-radius: 0px; opacity: 1;">
+
+            {% for landing in user.landings.all %}
+            <div class="bubble-element GroupItem bubble-r-container flex row group-item entry-7"
+             style="justify-content: space-around; box-sizing: content-box; min-height: 40px; border-top: 0px none rgba(150, 150, 150, 0.5); margin-top: 0px; border-left-style: none;">
+                <div class="bubble-element Group bubble-r-container flex row clickable-element"
+                     style="align-self: flex-start; min-width: 80%; order: 2; min-height: 32px; width: 80%; flex-grow: 1; height: max-content; margin: 0px 0px 15px; justify-content: space-between; overflow: visible; background: none rgb(246, 247, 249); border-radius: 5px; opacity: 1; cursor: pointer;">
+                    <div class="bubble-element Text bubble-r-vertical-center"
+                         style="align-self: flex-start; min-width: 80%; order: 4; min-height: 45px; width: 80%; flex-grow: 1; height: max-content; margin: 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 16px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 10px 8px; border-radius: 3px; border-left: 10px solid rgba(255, 74, 23, {% if landing == user.chosen_landing %}1{% else %}0{% endif %}); background: none rgb(246, 247, 249); opacity: 1; display: flex; flex-direction: row; justify-content: space-between;">
+                        <a href="{% url 'editor' id=landing.id %}">{{landing.title}}</a>
+
+                        <a href="{% url 'delete' id=landing.id %}" style="color: red;">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="bubble-element Group bubble-r-container flex row"
+             style="z-index: 43; align-self: center; min-width: 80%; order: 7; min-height: 42px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 32px); margin: 16px 16px 36px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">
+            <input type="text" class="bubble-element Input a1687242299888x4640"
+                   style="z-index: 41; align-self: flex-start; min-width: 130px; order: 1; min-height: 42px; width: 130px; flex-grow: 1; height: 42px; margin: 0px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 10px; font-family: Lato; font-size: 16px; font-weight: 400; color: rgb(0, 0, 0); text-align: center; padding: 0px 4px; opacity: 1;"
+                   placeholder="Project name" maxlength="" name="title">
+                   
+                {% if projectCount < projectAddLimit %}
+                    <button class="bubble-element Button clickable-element"
+                        style="z-index: 42; align-self: flex-start; min-width: 119px; max-width: 119px; order: 2; min-height: 42px; width: 119px; flex-grow: 1; height: max-content; margin: 0px 0px 0px 8px; padding: 0px; cursor: pointer; background: none #FF4A17; border: none; text-align: center; font-family: Lato; font-size: 16px; font-weight: 400; color: rgb(255, 255, 255); line-height: 1; border-radius: 10px; opacity: 1;">
+                        Create new
+                    </button>
+                {% else %}
+                    <button type="button" class="bubble-element Button clickable-element"
+                        style="z-index: 42; align-self: flex-start; min-width: 119px; max-width: 119px; order: 2; min-height: 42px; width: 119px; flex-grow: 1; height: max-content; margin: 0px 0px 0px 8px; padding: 0px; cursor: pointer; background: none #8F8F8F; border: none; text-align: center; font-family: Lato; font-size: 16px; font-weight: 400; color: rgb(255, 255, 255); line-height: 1; border-radius: 10px; opacity: 1;">
+                        Limit reached
+                    </button>
+                {% endif %}
+        </div>
+    </div>
+</form>
+</body>
+</html>

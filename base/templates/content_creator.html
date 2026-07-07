@@ -1,0 +1,156 @@
+{% extends 'layout/layoutNew.html' %}
+{% load static %}
+
+{% block 'head' %}
+<title>LandlyAi : Your AI-Powered Tool for Seamless Content Creation</title>
+<meta name="description" content="Discover LandlyAi: Your go-to AI-powered content creation tool, streamlining the process with cutting-edge technology for seamless and engaging content production.">
+<meta name="keywords" content="content creation tool, ai content creator, content creator tool">
+{% endblock %}
+
+{% block 'body' %}
+
+<style>
+  #response p {
+    text-align: left!important;
+    padding: 1em!important;
+  }
+
+  
+#response{
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 1em auto;
+}
+
+#response p{
+  background-color: #242424;
+  padding: 0.41em 2em;
+  border-radius: 0.41em;
+  margin: 0;
+}
+
+.submitButton{
+  all:unset;
+  background-color: #aaff79;
+  padding: 0.41em 1.3em;
+  border-radius: 0.41em;
+  margin: 0;
+  color:#000000;
+}
+
+.inputText{
+  all:unset;
+  width:25%;
+  text-align:left;
+  background-color: #ffffff;
+  padding: 0.41em 2em;
+  border-radius: 0.41em;
+  margin: 0;
+  color:rgb(0, 0, 0);
+}
+
+.gptForm{
+  display: flex;
+  gap:0.8em;
+  justify-content: center;
+  width:100%;
+}
+
+.formHeading{
+  margin: 0.3em 0;
+  font-size: 4.9em;
+  text-align:center;
+}
+
+.gptFormHeightAdj{
+  height:70vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+@media (max-width:633px){
+  .gptForm{
+    flex-direction: column;
+  }
+  .gptForm .submitButton{
+      text-align: center;
+  }
+
+  .inputText{
+    width:auto;  
+    text-align:center;
+  }
+
+}
+</style>
+
+
+<!-- Start Hero -->
+<div class="cs-page_heading cs-style1 cs-center text-center cs-bg" >
+  <div class="newContainer gptFormHeightAdj">
+    
+
+
+    <h1 class="formHeading">Content Creator</h1>
+    <form class="gptForm" method="post">
+        {% csrf_token %}
+        <input class="inputText"  type="text" name="user_input" placeholder="Describe Your topic">
+        <input class="submitButton" type="submit" value="Generate Content">
+    </form>
+    <div id="response">
+      
+    </div>
+
+
+
+
+
+  </div>
+</div>
+<!-- End Hero -->
+
+<script>
+
+
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const responseContainer = document.querySelector('#response');
+
+    responseContainer.innerHTML=''
+
+    if(responseContainer.innerHTML.replace(/\s+/g, ' ').trim() ===""){
+      responseContainer.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block; shape-rendering: auto;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><path d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#ffffff" stroke="none">  <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" keyTimes="0;1" values="0 50 51;360 50 51"></animateTransform></path>'
+    }
+
+    // console.log(responseContainer.textContent.replace(/\s+/g, ' ').trim())
+
+    let user_input = document.querySelector('input[name="user_input"]').value;
+    user_input = `generate a detailed content realated to "${user_input}" `
+
+    const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    const response = await fetch('/content_creator/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        body: JSON.stringify({ user_input: user_input })
+    });
+
+  const data = await response.json();
+
+  const responseParts = data.response;
+  console.log(responseParts)
+  const formattedText = responseParts.trim().replace(/\n/g, '<br>')
+  const partElement = document.createElement('p');
+  partElement.innerHTML = formattedText;
+  responseContainer.innerHTML = ''; 
+  responseContainer.appendChild(partElement);
+});
+
+</script>
+{% endblock %}

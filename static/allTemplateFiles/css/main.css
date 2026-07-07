@@ -1,0 +1,21 @@
+
+.activeEditTab{
+    border:2px dashed #ff2f2fdb!important;
+}
+
+
+.activeEditSection{
+    border-radius: 10px 10px 0px 0px;
+    visibility: visible;
+    display:none;
+    background: transparent;
+}
+
+::selection {
+    background-color: #c576ff!important;
+    color: #fff;
+}
+  
+img:active {
+    background-color: #c576ff;
+}

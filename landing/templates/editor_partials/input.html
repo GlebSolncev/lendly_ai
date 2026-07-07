@@ -1,0 +1,611 @@
+<div class="bubble-element GroupItem bubble-r-container flex column group-item entry-1" style="justify-content: flex-start; box-sizing: content-box; min-height: 0px; border-top-style: none; border-left-style: none; position: relative;">
+
+   <div class="bubble-element Group bubble-r-container flex column" id="{{part.slug}}-element-1" style="z-index: 16; align-self: flex-start; min-width: 100%; max-width: 100%; order: 1; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 8px 0px 0px; justify-content: flex-start; overflow: visible; background-color: rgb(255, 255, 255); border-style: solid; border-width: 1px; border-color: rgb(225, 223, 235); border-radius: 10px; opacity: 1;" id="GenPanel_1">
+      <div class="bubble-element Group bubble-r-container flex row" style="align-self: center; min-width: 100%; max-width: 100%; order: 1; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 100%; margin: 0px; justify-content: space-between; overflow: visible; background-color: rgb(246, 247, 249); border-radius: 10px; border-style: none none solid; border-width: 1px; border-color: rgb(107, 107, 107) rgb(107, 107, 107) rgb(225, 223, 235); opacity: 1;">
+         <div class="bubble-element Text" style="align-self: center; min-width: 50px; order: 1; min-height: 0px; width: 50px; flex-grow: 1; height: max-content; margin: 0px 0px 0px 16px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 18px; font-weight: bold; color: rgb(0, 0, 0); line-height: 1.3; border-radius: 0px; opacity: 1;">{%if part.title == "Main" %}Hero Title{% elif part.title == "Main long" %}Hero Subtitle{% elif part.title == "Services" %}Services{% elif part.title == "Testimonials" %}Reviews{% elif part.title == "Services" %}Services{% elif part.title == "Statistics" %}Statistics{% elif part.title == "CTA" %}Call To Action Title{% elif part.title == "CTA long" %}Call To Action Subtitle{% elif part.title == "About us" %}About Us{% elif part.title == "Product Features" %}Product Features{% elif part.title == "Product Price" %}Product Price{% elif part.title == "Product Title" %}Product Title{% elif part.title == "Product Redirect Link" %}Product Redirect Link{% endif %}  </div>
+            
+            {% if active_elements %}
+            {% if part.slug in active_elements %}
+            <div data-elementToggle='{{part.slug}}' style="background:black" class="elementSwitcher"> 
+                on
+            </div>
+            {% else %}
+            <div data-elementToggle='{{part.slug}}' style="background:#808080" class="elementSwitcher"> 
+                off
+            </div>
+            {% endif %}
+            {% endif %}
+
+         <div class="bubble-element Group bubble-r-container fixed clickable-element" style="align-self: flex-start; min-width: 26px; max-width: 26px; order: 2; min-height: 26px; max-height: 26px; width: 26px; flex-grow: 1; height: 26px; margin: 9px 16px 0px 0px; overflow: visible; border-style: solid; border-width: 1px; border-color: rgb(107, 107, 107); border-radius: 20px; padding: 0px; opacity: 1; cursor: pointer;">
+            <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 2; top: 2px; left: 2px; width: 20px; min-width: 20px; max-width: 20px; height: 20px; border-radius: 0px;">
+               <div class="{{part.slug}}-buttonOpen" style="width: 100%; height: 100%;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right" color="rgba(51, 51, 51, 1)" pointer-events="none">
+                     <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="bubble-element Group bubble-r-container flex column" id="{{part.slug}}-element-2" style="align-self: flex-start; min-width: 100%; order: 2; min-height: 50px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 0px); margin: 0px; justify-content: flex-start; overflow: visible; background-color: rgb(255, 255, 255); border-radius: 10px; padding: 12px 0px 0px; opacity: 1; visibility: hidden; display: none;">
+
+    
+    {% if not part.slug == 'product_price' and not part.slug == 'product_title' and not part.slug == 'product_features' and not part.slug == 'product_link'  %}
+
+        <div id="{{part.slug}}-colorForm" class="colorfm">
+            <div class="">
+                <label for="customFont">Use Custom Font Colors:</label>
+                <input
+                {% with dynamic_key=landing.allColors|get_item:part.slug %}
+                    {% if not dynamic_key.fontColor == 'default' %}
+                        checked
+                    {% endif %}
+                {% endwith %}
+                
+                
+                
+                type="checkbox" id="customFont" onchange="toggleColorPickers('{{part.slug}}','customFont','fontColor')">
+            </div>
+
+            <div class="">
+                <label for="fontColor">Font Color:</label>
+                <input 
+                {% with dynamic_key=landing.allColors|get_item:part.slug %}
+                    {% if dynamic_key.fontColor == 'default' %}
+                        value="#000000"
+                        disabled
+                    {% else %}
+                        value = {{dynamic_key.fontColor}}
+                    {% endif %}
+                {% endwith %}
+                
+                onchange="updateColor('{{part.slug}}','fontColor')" type="color" id="fontColor">
+            </div>
+
+
+            <div class="">
+                <label for="customBg">Use Custom bg Colors:</label>
+                <input 
+                
+                {% with dynamic_key=landing.allColors|get_item:part.slug %}
+                    {% if not dynamic_key.bgColor == 'default' %}
+                        checked
+                    {% endif %}
+                {% endwith %}
+                
+                type="checkbox" id="customBg" onchange="toggleColorPickers('{{part.slug}}','customBg','bgColor')">
+            </div>
+
+
+            <div class="">
+                <label for="bgColor">Background Color:</label>
+                <input
+
+                {% with dynamic_key=landing.allColors|get_item:part.slug %}
+                    {% if dynamic_key.bgColor == 'default' %}
+                        value="#ffffff"
+                        disabled
+                    {% else %}
+                        value = {{dynamic_key.bgColor}}
+                    {% endif %}
+                {% endwith %}
+                
+                onchange="updateColor('{{part.slug}}','bgColor')" type="color" id="bgColor">
+            </div>
+
+        </div>
+
+    {% endif %}
+
+         {% if part.description %}
+         <div class="bubble-element Group bubble-r-container-wrapper" style="align-self: flex-start; min-width: 80%; order: 1; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 32px); margin: 0px 16px; overflow: visible; border-radius: 0px; opacity: 1;"><div class="bubble-r-container flex row" style="justify-content: center;"><div class="bubble-element Text bubble-r-vertical-center" style="z-index: 39; align-self: center; min-width: 80%; order: 1; min-height: 100%; width: 80%; flex-grow: 1; height: max-content; margin: 0px 16px 0px 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(15, 7, 7); line-height: 1.4; border-radius: 0px; opacity: 1;"><div>{{part.description}}</div></div><div class="bubble-element CustomElement bubble-r-container fixed" style="z-index: 41; align-self: flex-start; min-width: 32px; max-width: 32px; order: 2; min-height: 32px; max-height: 32px; width: 32px; flex-grow: 1; height: 32px; margin: 0px; overflow: visible; background-color: rgb(255, 255, 255); border-radius: 0px; padding: 0px; opacity: 1;"><button class="bubble-element materialicons-Materialicon clickable-element inner-element material-icons" style="z-index: 41; top: 0px; left: 0px; width: 32px; min-width: 32px; max-width: 32px; height: 32px; padding: 0px; text-align: center; background: none #FF4A17; border: none; color: rgb(255, 255, 255); font-size: 32px; border-radius: 40px; cursor: pointer;">info</button></div></div></div>
+         {% endif %}
+
+
+         <div class="bubble-element RepeatingGroup bubble-rg" id="{{part.slug}}-element-3" style="z-index: 40; align-self: flex-start; min-width: 80%; order: 3; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 32px); margin: 16px 16px 0px; gap: 0px; grid-auto-rows: minmax(max-content, 40px); grid-template-columns: repeat(1, minmax(0px, 1fr)); grid-auto-flow: row; overflow: auto; border-radius: 0px; opacity: 1;">
+            {% if part.slug == 'hero' %}
+               {% for text in landing.get_hero %}
+                  {% with landing.get_active_hero as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+                {% if landing.template.template == 'template_2.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t2_main" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t2_main %}{{ images.t2_main.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t2_main" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t2_main" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t2_main"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t2_main">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t2_main" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t2_main" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t2_main %}{{ images.t2_main.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+                {% if landing.template.template == 'template_4.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_main" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_main %}{{ images.t4_main.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_main" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_main" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_main"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_main">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_main" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_main" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_main %}{{ images.t4_main.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+            {% elif part.slug == 'hero_long' %}
+               {% for text in landing.get_hero_long %}
+                  {% with landing.get_active_hero_long as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+            {% elif part.slug == 'services' %}
+               {% for text in landing.get_services %}
+                  {% with landing.get_active_service as value %}
+                    
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+                {% if landing.template.template == 'template_1.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t1_service_main" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t1_service_main %}{{ images.t1_service_main.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t1_service_main" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t1_service_main" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t1_service_main"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t1_service_main">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t1_service_main" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t1_service_main" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t1_service_main %}{{ images.t1_service_main.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #1</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t1_service_gallery_1" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t1_service_gallery_1 %}{{ images.t1_service_gallery_1.description }}{% endif %}</textarea>
+                        </div>
+                    <form enctype="multipart/form-data" class="d-none img-form" data-type="t1_service_gallery_1" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t1_service_gallery_1" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t1_service_gallery_1"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t1_service_gallery_1">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t1_service_gallery_1" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t1_service_gallery_1" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t1_service_gallery_1 %}{{ images.t1_service_gallery_1.alt }}{% endif %}</textarea>
+                    </div>
+
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #2</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t1_service_gallery_2" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t1_service_gallery_2 %}{{ images.t1_service_gallery_2.description }}{% endif %}</textarea>
+                        </div>
+                    <form enctype="multipart/form-data" class="d-none img-form" data-type="t1_service_gallery_2" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t1_service_gallery_2" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t1_service_gallery_2"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t1_service_gallery_2">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t1_service_gallery_2" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t1_service_gallery_2" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t1_service_gallery_2 %}{{ images.t1_service_gallery_2.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #3</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t1_service_gallery_3" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t1_service_gallery_3 %}{{ images.t1_service_gallery_3.description }}{% endif %}</textarea>
+                        </div>
+                    <form enctype="multipart/form-data" class="d-none img-form" data-type="t1_service_gallery_3" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t1_service_gallery_3" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t1_service_gallery_3"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t1_service_gallery_3">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t1_service_gallery_3" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t1_service_gallery_3" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t1_service_gallery_3 %}{{ images.t1_service_gallery_3.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #4</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t1_service_gallery_4" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t1_service_gallery_4 %}{{ images.t1_service_gallery_4.description }}{% endif %}</textarea>
+                        </div>
+                    <form enctype="multipart/form-data" class="d-none img-form" data-type="t1_service_gallery_4" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t1_service_gallery_4" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t1_service_gallery_4"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t1_service_gallery_4">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t1_service_gallery_4" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t1_service_gallery_4" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t1_service_gallery_4 %}{{ images.t1_service_gallery_4.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+                {% if landing.template.template == 'template_2.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t2_service" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t2_service %}{{ images.t2_service.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t2_service" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t2_service" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t2_service"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t2_service">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t2_service" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t2_service" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t2_service %}{{ images.t2_service.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+                {% if landing.template.template == 'template_3.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Background Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t3_service_back" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t3_service_back %}{{ images.t3_service_back.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t3_service_back" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t3_service_back" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t3_service_back"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t3_service_back">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t3_service_back" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t3_service_back" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t3_service_back %}{{ images.t3_service_back.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+                {% if landing.template.template == 'template_4.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_services" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_services %}{{ images.t4_services.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_services" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_services" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_services"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_services">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_services" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_services" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_services %}{{ images.t4_services.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+            {% elif part.slug == 'statistics' %}
+               {% for text in landing.get_statistics %}
+                  {% with landing.statistics as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+            {% elif part.slug == 'about_us' %}
+               {% for text in landing.get_about_us %}
+                  {% with landing.about_us as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+                {% if landing.template.template == 'template_3.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t3_about" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t3_about %}{{ images.t3_about.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t3_about" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t3_about" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t3_about"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t3_about">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t3_about" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t3_about" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t3_about %}{{ images.t3_about.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+                {% if landing.template.template == 'template_4.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Main Image</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_about" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_about %}{{ images.t4_about.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_about" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_about" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_about"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_about">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_about" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_about" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_about %}{{ images.t4_about.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {%  endif %}
+            {% elif part.slug == 'testimonials' %}
+               {% for text in landing.get_testimonials %}
+                  {% with landing.testimonials as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+            {% elif part.slug == 'cta' %}
+               {% for text in landing.get_cta %}
+                  {% with landing.get_cta_active as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+                {% if landing.template.template == 'template_4.html' and not landing.text_only %}
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #1</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_cta_g_1" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_cta_g_1" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_cta_g_1" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_cta_g_1"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_cta_g_1">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_cta_g_1" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_cta_g_1" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #2</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_cta_g_2" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_cta_g_2 %}{{ images.t4_cta_g_2.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_cta_g_2" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_cta_g_2" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_cta_g_2"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_cta_g_2">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_cta_g_2" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_cta_g_2" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_cta_g_2 %}{{ images.t4_cta_g_2.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #3</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_cta_g_3" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_cta_g_3 %}{{ images.t4_cta_g_3.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_cta_g_3" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_cta_g_3" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_cta_g_3"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_cta_g_3">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_cta_g_3" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_cta_g_3" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_cta_g_3 %}{{ images.t4_cta_g_3.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Gallery Image #4</span>
+                    </div>
+                        <div class="col-12">
+                            <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="t4_cta_g_4" minlength="40" required="" maxlength="1000" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 96px; max-height: 96px; height: 96px; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" data-gramm_editor="false" maxlength="" placeholder="Image description">{% if images.t4_cta_g_4 %}{{ images.t4_cta_g_4.description }}{% endif %}</textarea>
+                        </div>
+                        <form enctype="multipart/form-data" class="d-none img-form" data-type="t4_cta_g_4" method="post" action="{% url 'upload_img' landing.id %}">
+                            <input name="type" type="hidden" value="t4_cta_g_4" />
+                            <input accept="image/*" name="image" type="file" class="img-input" data-type="t4_cta_g_4"/>
+                        </form>
+                        <div class="col-12">
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="t4_cta_g_4">Upload Image</button>
+                        <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="t4_cta_g_4" data-id="{{ landing.id }}">Generate Image</button>
+                    </div>
+                    <div class="col-12">
+                        <span class="text-bold" style="color: black">Image Alt Text</span>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="altTextField" data-type="t4_cta_g_4" style="align-self: flex-start; min-width: 80%; order: 2; flex-grow: 1; width: calc(100% - 32px); margin: 0px 16px; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); border-radius: 3px; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 4px; opacity: 1;" placeholder="Enter your Alt Text Here">{% if images.t4_cta_g_4 %}{{ images.t4_cta_g_4.alt }}{% endif %}</textarea>
+                    </div>
+                    </div>
+                {% endif %}
+            {% elif part.slug == 'cta_long' %}
+               {% for text in landing.get_cta_long %}
+                  {% with landing.get_cta_long_active as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+
+            {% elif part.slug == 'product_title' %}
+               {% for text in landing.get_product_title_list %}
+                  {% with landing.get_product_title as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+            {% elif part.slug == 'product_price' %}
+               {% for text in landing.get_product_price_list %}
+                  {% with landing.get_product_price as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+            {% elif part.slug == 'product_features' %}
+               {% for text in landing.get_product_features_list %}
+                  {% with landing.product_features as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+            {% elif part.slug == 'product_link' %}
+               {% for text in landing.get_product_link_list %}
+                  {% with landing.get_product_link as value %}
+                     {% include 'editor_partials/input_value.html' %}
+                  {% endwith %}
+               {% endfor %}
+
+
+            {% comment %} {% elif part.slug == 'product_title' %}
+
+                {% with landing.get_product_title_list as value %}
+                    {% with landing.get_product_title as text %}
+                    {% include 'editor_partials/input_value.html' %}
+                    {% endwith %}
+                {% endwith %} {% endcomment %}
+
+            {% comment %} {% elif part.slug == 'product_price' %}
+                {% with landing.product_price as value %}
+                    {% with landing.product_price_list as text %}
+                    {% include 'editor_partials/input_value.html' %}
+                    {% endwith %}
+                {% endwith %} {% endcomment %}
+            {% comment %} {% elif part.slug == 'product_features' %}
+                {% for text in landing.get_product_features_list %}
+                    {% with landing.get_product_features as value %}
+                        {% include 'editor_partials/input_value.html' %}
+                    {% endwith %}
+                {% endfor %} {% endcomment %}
+             {% endif %}
+         </div>
+         <div class="bubble-element 1553729425930x287123392710311940-AAC" style="visibility: hidden; align-self: center; min-width: 60px; max-width: 60px; order: 4; flex-grow: 0; flex-shrink: 0; width: 60px; margin: 0px; display: none;"></div>
+         <div class="bubble-element RepeatingGroup" style="visibility: hidden; align-self: flex-start; min-width: 80%; order: 5; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 16px); margin: 0px 8px; display: none;"></div>
+         <div class="bubble-element Group bubble-r-container flex row" style="visibility: hidden; align-self: flex-start; min-width: 100%; order: 7; min-height: 1px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 0px); margin: 0px; display: none; justify-content: flex-start;"><input type="input" class="bubble-element Input" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 1; min-height: 40px; max-height: 40px; width: 100%; flex-grow: 1; height: 40px; margin: 0px;"></div>
+         <div class="bubble-element 1488796042609x768734193128308700-AAC" style="z-index: 3; align-self: flex-start; min-width: 1px; max-width: 1px; order: 8; flex-grow: 0; flex-shrink: 0; width: 1px; margin: 0px; height: 1px;"></div>
+         <div class="bubble-element Group bubble-r-container flex row" style="visibility: hidden; align-self: center; min-width: 100px; max-width: 1000px; order: 10; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: calc(100% - 0px); margin: 0px; display: none; justify-content: center;">
+            <div class="bubble-element RepeatingGroup" style="z-index: 2; align-self: center; min-width: 40px; max-width: 320px; order: 1; min-height: 40px; width: max-content; flex-grow: 0; height: max-content; margin: 0px;"></div>
+         </div>
+      {% if not part.slug == 'product_title' and not part.slug == 'product_price' and not part.slug == 'product_features' and not part.slug == 'product_link'  %}
+         <button data-field="{{part.slug}}" class="generateMore bubble-element Button clickable-element" style="align-self: flex-start; min-width: 80%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: calc(100% - 32px); margin: 16px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;">Generate more</button>
+      {% endif %}
+      </div>
+   </div>
+</div>
+
+<script>
+   {
+      let button = '.{{part.slug}}-buttonOpen';
+      let element1 = '#{{part.slug}}-element-2';
+      let element2 = '#{{part.slug}}-element-2';
+      
+      $(button).on( "click", function() {
+         if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+
+            $(element1).css('border-radius', '10px');
+            $(element2).css('visibility', 'hidden');
+            $(element2).css('display', 'none');
+         } else {
+            $(this).addClass('active');
+
+            $(element1).css('border-radius', '10px 10px 0px 0px');
+            $(element2).css('visibility', '');
+            $(element2).css('display', '');
+         }
+      });
+   }
+</script>

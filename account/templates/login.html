@@ -1,0 +1,135 @@
+{% extends 'layout/layoutNew.html' %}
+{% load static %}
+
+
+{% block 'body' %}
+
+
+  <style>
+
+  .loginCont{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loginCont h2{
+    font-size: 3em;
+  }
+
+  .loginCont input{
+    background: transparent;
+    border-radius: 0.7em;
+    color:white;
+    width:100%;
+    font-size:1em;
+    outline: none;
+    border: 2px solid white;
+    padding: 0.5em 1em;
+  }
+
+  .loginCont form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size:1em;
+    
+  }
+
+  
+
+  .loginCont button span{
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+
+  .loginCont button{
+    background: #FF4A17;
+    border: none;
+    outline: none;
+    padding: 0.3em 0.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    border-radius: 0.7em;
+    cursor: pointer;
+    font-size:1em;
+  }
+  .loginCont button:hover{
+    opacity: 0.8;
+  }
+
+  .loginInnerCont{
+    width: 100%;
+    max-width: 26em;
+  }
+  
+
+  @media (min-width:768px){
+    .loginInnerCont{
+      font-size:1.2em;
+    }
+  }
+
+  </style>
+
+ 
+  
+
+  <!-- Start Hero -->
+  <div class="loginCont cs-page_heading cs-style1 cs-center text-center cs-bg" >
+    <div class="newContainer">
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <div class="loginInnerCont">
+          <div class="cs-section_heading cs-style1" style="margin-bottom: 20px;">
+            <h2 class="cs-section_title">Log in</h2>
+          </div>
+          <form id="" action="" method="POST" class="row">
+            {% csrf_token %}
+
+            <div class="col-sm-6" style="width: 100%">
+              <!--<label class="cs-primary_color">Email*</label>-->
+              <input placeholder="Email" type="email" class="cs-form_field" name="email" required>
+              <div class="cs-height_20 cs-height_lg_20"></div>
+            </div>
+            <div class="col-sm-6" style="width: 100%">
+              <!--<label class="cs-primary_color">Password*</label>-->
+              <input placeholder="Password" type="password" class="cs-form_field" name="password" required>
+              <div class="cs-height_20 cs-height_lg_20"></div>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                  <p style='color: #ff8a8a;' class="errorMessages">{{ message }}</p>
+                {% endfor %}
+          
+                <script>
+                  setTimeout(function(){
+                    document.querySelectorAll('.errorMessages').forEach(function(message){
+                      message.style.display = 'none';
+                    });
+                  }, 3000);
+                </script>
+            {% endif %}
+            <div class="col-lg-12">
+              <button class="cs-btn cs-style1" type="submit">
+                <span>Log in</span>
+                <svg width="26" height="12" viewBox="0 0 26 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M25.5303 6.53033C25.8232 6.23744 25.8232 5.76256 25.5303 5.46967L20.7574 0.696699C20.4645 0.403806 19.9896 0.403806 19.6967 0.696699C19.4038 0.989593 19.4038 1.46447 19.6967 1.75736L23.9393 6L19.6967 10.2426C19.4038 10.5355 19.4038 11.0104 19.6967 11.3033C19.9896 11.5962 20.4645 11.5962 20.7574 11.3033L25.5303 6.53033ZM0 6.75H25V5.25H0V6.75Z" fill="currentColor"/>
+                </svg>
+              </button>
+              <div id="cs-result"></div>
+            </div>
+          </form>
+          <div class="cs-section_heading cs-style1" style="margin-top: 50px;">
+            <h3 class="cs-section_subtitle">Don't have an account? <a href="{% url 'sign_up' %}" style="color:#FF4A17">Register!</a></h3>
+            <h3 class="cs-section_subtitle">Forgot password? <a href="{% url 'reset_password' %}" style="color:#FF4A17">Reset.</a></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Hero -->
+{% endblock %}

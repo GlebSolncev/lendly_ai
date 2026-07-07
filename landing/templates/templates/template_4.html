@@ -1,0 +1,1017 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="{{landing.meta.2.data}}">
+    <meta name="keywords" content="{{landing.meta.1.data}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Page Title -->
+    <title>{% if landing.meta.0.data %} {{landing.meta.0.data}} {% else %} {{landing.get_company_name.text}} {% endif %}</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ images.favIcon.img_url }}">
+    <!-- Animate -->
+    <link rel="stylesheet" href="{% static 'template_4/css/animate.min.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'template_4/css/bootstrap.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'template_4/css/font-awesome.min.css' %}">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="{% static 'template_4/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'template_4/css/owl.theme.default.min.css' %}">
+    <!-- Cube Portfolio -->
+    <link rel="stylesheet" href="{% static 'template_4/css/cubeportfolio.min.css' %}">
+    <!-- Fancy Box -->
+    <link rel="stylesheet" href="{% static 'template_4/css/jquery.fancybox.min.css' %}">
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'template_4/rs-plugin/css/settings.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'template_4/rs-plugin/css/navigation.css' %}">
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="{% static 'template_4/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'template_4/css/gray.css' %}">
+    <link rel="stylesheet" href="{% static 'allTemplateFiles/css/main.css' %}">
+
+    <style>
+
+        .customFont{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        @media (min-width:991px){
+            .onlyOnMobile{
+                display: none!important;
+            }
+        }
+
+        {% if not landing.SecondaryFont == 'default' %}
+        body, .customFont{
+            font-family: {{landing.SecondaryFont}}; 
+        }
+        {% endif %}
+        
+        {% if not landing.PrimaryFont == 'default' %}
+    
+        h1, h2, h3,
+        h4, h5, h6 {
+            font-family:{{landing.PrimaryFont}};
+    
+        }
+        
+        .h1, .h2, .h3,
+        .h4, .h5, .h6, {
+            
+            font-family: {{landing.PrimaryFont}};
+        
+        }
+        {% endif %}
+
+
+
+
+
+
+
+
+        
+        *[data-field='hero']{
+            {% if not landing.hero_colors.bgColor == 'default' %}
+            background:{{landing.hero_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.hero_colors.fontColor == 'default' %}
+            color:{{landing.hero_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+        *[data-field='hero_long']{
+            {% if not landing.hero_long_colors.bgColor == 'default' %}
+            background:{{landing.hero_long_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.hero_long_colors.fontColor == 'default' %}
+            color:{{landing.hero_long_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        #app{
+            {% if not landing.services_colors.bgColor == 'default' %}
+            background:{{landing.services_colors.bgColor}} !important;
+            {% endif %}
+        
+        }
+
+        #app p, #app h4, #app h3, #app h6  {
+            {% if not landing.services_colors.fontColor == 'default' %}
+            color:{{landing.services_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+        #testimonialTempFr .bg-light{
+            {% if not landing.testimonials_colors.bgColor == 'default' %}
+            background:{{landing.testimonials_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        #testimonialTempFr h1, #testimonialTempFr h3, #testimonialTempFr p {
+            {% if not landing.testimonials_colors.fontColor == 'default' %}
+            color:{{landing.testimonials_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        #portfolio{
+            {% if not landing.cta_colors.bgColor == 'default' %}
+            background:{{landing.cta_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        #portfolio{
+            {% if not landing.cta_colors.fontColor == 'default' %}
+            color:{{landing.cta_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        #about{
+            {% if not landing.about_us_colors.bgColor == 'default' %}
+            background:{{landing.about_us_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        #about h3, #about h4, #about p{
+            {% if not landing.about_us_colors.fontColor == 'default' %}
+            color:{{landing.about_us_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        .price-item {
+            {% if not landing.product_title_colors.bgColor == 'default' %}
+            background:{{landing.product_title_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        .price-item h3, .price-item h4, .price-item p, .price-item span, .price-item i , .price-item a  {
+            {% if not landing.product_title_colors.fontColor == 'default' %}
+            color:{{landing.product_title_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+  
+
+        .navbar {
+            font-size:20px;
+        }
+
+        .mapCont{
+        width: 100%;
+        {% comment %} height: 100%; {% endcomment %}
+        }
+        
+        .mapCont iframe{
+        width: 100%;
+        {% comment %} height: 100%; {% endcomment %}
+        }
+
+
+
+
+        *[data-field='desc'], *[data-field='desc'] h4{
+            {% if not landing.desc_colors.bgColor == 'default' %}
+                background:{{landing.desc_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.desc_colors.fontColor == 'default' %}
+                color:{{landing.desc_colors.fontColor}} !important;
+            {% endif %}
+        }
+    </style>
+
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="90">
+
+<!--Loader Start-->
+<div class="loader">
+    <div class="loader-inner">
+        <div class="loader-blocks">
+            <span class="block-1"></span>
+            <span class="block-2"></span>
+            <span class="block-3"></span>
+            <span class="block-4"></span>
+            <span class="block-5"></span>
+            <span class="block-6"></span>
+            <span class="block-7"></span>
+            <span class="block-8"></span>
+            <span class="block-9"></span>
+            <span class="block-10"></span>
+            <span class="block-11"></span>
+            <span class="block-12"></span>
+            <span class="block-13"></span>
+            <span class="block-14"></span>
+            <span class="block-15"></span>
+            <span class="block-16"></span>
+        </div>
+    </div>
+</div>
+<!--Loader End-->
+
+<!--Header Start-->
+<header>
+
+    <!--Navigation-->
+    <nav class="navbar navbar-top-default navbar-expand-lg navbar-gradient nav-icon">
+        <div class="container">
+            <a href="javascript:void(0)" title="Logo" class="logo scroll">
+                <!--Logo Default-->
+                <span  data-companyname='true' data-field="desc" data-id="{{landing.get_company_name.id}}" class="iframeClickable text-white text-bold">{{landing.get_company_name.text}}</span>
+            </a>
+
+            <!--Nav Links-->
+            <div class="collapse navbar-collapse" id="wexim">
+                <div class="navbar-nav ms-auto">
+                        <a class="nav-link scroll" href="#home">Home</a>
+                        <a class="nav-link scroll" href="#about">About</a>
+{#                        <a class="nav-link scroll" href="#team">Team</a>#}
+                        <a class="nav-link scroll" href="#portfolio">Gallery</a>
+                        <a class="nav-link scroll" href="#price">Pricing</a>
+{#                        <a class="nav-link scroll" href="#blog">Blog</a>#}
+                        <a class="nav-link scroll" href="#contact">Contact</a>
+                    <span class="menu-line"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                </div>
+            </div>
+
+            <!--Side Menu Button-->
+            <a href="javascript:void(0)" class="onlyOnMobile d-inline-block sidemenu_btn" id="sidemenu_toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+
+        </div>
+    </nav>
+
+    <!--Side Nav-->
+    <div class="side-menu onlyOnMobile">
+        <div class="inner-wrapper">
+            <span class="btn-close" id="btn_sideNavClose"><i></i><i></i></span>
+            <nav class="side-nav w-100">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#about">About</a>
+                    </li>
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link scroll" href="#team">Team</a>#}
+{#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#portfolio">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#price">Pricing</a>
+                    </li>
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link scroll" href="#blog">Blog</a>#}
+{#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="side-footer text-white w-100">
+                <ul class="social-icons-simple">
+                    {% if landing.facebook %}<li><a class="facebook-text-hvr iframeClickable" contenteditable="false" data-field="addtional" href="{{landing.get_additional.facebook.text}}" data-id="{{landing.get_additional.facebook.id}}"><i class="fa fa-facebook"></i> </a> </li>{% endif %}
+                    {% if landing.instagram %}<li><a class="instagram-text-hvr iframeClickable" contenteditable="false"  data-field="addtional" href="{{landing.get_additional.instagram.text}}" data-id="{{landing.get_additional.instagram.id}}"><i class="fa fa-instagram"></i> </a> </li>{% endif %}
+                    {% if landing.twitter %}<li><a class="twitter-text-hvr iframeClickable" contenteditable="false" data-field="addtional" href="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}"><i class="fa fa-twitter"></i> </a> </li>{% endif %}
+                    {% if landing.youtube %}<li><a class="twitter-text-hvr iframeClickable" contenteditable="false"  data-field="addtional" href="{{landing.get_additional.youtube.text}}" data-id="{{landing.get_additional.youtube.id}}"><i class="fa fa-youtube"></i></a></li>{% endif %}
+                </ul>
+{#                <p class="text-white">&copy; 2021 Wexim. Made With Love by Themesindustry</p>#}
+            </div>
+        </div>
+    </div>
+    <a class="onlyOnMobile" id="close_side_menu" href="javascript:void(0);"></a>
+    <!-- End side menu -->
+
+</header>
+<!--Header end-->
+
+<!--slider-->
+<section id="home" class="p-0 single-slide">
+    <h2 class="d-none">hidden</h2>
+    <div id="rev_slider_19_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="wexim_slider_01" data-source="gallery" style="background:{% if not landing.text_only %}transparent{% else %}grey{% endif %};padding:0px;">
+        <!-- START REVOLUTION SLIDER 5.4.8.1 fullscreen mode -->
+        <div id="rev_slider_19_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.8.1">
+            <ul>	<!-- SLIDE  -->
+                <li data-index="rs-94" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="300"  data-rotate="0"  data-saveperformance="off"  data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                    <!-- MAIN IMAGE -->
+                    {% if not landing.text_only %}
+                    <img alt="{% if images.t4_main %}{{ images.t4_main.alt }}{% endif %}" src="{% if images.t4_main %}{{ images.t4_main.img_url }}{% else %}{% static 'assets/img/placeholderTempFour.jpg' %}{% endif %}" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" data-no-retina>
+                    {% endif %}
+                    <!-- LAYERS -->
+
+                    <!-- LAYER NR. 3 -->
+                    {% comment %} <div class="tp-caption   tp-resizeme"
+                         id="slide-94-layer-3"
+                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                         data-y="['middle','middle','middle','middle']" data-voffset="['-81','-81','-64','-48']"
+                         data-fontsize="['25','25','18','14']"
+                         data-lineheight="['20','20','18','14']"
+                         data-width="none"
+                         data-height="none"
+                         data-whitespace="nowrap"
+
+                         data-type="text"
+                         data-responsive_offset="on"
+
+                         data-frames='[{"delay":1979.8828125,"speed":1500,"sfxcolor":"#ffffff","sfx_effect":"blockfromtop","frame":"0","from":"z:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['inherit','inherit','inherit','inherit']"
+                         data-paddingtop="[0,0,0,0]"
+                         data-paddingright="[0,0,0,0]"
+                         data-paddingbottom="[0,0,0,0]"
+                         data-paddingleft="[0,0,0,0]"
+
+                         
+
+                         style="z-index: 7; white-space: nowrap; font-size: 25px; line-height: 20px; font-weight: 300; color: #ffffff; letter-spacing: 0px;font-family:Poppins;" ><span data-field="hero" class="iframeClickable" data-id="{{landing.get_active_hero.id}}">{{landing.get_active_hero.text}}</span></div> {% endcomment %}
+
+                       
+                    <!-- LAYER NR. 4 -->
+                    {% comment %} <div class="tp-caption   tp-resizeme"
+                         id="slide-94-layer-4"
+                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                         data-y="['middle','middle','middle','middle']" data-voffset="['1','1','0','0']"
+                         data-fontsize="['100','100','70','50']"
+                         data-lineheight="['100','100','70','50']"
+                         data-width="['1900','1900','1900','1900']"
+                         data-height="none"
+                         data-whitespace="nowrap"
+
+                         data-type="text"
+                         data-responsive_offset="on"
+
+                         data-frames='[{"delay":2929.8828125,"speed":1500,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['inherit','inherit','inherit','inherit']"
+                         data-paddingtop="[0,0,0,0]"
+                         data-paddingright="[0,0,0,0]"
+                         data-paddingbottom="[0,0,0,0]"
+                         data-paddingleft="[0,0,0,0]"
+
+                         style="z-index: 8; white-space: nowrap;font-weight: 600; color: #ffffff; letter-spacing: 0px;font-family:Poppins;"> <div data-companyname='true' data-field="desc" data-id="{{landing.get_company_name.id}}" contenteditable="false"  class="iframeClickable text-center" id="js-rotating">{{landing.get_company_name.text}}</div>
+                    </div> {% endcomment %}
+
+
+                    <div
+                    style="z-index: 200;
+                    position: absolute;
+                    top: 45%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    width: 90%;
+                    font-size:min(max(0em, 4vw), 1.9em);
+                    
+                    color: white;"
+                    class="customFont">
+                        {% if 'hero' in landing.active_elements %}
+                        <div
+                        style="
+                        font-size: 0.8em;
+                        text-align:center;"
+                        data-field="hero" class=" iframeClickable" data-id="{{landing.get_active_hero.id}}">{{landing.get_active_hero.text}}</div>
+                        {%endif%}
+                        <div
+                        style="
+                        font-weight: 600;
+                        line-height: 1em;
+                        font-size: 2.1em;
+                        "
+                        data-companyname='true' data-field="desc" data-id="{{landing.get_company_name.id}}" contenteditable="false"  class="iframeClickable text-center" >{{landing.get_company_name.text}}</div>
+                    </div>
+                    
+                    <!-- LAYER NR. 5 -->
+                    <div class="tp-caption   tp-resizeme"
+                         id="slide-94-layer-5"
+                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                         data-y="['middle','middle','middle','middle']" data-voffset="['107','107','76','59']"
+                         data-width="none"
+                         data-height="none"
+                         data-whitespace="nowrap"
+
+                         data-type="text"
+                         data-responsive_offset="on"
+
+                         data-frames='[{"delay":3809.9609375,"speed":1500,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
+                         data-textAlign="['inherit','inherit','inherit','inherit']"
+                         data-paddingtop="[0,0,0,0]"
+                         data-paddingright="[0,0,0,0]"
+                         data-paddingbottom="[0,0,0,0]"
+                         data-paddingleft="[0,0,0,0]"
+
+                         style="z-index: 9; white-space: nowrap;"><a class="btn btn-large btn-blue btn-rounded" href="#price"> Buy Now </a></div>
+                </li>
+            </ul>
+    </div>
+    <!-- END REVOLUTION SLIDER -->
+    </div>
+
+    <!--scroll down-->
+    <a href="#about" class="scroll-down scroll">Scroll Down <i class="fa fa-long-arrow-down"></i></a>
+
+</section>
+<!--slider end-->
+
+
+{% if 'about_us' in landing.active_elements %}
+
+
+<!--About Start-->
+<section id="about">
+    <div class="container">
+        <!--About-->
+        <div class="row align-items-center wow fadeIn">
+            <div class="col-12">
+                <div class="title">
+                        <h6 class="third-color mb-3">Basic info about company</h6>
+
+                        {% if 'hero_long' in landing.active_elements %}
+                        <h2 class="iframeClickable"  data-id="{{landing.get_active_hero_long.id}}" data-field="hero_long">{{landing.get_active_hero_long.text}}</h2>
+                        {% endif %}
+                    </div>
+            </div>
+{#            <div class="col-md-6 mb-4">#}
+{#                    <p>Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitudin. Quisque vitae sodales lectus. Nam porttitor justo sed mi finibus, vel tristique risus faucibus.#}
+{#                       <br><br>#}
+{#                        Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitudin. Quisque vitae sodales lectus. </p>#}
+{#                </div>#}
+        </div>
+
+        <!--Features-->
+        <div class="row mt-lg-5">
+            {% for about in landing.get_about_us_objects %}
+            <div class="col-md-4 wow fadeInLeft">
+                <div class="feature-box">
+                    <span class="item-number gradient-text1">
+                        0{{ forloop.counter }}.
+                    </span>
+                    <h6 data-service='true' data-field="about_us" data-id={{about.id}} class="iframeClickable mb-4">{{ about.title }}</h6>
+                    <p data-service='true' data-field="about_us" data-id={{about.id}} class="iframeClickable">{{ about.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not landing.text_only %}
+        <!--Slider Image-->
+        <div class="row laptop text-center">
+            <div class="col-md-12">
+                <img alt="{% if images.t4_about %}{{ images.t4_about.alt }}{% endif %}" class="iframeClickable" data-field="about_us" data-id="AboutUstemp4Img" contenteditable="false" src="{% if images.t4_about %}{{ images.t4_about.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" />
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+<!--About End-->
+{% endif %}
+
+
+{% if 'cta' in landing.active_elements %}
+
+<!--Portfolio Start-->
+<section id="portfolio" class="cube-portfolio1">
+    <div class="container">
+        <!--About-->
+        <div class="row align-items-center">
+            <div class="col-12 wow fadeInLeft">
+                <div class="title">
+                    <h2 data-field="cta" data-id="{{landing.get_cta_active.id}}" class="iframeClickable">{{landing.get_cta_active.text}}</h2>
+                </div>
+            </div>
+        </div>
+
+        {% if not landing.text_only %}
+        <div class="row wow fadeInUp">
+            <div class="col-md-12 iframeClickable" data-field="cta" data-id="ctatemp4Imgs" contenteditable="false">
+                <div class="row">
+                    <div class="col-3">
+                        <img alt="{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.alt }}{% endif %}" src="{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" class="w-100"/>
+                    </div>
+                <div class="col-3">
+                        <img alt="{% if images.t4_cta_g_2 %}{{ images.t4_cta_g_2.alt }}{% endif %}" src="{% if images.t4_cta_g_2 %}{{ images.t4_cta_g_2.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" class="w-100"/>
+                    </div>
+                <div class="col-3">
+                        <img alt="{% if images.t4_cta_g_3 %}{{ images.t4_cta_g_3.alt }}{% endif %}" src="{% if images.t4_cta_g_3 %}{{ images.t4_cta_g_3.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" class="w-100"/>
+                    </div>
+                <div class="col-3">
+                        <img alt="{% if images.t4_cta_g_4 %}{{ images.t4_cta_g_4.alt }}{% endif %}" src="{% if images.t4_cta_g_4 %}{{ images.t4_cta_g_4.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" class="w-100"/>
+                    </div>
+                </div>
+
+{#        <!--Portfolio Filters-->#}
+{#        <div id="js-filters-mosaic-flat" class="cbp-l-filters-button">#}
+{##}
+{#            <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">All</div>#}
+{#            <span class="text-blue">/</span>#}
+{#            <div data-filter=".graphic" class="cbp-filter-item">Graphic Design</div>#}
+{#            <span class="text-blue"> / </span>#}
+{#            <div data-filter=".web-design" class="cbp-filter-item">Web design</div>#}
+{#            <span class="text-blue"> / </span>#}
+{#            <div data-filter=".graphic" class="cbp-filter-item">SEO</div>#}
+{#            <span class="text-blue"> / </span>#}
+{#            <div data-filter=".marketing" class="cbp-filter-item">Marketing</div>#}
+{#        </div>#}
+
+        <!--Portfolio Items-->
+{#        <div id="js-grid-mosaic-flat" class="cbp cbp-l-grid-mosaic-flat">#}
+{##}
+{#            <div class="cbp-item web-design graphic">#}
+{#                <a href="#" class="cbp-caption cbp-lightbox">#}
+{#                    <div class="cbp-caption-defaultWrap">#}
+{#                        <img src="{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" alt="port-1">#}
+{#                    </div>#}
+{#                    <div class="cbp-caption-activeWrap"></div>#}
+{#                    <div class="cbp-l-caption-alignCenter center-block">#}
+{#                        <div class="cbp-l-caption-body">#}
+{#                            <div class="plus"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                </a>#}
+{#            </div>#}
+{#        <div class="cbp-item web-design graphic">#}
+{#                <a href="#" class="cbp-caption cbp-lightbox">#}
+{#                    <div class="cbp-caption-defaultWrap">#}
+{#                        <img src="{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" alt="port-1">#}
+{#                    </div>#}
+{#                    <div class="cbp-caption-activeWrap"></div>#}
+{#                    <div class="cbp-l-caption-alignCenter center-block">#}
+{#                        <div class="cbp-l-caption-body">#}
+{#                            <div class="plus"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                </a>#}
+{#            </div>#}
+{#        <div class="cbp-item web-design graphic">#}
+{#                <a href="#" class="cbp-caption cbp-lightbox">#}
+{#                    <div class="cbp-caption-defaultWrap">#}
+{#                        <img src="{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" alt="port-1">#}
+{#                    </div>#}
+{#                    <div class="cbp-caption-activeWrap"></div>#}
+{#                    <div class="cbp-l-caption-alignCenter center-block">#}
+{#                        <div class="cbp-l-caption-body">#}
+{#                            <div class="plus"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                </a>#}
+{#            </div>#}
+{#        <div class="cbp-item web-design graphic">#}
+{#                <a href="#" class="cbp-caption cbp-lightbox">#}
+{#                    <div class="cbp-caption-defaultWrap">#}
+{#                        <img src="{% if images.t4_cta_g_1 %}{{ images.t4_cta_g_1.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" alt="port-1">#}
+{#                    </div>#}
+{#                    <div class="cbp-caption-activeWrap"></div>#}
+{#                    <div class="cbp-l-caption-alignCenter center-block">#}
+{#                        <div class="cbp-l-caption-body">#}
+{#                            <div class="plus"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                </a>#}
+{#            </div>#}
+{#        #}
+{##}
+{#        </div>#}
+            <!--To Enable Load More Button Remove The Class="d-none"-->
+        <div id="js-loadMore-mosaic-flat" class="cbp-l-loadMore-bgbutton d-none">
+            <a href="loadmore.html" class="cbp-l-loadMore-link no-transition btn-rounded" rel="nofollow">
+                <span class="cbp-l-loadMore-defaultText no-transition ">Load More</span>
+                <span class="cbp-l-loadMore-loadingText ">Loading...</span>
+                <span class="cbp-l-loadMore-noMoreLoading">Finish</span>
+            </a>
+        </div>
+
+        </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+<!--Portfolio end-->
+
+{% endif %}
+
+{% if 'product' in landing.active_elements %}
+
+<!--Pricing Start-->
+<section id="price" class="bg-light">
+    <div class="container">
+        <!--Heading-->
+        <div class="row">
+            <div class="col-md-12 text-center wow fadeIn">
+                <div class="title d-inline-block">
+                    <h6 class="mb-3">Most flexible pricing</h6>
+                    <h2 class="gradient-text1 mb-3">Easy Pricing</h2>
+{#                    <p>Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitudin. Quisque vitae sodales lectus. Nam porttitor justo sed mi finibus, vel tristique risus faucibus. </p>#}
+                </div>
+            </div>
+        </div>
+
+        <!--Team-->
+        <div class="row">
+            <div id="price-slider" class="owl-carousel owl-item wow fadeInUp col-4 offset-lg-4">
+            <!--price item-->
+            <div class="price-item text-start w-100">
+                <h4 class="alt-font d-inline-block font-weight-500 mb-4 iframeClickable" data-field="product_title" data-id="{{landing.get_product_title.id}}">{{ landing.get_product_title.text }}</h4>
+                <div class="price-tag d-flex align-items-center">
+                    <div class="price alt-font text-dark-gray">
+                        <h3 class="currency iframeClickable"   data-field="product_price" data-id="{{landing.get_product_price.id}}">{{ landing.get_product_price.text }}</h3>
+{#                        <span class="month">MONTH</span>#}
+                    </div>
+{#                    <p class="price-text no-margin">It has survived not only five centu but also the leap electronic.</p>#}
+                </div>
+                <ul class="packages">
+                    {% for feature in landing.get_product_features %}
+                        <li><i class="fa fa-check" aria-hidden="true"></i>  <span class="iframeClickable" data-field="product_features" data-id="{{feature.id}}">{{ feature.text }}</span>  </li>
+                    {% endfor %}
+                </ul>
+                <a  contenteditable='false' data-field="product_link" data-id="{{landing.get_product_link.id}}" href="{{landing.get_product_link.text}}" class="iframeClickable buylink btn btn-large btn-black btn-rounded w-100">Buy Now</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Pricing End Start-->
+
+{% endif %}
+
+
+<!--Content Start-->
+{#<section class="content">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{##}
+{#            <div class="col-lg-6 wow fadeInLeft">#}
+{#                <div class="title">#}
+{#                    <h6 class="third-color mb-3">You can trust us</h6>#}
+{#                    <h2 class="mb-4">We Can<br>Make Your Design</h2>#}
+{#                    <p>Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitu eleifend in maximus metus sollicitudin.</p>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-lg-6 wow fadeInRight">#}
+{#                <div class="content-image">#}
+{#                    <img src="images/phone.png" alt="image">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+<!--Content End-->
+
+{% if 'testimonials' in landing.active_elements %}
+<!--Testimonial Start-->
+<section id='testimonialTempFr' class="p-0">
+    <div class="container-fluid">
+        <div class="row">
+            <!--testimonial-->
+            <div class="col-12 bg-light">
+                <div id="testimonial_slider" class="owl-carousel">
+                    {% for testimonial in landing.get_testimonials_objects %}
+                    <!--testimonial item-->
+                    <div class="testimonial-item item">
+                    <i class="fa fa-quote-right testimonial-icon gradient-text1"></i>
+                    <p data-field="testimonials" data-id={{testimonial.id}} class="iframeClickable mb-4">{{ testimonial.text }}</p>
+
+                    <!--Image-->
+{#                    <div class="testimonial-image">#}
+{#                        <img src="images/testimonial-img1.jpg" alt="image">#}
+{#                    </div>#}
+                    <h5 class="font-weight-500 third-color">{{ testimonial.title }}</h5>
+{#                    <span class="destination">Project Manager, The Company Inc.</span>#}
+                </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!--counters-->
+{#            <div class="col-md-6 p-0">#}
+{#                <!--counter background-->#}
+{#                <div class="counters d-flex align-items-center text-start bg-img1">#}
+{#                    <!--overlay-->#}
+{#                    <div class="bg-overlay gradient-bg1 opacity-8"></div>#}
+{#                   <div class="counter-row">#}
+{#                       <!--counters item-->#}
+{#                       <div class="counter-item">#}
+{#                           <div class="count alt-font">69</div>#}
+{#                           <h6 class="text-white">Award Won</h6>#}
+{#                       </div>#}
+{#                       <!--counters item-->#}
+{#                       <div class="counter-item">#}
+{#                           <div class="count alt-font">780</div>#}
+{#                           <h6 class="text-white">Employees</h6>#}
+{#                       </div>#}
+{#                       <!--counters item-->#}
+{#                       <div class="counter-item">#}
+{#                           <div class="count alt-font">456</div>#}
+{#                           <h6 class="text-white">Happy Clients</h6>#}
+{#                       </div>#}
+{#                       <!--counters item-->#}
+{#                       <div class="counter-item">#}
+{#                           <div class="count alt-font">599</div>#}
+{#                           <h6 class="text-white">Finished Projects</h6>#}
+{#                       </div>#}
+{#                   </div>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+    </div>
+</section>
+<!--Testimonial End-->
+{% endif %}
+
+
+{% if 'services' in landing.active_elements %}
+
+<!--App Section-->
+<section id="app">
+    <div class="container">
+        <!--Heading-->
+        <div class="row">
+            <div class="col-md-12 text-center wow fadeIn">
+                <div class="title d-inline-block">
+                    <h6 class="mb-3">Most reliable features</h6>
+{#                    <h2 class="gradient-text1 mb-3">Mobile App Design</h2>#}
+{#                    <p>Curabitur mollis bibendum luctus. Duis suscipit vitae dui sed suscipit. Vestibulum auctor nunc vitae diam eleifend, in maximus metus sollicitudin. Quisque vitae sodales lectus. Nam porttitor justo sed mi finibus, vel tristique risus faucibus. </p>#}
+                </div>
+            </div>
+        </div>
+
+        <!--App deatil-->
+        <div class="row align-items-center text-center">
+
+            <div class="col-md-4 wow fadeInLeft">
+                <!--App deatil item-->
+                {% for service in landing.get_service_objects %}
+                    {% if forloop.counter0 == 0 %}
+                <div class="app-feature">
+                    <i class="fa fa-diamond gradient-text1" aria-hidden="true"></i>
+                    <h4 data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable mb-3">{{ service.title }}</h4>
+                    <p data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable">{{ service.text }}</p>
+                </div>
+                    {% endif %}
+                <!--App deatil item-->
+                    {% if forloop.counter0 == 1 %}
+                <div class="app-feature">
+                    <i class="fa fa-edit gradient-text1" aria-hidden="true"></i>
+                    <h4 data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable mb-3">{{ service.title }}</h4>
+                    <p data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable">{{ service.text }}</p>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <!--app slider-->
+            <div class="col-md-4 wow fadeInUp">
+                {% if not landing.text_only %}
+                <!--app Image-->
+                <div class="app-image">
+                    <img alt="{% if images.t4_services %}{{ images.t4_services.alt }}{% endif %}" data-field="services" data-id="Servicestemp4Img" contenteditable="false" class="w-100 iframeClickable" src="{% if images.t4_services %}{{ images.t4_services.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" />
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-4 wow fadeInRight">
+                {% for service in landing.get_service_objects %}
+                    {% if forloop.counter0 == 2 %}
+                <!--App deatil item-->
+                <div class="app-feature">
+                    <i class="fa fa-code gradient-text1" aria-hidden="true"></i>
+                    <h4 data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable mb-3">{{ service.title }}</h4>
+                    <p data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable">{{ service.text }}</p>
+                </div>
+                    {% endif %}
+                    {% if forloop.counter0 == 3 %}
+                <!--App deatil item-->
+                <div class="app-feature">
+                    <i class="fa fa-folder-open-o gradient-text1" aria-hidden="true"></i>
+                    <h4 data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable mb-3">{{ service.title }}</h4>
+                    <p data-service='true' data-id="{{service.id}}" data-field="services" class="iframeClickable">{{ service.text }}</p>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!--App Section End-->
+
+{% endif %}
+
+
+<!--Blog Start-->
+
+<!--Blog End-->
+
+<!--Address Start-->
+<section id="contact" class="p-0">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12 p-0">
+                <div class="address-box title mb-0">
+                    <!--overlay-->
+                    <div class="bg-overlay gradient-bg1 opacity-8" style="background-color: #acacac"></div>
+                    <div class="address-text text-center text-white position-relative wow fadeInUp">
+{#                        <h6 class="mb-3">Lorem ipsum dolor sit amet consectetur</h6>#}
+                        <!--title-->
+                        <h2 dataCompanyname="true" data-field="desc" data-id="{{landing.get_company_name.id}}"  class="mb-4">{{landing.get_company_name.text}}</h2>
+                        <!--Address-->
+                        {% if landing.address %}
+                        <p class="mb-3 text-white iframeClickable" data-field="addtional" data-id="{{landing.get_additional.address.id}}">{{landing.get_additional.address.text}}</p>
+                        {% endif %}
+                        <!--Phone-->
+                        {% if landing.phone %}
+                        <p class="mb-3 text-white">Phone : <span class="iframeClickable" data-id="{{landing.get_additional.phone.id}}" data-field="addtional" href="tel:{{landing.get_additional.phone.text}}">{{landing.get_additional.phone.text}}</span></p>
+                        {% endif %}
+                        <!--Email-->
+                        {% if landing.email %}
+                        <p class="mb-3 text-white">mail : <span class="iframeClickable" data-id="{{landing.get_additional.email.id}}" data-field="addtional" href="mailto:{{landing.get_additional.email.text}}">{{landing.get_additional.email.text}}</span></p>
+                        {% endif %}
+                        <!--Timing-->
+{#                        <p class="mb-3 text-white">Mon-Fri: 9am to 6pm</p>#}
+                        <!--Social Icon-->
+                        <div class="address-social">
+                            <ul class="list-unstyled">
+                                {% if landing.facebook %}<li><a class="facebook-text-hvr iframeClickable" contenteditable="false" data-field="addtional" href="{{landing.get_additional.facebook.text}}" data-id="{{landing.get_additional.facebook.id}}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>{% endif %}
+                                {% if landing.twitter %}<li><a class="twitter-text-hvr iframeClickable" contenteditable="false" data-field="addtional" href="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>{% endif %}
+                                {% if landing.youtube %}<li><a class="linkedin-text-hvr iframeClickable" contenteditable="false"  data-field="addtional" href="{{landing.get_additional.youtube.text}}" data-id="{{landing.get_additional.youtube.id}}"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>{% endif %}
+                                {% if landing.instagram %}<li><a class="instagram-text-hvr iframeClickable" contenteditable="false"  data-field="addtional" href="{{landing.get_additional.instagram.text}}" data-id="{{landing.get_additional.instagram.id}}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>{% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Address End-->
+
+<!--Contact Start-->
+<section>
+    <div class="container">
+        <!--Heading-->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="title d-inline-block">
+{#                    <h6 class="mb-3 third-color">Lorem ipsum dolor sit amet</h6>#}
+                    <h2>Let's Get In Touch</h2>
+                    </div>
+            </div>
+        </div>
+
+        <!--contact us-->
+        <form class="contact-form">
+            <div class="row">
+
+                <div class="col-sm-12" id="result"></div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="First Name:" required="" id="first_name" name="first_name">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Last Name:" required="" id="last_name" name="last_name">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="email" placeholder="Email:" required="" id="email" name="email">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" type="tel" placeholder="Phone:" id="phone" name="phone">
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Message" id="message" name="message"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <button data-url="https://landlyai.com{% url 'template_4_email' landing.id %}" type="submit" class="btn btn-large btn-gradient btn-rounded mt-4" id="submit_btn"><i class="fa fa-spinner fa-spin mr-2 d-none" aria-hidden="true"></i> <span>Contact Now</span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!--Contact End-->
+
+<!--Footer Start-->
+<section class="bg-light text-center">
+    <h2 class="d-none">hidden</h2>
+    <div class="container">
+        <div class="d-sm-flex  justify-content-between align-items-center">
+            <div class="col-md-5">
+                <div class="footer-social">
+                    <ul class="list-unstyled">
+                        {% if landing.facebook %}<li><a class="wow fadeInUp iframeClickable" contenteditable="false" data-field="addtional" href="{{landing.get_additional.facebook.text}}" data-id="{{landing.get_additional.facebook.id}}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>{% endif %}
+                        {% if landing.twitter %}<li><a class="wow fadeInDown iframeClickable" contenteditable="false" data-field="addtional" href="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>{% endif %}
+                        {% if landing.youtube %}<li><a class="wow fadeInUp iframeClickable" contenteditable="false"  data-field="addtional" href="{{landing.get_additional.youtube.text}}" data-id="{{landing.get_additional.youtube.id}}"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>{% endif %}
+                        {% if landing.instagram %}<li><a class="wow fadeInUp iframeClickable" contenteditable="false"  data-field="addtional" href="{{landing.get_additional.instagram.text}}" data-id="{{landing.get_additional.instagram.id}}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>{% endif %}
+                    </ul>
+                </div>
+{#                <p class="company-about fadeIn">© 2021 Wexim. Made With Love By <a href="javascript:void(0);">Themesindustry</a></p>#}
+            </div>
+            {% if landing.get_additional.map.text %}
+            <div class="col-lg-4 col-sm-6">
+              <div contenteditable='false' data-field="addtional" data-id="{{landing.get_additional.address.id}}" class="mapCont iframeClickable cs-footer_item">
+                {{landing.get_additional.map.text | safe }}
+              </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!--Footer End-->
+
+<!--Scroll Top-->
+<a class="scroll-top-arrow" href="javascript:void(0);"><i class="fa fa-angle-up"></i></a>
+<!--Scroll Top End-->
+
+<!-- Optional JavaScript -->
+<script src="{% static 'template_4/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'template_4/js/popper.min.js' %}"></script>
+<script src="{% static 'template_4/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'template_4/js/jquery.appear.js' %}"></script>
+<!-- isotop gallery -->
+<script src="{% static 'template_4/js/isotope.pkgd.min.js' %}"></script>
+<!-- cube portfolio gallery -->
+<script src="{% static 'template_4/js/jquery.cubeportfolio.min.js' %}"></script>
+<!-- owl carousel slider -->
+<script src="{% static 'template_4/js/owl.carousel.min.js' %}"></script>
+<!-- text rotate -->
+<script src="{% static 'template_4/js/morphext.min.js' %}"></script>
+<!-- particles -->
+<script src="{% static 'template_4/js/particles.min.js' %}"></script>
+<!-- parallax Background -->
+<script src="{% static 'template_4/js/parallaxie.min.js' %}"></script>
+<!-- fancybox popup -->
+<script src="{% static 'template_4/js/jquery.fancybox.min.js' %}"></script>
+<!-- fancybox popup -->
+<script src="{% static 'template_4/js/wow.js' %}"></script>
+<!-- REVOLUTION JS FILES -->
+<script src="{% static 'template_4/rs-plugin/js/jquery.themepunch.tools.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+<!-- SLIDER REVOLUTION EXTENSIONS -->
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.actions.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.migration.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+<script src="{% static 'template_4/rs-plugin/js/extensions/revolution.extension.video.min.js' %}"></script>
+<!-- map -->
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyB6YJu2gWq_4ABpOPGLy0c4JKg82U7a_JM"></script>
+<script src="{% static 'template_4/js/map.js' %}"></script>
+<!-- custom script -->
+<script src="{% static 'template_4/js/script.js' %}"></script>
+<script>
+    // Save scroll position to sessionStorage
+    window.addEventListener('unload', function() {
+        sessionStorage.setItem('iframeScrollTop', window.scrollY);
+    });
+
+    // Restore scroll position from sessionStorage
+    window.addEventListener('load', function() {
+        var savedScrollTop = sessionStorage.getItem('iframeScrollTop');
+        if (savedScrollTop !== null) {
+            window.scrollTo(0, savedScrollTop);
+        }
+    });
+
+    {% comment %} alter buy link {% endcomment %}
+    document.addEventListener('DOMContentLoaded', function() {
+        var buyLinks = document.querySelectorAll('.buylink');
+    
+        buyLinks.forEach(function(link) {
+            var href = link.getAttribute('href');
+    
+            // Check if the URL starts with 'http://' or 'https://'
+            if (!/^https?:\/\//i.test(href)) {
+                // If not, add 'https://' as the default protocol
+                href = 'https://' + href;
+                // Update the href attribute
+                link.setAttribute('href', href);
+            }
+        });
+    }); 
+</script>
+</body>
+</html>

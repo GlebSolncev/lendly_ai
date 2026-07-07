@@ -1,0 +1,456 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+
+
+
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="icon" href="{{ images.favIcon.img_url }}">
+    <!-- Meta Description -->
+    
+    <meta name="description" content="{{landing.meta.2.data}}">
+    <meta name="keywords" content="{{landing.meta.1.data}}">
+    <!-- Meta Keyword -->
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>{% if landing.meta.0.data %} {{landing.meta.0.data}} {% else %} {{landing.get_company_name.text}} {% endif %}</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+    <!--
+		CSS
+		============================================= -->
+    <link rel="stylesheet" href="{% static 'template_2/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/linearicons.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'template_2/css/main.css' %}">
+    <style type="text/css">
+        html {
+          scroll-behavior: smooth;
+        }   
+
+
+        {% if not landing.SecondaryFont == 'default' %}
+        body{
+            font-family: {{landing.SecondaryFont}}; 
+        }
+        {% endif %}
+        
+        {% if not landing.PrimaryFont == 'default' %}
+    
+        h1, h2, h3,
+        h4, h5, h6 {
+            font-family:{{landing.PrimaryFont}};
+    
+        }
+        
+        .h1, .h2, .h3,
+        .h4, .h5, .h6 {
+    
+            font-family: {{landing.PrimaryFont}};
+        
+        }
+        {% endif %}
+        
+
+
+
+
+
+        
+        *[data-field='hero']{
+            {% if not landing.hero_colors.bgColor == 'default' %}
+            background:{{landing.hero_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.hero_colors.fontColor == 'default' %}
+            color:{{landing.hero_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+        *[data-field='hero_long']{
+            {% if not landing.hero_long_colors.bgColor == 'default' %}
+            background:{{landing.hero_long_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.hero_long_colors.fontColor == 'default' %}
+            color:{{landing.hero_long_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        #feature{
+            {% if not landing.services_colors.bgColor == 'default' %}
+            background:{{landing.services_colors.bgColor}} !important;
+            {% endif %}
+        
+        }
+
+        #feature p, #feature h4, #feature h1  {
+            {% if not landing.services_colors.fontColor == 'default' %}
+            color:{{landing.services_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+
+
+        
+
+        #review{
+            {% if not landing.testimonials_colors.bgColor == 'default' %}
+            background:{{landing.testimonials_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        #review h1, #review p {
+            {% if not landing.testimonials_colors.fontColor == 'default' %}
+            color:{{landing.testimonials_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+
+        *[data-field='cta']{
+            {% if not landing.cta_colors.bgColor == 'default' %}
+            background:{{landing.cta_colors.bgColor}} !important;
+            {% endif %}
+        }
+
+        *[data-field='cta']{
+            {% if not landing.cta_colors.fontColor == 'default' %}
+            color:{{landing.cta_colors.fontColor}} !important;
+            {% endif %}
+        }
+
+        .mapCont{
+            width: 100%;
+            height: 100%;
+        }
+        
+        .mapCont iframe{
+            width: 100%;
+            height: 100%;
+        }
+  
+        
+        *[data-field='desc'], *[data-field='desc'] h4{
+            {% if not landing.desc_colors.bgColor == 'default' %}
+                background:{{landing.desc_colors.bgColor}} !important;
+            {% endif %}
+            {% if not landing.desc_colors.fontColor == 'default' %}
+                color:{{landing.desc_colors.fontColor}} !important;
+            {% endif %}
+        }
+    </style>
+</head>
+<body> 
+    <!-- start Header Area -->
+    <header id="header">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-between">
+                <div id="logo">
+                    <h4 class="iframeClickable" data-companyname='true' style="color: white; font-size: 35px;" data-field="desc" data-id="{{landing.get_company_name.id}}"> {{landing.get_company_name.text}}</h4>
+
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu align-items-center d-flex">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#feature">Feature</a></li>
+                        <li><a href="#review">Review</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <!-- #nav-menu-container -->
+            </div>
+        </div>
+    </header>
+    <!-- End Header Area -->
+
+
+
+
+<div class="g1-gradient-color">
+
+    <!-- Start slider Area -->
+    <section class="slider-area relative" id="home">
+        <div class="container">
+            <div>
+                <div class="row align-self justify-content-center fullscreen align-items-center item">
+                    <div class="col-lg-7 col-md-6 slider-left">
+                        {% if 'hero' in landing.active_elements %}
+                        
+                        <h1 class="iframeClickable"  data-field="hero" data-id="{{landing.get_active_hero.id}}" >{{landing.get_active_hero.text}}</h1>
+                        {% endif %}
+                        
+                        {% if 'hero_long' in landing.active_elements %}
+                        
+                        <p class="iframeClickable"  data-id="{{landing.get_active_hero_long.id}}" data-field="hero_long">{{landing.get_active_hero_long.text}}</p>
+                        {% endif %}
+                    </div>
+                    {% if not landing.text_only %}
+                    <div class="col-lg-5 col-md-6 slider-right">
+                        <img  class="iframeClickable img-fluid mx-auto"  data-field="hero" src="{% if images.t2_main %}{{ images.t2_main.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" alt="{% if images.t2_main %}{{ images.t2_main.alt }}{% endif %}">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>  
+            <div class="scroll-down">
+                <a href="#fature-area"><span></span></a>
+            </div>            
+    </section>
+    <!-- End slider Area -->
+    
+
+    {% if 'services' in landing.active_elements %}
+
+    <!-- Start feature Area -->
+    <section class="feature-area pt-120" id="feature">
+        <img class="pattern-bg" src="{% static 'template_2/img/pattern-bg.png' %}" alt="">
+        <div class="container">
+            <div class="row justify-content-center home-area-title">
+                <div class="col-lg-8">                  
+                    <h1 class="text-white text-center">Most Powerful Features</h1>
+                </div>
+            </div>              
+            <div class="row">
+                {% for service in landing.get_service_objects %}
+                <div  class=" col-lg-3 col-md-6">
+                    <div class="single-feature">
+                        <a href="#"><h4 class="iframeClickable" data-service='true' data-id="{{service.id}}" data-field="services">{{service.title}}</h4></a>
+                        <p class="iframeClickable" data-service='true' data-id="{{service.id}}" data-field="services">{{service.text}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>    
+    </section>
+    <!-- End feature Area -->    
+    {% endif %}
+
+</div>
+
+{% if 'services' in landing.active_elements %}
+
+<div class="g2-gradient-color">
+    <!-- Start screens Area -->
+    <section class="screens-area pt-120" id="screens">
+        <img class="pattern-left" src="{% static 'template_2/img/pattern-left.png' %}" alt="">
+        <div class="container-fluid d-flex justify-content-center">
+            {% if not landing.text_only %}
+            <div   class=" info-img mt-100">
+                <img data-field="services" class="iframeClickable img-fluid mx-auto" src="{% if images.t2_service %}{{ images.t2_service.img_url }}{% else %}{% static 'assets/img/placeholder_img.jpg' %}{% endif %}" alt="{% if images.t2_service %}{{ images.t2_service.alt }}{% endif %}">
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    <!-- End screens Area -->
+
+</div>
+
+{% endif %}
+
+
+
+
+<div class="g4-gradient-color">
+    <!-- Start game-review Area -->
+    {% if 'testimonials' in landing.active_elements %}
+    <section class="game-review-area pt-120" id="review">
+        <div class="container">
+            <div class="row justify-content-center home-area-title">
+                <div class="col-lg-8">
+                    <h1 class="text-white text-center">Reviews from People</h1>
+                </div>
+            </div>                    
+            <div class="row">
+                <div class="active-review-carusel pt-40">
+                    {% for testimonial in landing.get_testimonials_objects %}
+                    <div class=" single-review">
+                        <h4 class="text-white">{{testimonial.title}}</h4>
+                        <p class="iframeClickable"  data-field="testimonials" data-id={{testimonial.id}}>{{testimonial.text}}</p>
+                        <div class="star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>                                
+                        </div>                                  
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>    
+    </section>
+    {% endif %}
+    <!-- End game-review Area -->
+    <!-- Start home-contact Area -->
+    <section class="home-contact-area section-gap" id="contact">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+            {% if 'cta' in landing.active_elements %}
+            <div class="menu-content pb-70 col-lg-8 home-area-title">
+                <div class="title text-center">
+
+                    <h1 data-field="cta" data-id="{{landing.get_cta_active.id}}" class="iframeClickable mb-10 text-white">{{landing.get_cta_active.text}}</h1>
+                    <p>
+                        {% for testimonial in landing.get_cta_long_active %}
+                            <span data-field="cta_long" class="iframeClickable" data-id="{{testimonial.id}}">{{testimonial.text}}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+            </div>
+            <div class="row">
+                {% if landing.phone or landing.email or landing.address %}
+                <div class="col-lg-4 d-flex flex-column address-wrap">
+                    {% if landing.address %}
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <i class="ti-map-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h5 class="iframeClickable" data-field="addtional" data-id="{{landing.get_additional.address.id}}" >{{landing.get_additional.address.text}}</h5>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if landing.phone %}
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                            <i class="ti-headphone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <a  href="tel:{{landing.get_additional.phone.text}}" ><h5 class="iframeClickable phn" data-id="{{landing.get_additional.phone.id}}" data-field="addtional">{{landing.get_additional.phone.text}}</h5></a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if landing.email %}
+                    <div class="single-contact-address d-flex flex-row">
+                        <div class="icon">
+                             <i class="ti-email"></i>
+                        </div>
+                        <div class="contact-details">
+                            <a  href="mailto: {{landing.get_additional.email.text}}"><h5 class="iframeClickable" data-id="{{landing.get_additional.email.id}}" data-field="addtional">{{landing.get_additional.email.text}}</h5></a>
+                            <p>Send us your query anytime!</p>
+                        </div>
+                    </div>
+                    {% endif %}                                               
+                </div>
+                {% endif %}
+                <div class="col-lg-8">
+                    <form id="myForm" action="" method="post" data-url="https://landlyai.com{% url 'template_2_email' landing.id %}" class="form-area contact-form text-right">
+                        <div class="row">   
+                            <div class="col-lg-6 form-group">
+                                <input name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
+                            
+                                <input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
+
+                                <input name="sub" placeholder="Enter subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <textarea class="common-textarea form-control" name="message" placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>               
+                            </div>
+                            <div class="col-lg-12">
+                                <button class="contact-btn genric-btn submit-btn primary align-items-center text-uppercase" style="float: right;">Send Message<span class="lnr lnr-arrow-right"></span></button>
+                                <div class="alert-msg" style="text-align: left;"></div>                        
+                            </div>
+                        </div>
+                    </form> 
+                </div>            
+            </div>
+        </div>    
+    </section>
+    <!-- End home-contact Area -->
+</div>
+
+        <!-- start footer Area -->
+        <footer class="footer-area">
+            <img class="pattern-right" src="{% static 'template_2/img/pattern-right.png' %}" alt="">
+            <div class="container">
+                <h4 class="" dataCompanyname="true"  style="color: white; font-size: 35px;" data-field="desc" data-id="{{landing.get_company_name.id}}"> {{landing.get_company_name.text}}</h4>
+                <div class="row">
+                    <div class="col-lg-3  col-md-6 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h4>About Us</h4>
+                            <p class="iframeClickable"  data-id="{{landing.get_active_hero_long.id}}" data-field="hero_long">{{landing.get_active_hero_long.text}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h4>Pages</h4>
+                            <ul class="menu-list">
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#feature">Feature</a></li>
+                                <li><a href="#review">Review</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% if landing.get_additional.map.text %}
+                    <div style='margin-left:auto' class="col-lg-4 col-sm-6">
+                      <div contenteditable='false' data-field="addtional" data-id="{{landing.get_additional.address.id}}" class="mapCont iframeClickable cs-footer_item">
+                        {{landing.get_additional.map.text | safe }}
+                      </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="footer-bottom row align-items-center">
+                    <p class="footer-text m-0 col-lg-6 col-md-12">Copyright © 2023 All rights reserved to Powered by <a href="{{request.scheme}}://{{ request.get_host }}">LandlyAI</a></p>
+                    <div class="footer-social col-lg-6 col-md-12">
+                        {% if landing.facebook %}
+                        <a contenteditable="false" class="iframeClickable" data-field="addtional" href="{{landing.get_additional.facebook.text}}" data-id="{{landing.get_additional.facebook.id}}" ><i class="fa fa-facebook"></i></a>
+                        {% endif %}
+                        {% if landing.twitter %}
+                        <a contenteditable="false" class="iframeClickable" data-field="addtional" href="{{landing.get_additional.twitter.text}}" data-id="{{landing.get_additional.twitter.id}}"><i class="fa fa-twitter"></i></a>
+                        {% endif %}
+                        {% if landing.instagram %}
+                        <a contenteditable="false" class="iframeClickable" data-field="addtional" href="{{landing.get_additional.instagram.text}}" data-id="{{landing.get_additional.instagram.id}}"><i class="fa fa-instagram"></i></a>
+                        {% endif %}
+                        {% if landing.youtube %}
+                        <a contenteditable="false" class="iframeClickable" data-field="addtional" href="{{landing.get_additional.youtube.text}}" data-id="{{landing.get_additional.youtube.id}}"><i class="fa fa-youtube"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End footer Area -->
+
+        <script>
+            // Save scroll position to sessionStorage
+            window.addEventListener('unload', function() {
+                sessionStorage.setItem('iframeScrollTop', window.scrollY);
+            });
+        
+            // Restore scroll position from sessionStorage
+            window.addEventListener('load', function() {
+                var savedScrollTop = sessionStorage.getItem('iframeScrollTop');
+                if (savedScrollTop !== null) {
+                    window.scrollTo(0, savedScrollTop);
+                }
+            });
+        </script>
+        
+        <script src="{% static 'template_2/js/vendor/jquery-2.2.4.min.js' %}"></script>
+        <script src="{% static 'template_2/js/popper.min.js' %}"></script>
+        <script src="{% static 'template_2/js/vendor/bootstrap.min.js' %}"></script>
+        <script src="{% static 'template_2/js/easing.min.js' %}"></script>
+        <script src="{% static 'template_2/js/superfish.min.js' %}"></script>
+        <script src="{% static 'template_2/js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'template_2/js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'template_2/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'template_2/js/jquery.tabs.min.js' %}"></script>
+        <script src="{% static 'template_2/js/mn-accordion.js' %}"></script>
+        <script src="{% static 'template_2/js/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'template_2/js/mail-script.js' %}"></script>
+        <script src="{% static 'template_2/js/main.js' %}"></script>
+    </body>
+</html>    

@@ -1,0 +1,1106 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block 'body' %}
+
+
+{% comment %} {{page.sectionHeadings|safe}} {% endcomment %}
+
+
+<div class="sectionTweek editApp">
+
+    <div :style="allPageData.general.style"
+    class="editCanvas  ">
+        <!-- header -->
+        <section  class="page-header">
+            <div @click="handleEdit(allPageData.general.header,'header')"  class="page-header-phone ">
+                <div  :style="allPageData.general.header.style" class="page-header-phone-innerCont " :class="{'editor-content-editable-header':editMode.isEdit}">
+                    <div @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(allPageData.general.companyName)" :style="allPageData.general.companyName.style" class="page-header-buttons editor-content-editable"><span :class="{displayHolo:!allPageData.general.companyName.activeText}">[[allPageData.general.companyName.text || 'Enter your text here']]</span></div>
+                    <div :style="!showTabs ? allPageData.general.menu.style : allPageData.general.menuClose.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click=" editMode.isEdit?handleEdit(!showTabs ?allPageData.general.menu  :allPageData.general.menuClose):showTabs = !showTabs" class="mobileHeader page-header-buttons editor-content-editable"> <span :class="{displayHolo: !showTabs ? !allPageData.general.menu.activeText : !allPageData.general.menuClose.activeText}">[[!showTabs ? allPageData.general.menu.text || 'Enter your text here':allPageData.general.menuClose.text|| 'Enter your text here']]</span></div>                            
+                    
+                    <div class="page-header-pc-innerCont">
+                        <div v-show="item.tabName.show" v-for="(item,index) in allPageData.sections" :key="index" class="page-header-buttons">
+                            <a :href="'#dynamic-section-'+index">
+                                <p class="editor-content-editable" >[[item.tabName.name]]</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div :style="allPageData.general.header.style" :class="{ showTabs:showTabs }" class="mobileHeader page-menu-contents">
+                    <a v-show="item.tabName.show" v-for="(item,index) in allPageData.sections" :key="index" :href="'#dynamic-section-'+index">
+                        <div  class="page-menu-tabs">
+                            <p  class="editor-content-editable" >[[item.tabName.name]]</p>
+                            <div class="editor-content-editable" v-html="[[item.tabName.img]]"></div>
+                        </div>
+                    </a>
+                </div>                    
+            </div>
+        </section>
+
+
+    <template v-for="(pageData,sIndex) in allPageData.sections">
+
+        <!-- hero -->
+        <section :id="'dynamic-section-' + sIndex"  :style="pageData.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')"  v-if="pageData.sectionType === 'hero'" class="page-hero editor-content-editable page-hero-contents-new">                    
+            <!-- <img class="page-hero-bg" src="./bg.jpg" alt=""> -->
+            {% comment %} <div class="page-hero-contents "> {% endcomment %}
+
+                {% comment %} <div   class="page-hero-contents-flex"> {% endcomment %}
+                    <!-- br after sec word -->
+                    <h1  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" class="editor-content-editable" :style="pageData.title.style" ><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h1>
+                    <div class="page-hero-contents-right">
+                        <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle)" class="editor-content-editable"  :style="pageData.subtitle.style"><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>
+                        {% comment %} <button @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.button)" class="editor-content-editable" :style="pageData.button.style" ><span :class="{displayHolo:!pageData.button.activeText}">[[pageData.button.text || 'Enter your text here']]</span></button> {% endcomment %}
+                    </div>
+                {% comment %} </div> {% endcomment %}
+
+            {% comment %} </div> {% endcomment %}
+        </section>
+
+        <!-- about us -->
+
+        <section :id="'dynamic-section-' + sIndex" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'about'" class="page-about page-section">
+            <div class="mainContainer page-about-left">
+                <h3 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.extra)" :style="pageData.extra.style" class="aboutusTopLine editor-content-editable"><span :class="{displayHolo:!pageData.extra.activeText}">[[pageData.extra.text || 'Enter your text here']]</span></h3>
+                <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="lowerLine editor-content-editable" ><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+                <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle)" :style="pageData.subtitle.style"  class="editor-content-editable" ><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>                        
+            </div>
+            <div class="page-about-imgBlocks">                            
+                <div v-for="(item,i) in pageData.content && pageData.content.length > 0 ? pageData.content : defContent.slice(0,3)" :key="i" class="imgBlocks relativePos">
+                    <img :style="item.img.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.img,'img')" :class="{'editor-content-editable-img':editMode.isEdit}" :src="item.img.path || '{% static "vue/img/def.jpg" %}'" alt="">                                    
+                </div>
+            </div>
+        </section>
+
+        <!-- service -->
+
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'service'" class="page-services mainContainer page-section">
+            <!-- br after 1st word -->
+            <h2  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="headingCenterOnPC lowerLine lowerLineCenter editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+            <p  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle,'text')" :style="pageData.subtitle.style" class="sectionP page-ourteam-p sectionPLimited pCenterOnPC editor-content-editable"><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>
+
+            <div class="page-services-cards">
+                <div  class="editor-content-editable"  :style="item.style" v-for="(item,index) in pageData.content && pageData.content.length > 0 ? pageData.content : defContent.slice(0,3)" :key="index">
+                    <div class="servicesIcon">
+                        <img @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.img,'img')" :class="{'editor-content-editable-img':editMode.isEdit}"   :style="item.img.style" :src="item.img.path || '{% static "vue/img/def.jpg" %}'" alt="">
+                    </div>
+                    <div class="serviceContext">
+                        <h3 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.title)" class="editor-content-editable"  :style="item.title.style" ><span :class="{displayHolo:!item.title.activeText}">[[item.title.text || 'Enter your text here']]</span></h2>
+                        <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.subtitle)" class="editor-content-editable"  :style="item.subtitle.style" ><span :class="{displayHolo:!item.subtitle.activeText}">[[item.subtitle.text || 'Enter your text here']]</span></p>
+                    </div>
+                </div>
+             
+            </div>
+
+
+        </section>
+
+        <!-- ourteam -->
+
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'team'" class="page-ourteam mainContainer page-section editor-content-editable">
+            <!-- br after 1st word -->
+            <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="lowerLine lowerLineCenter headingCenterOnPC editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+            <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle)" :style="pageData.subtitle.style" class="sectionP page-ourteam-p sectionPLimited pCenterOnPC editor-content-editable"><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>
+            <div class="page-ourteam-team">
+                <div :style="item.style" v-for="(item,index) in pageData.content && pageData.content.length > 0 ? pageData.content: defContent.slice(0,2) " :key="index" class="page-ourteam-team-blocks editor-content-editable">
+                    <div class="page-ourteam-team-blocks-one">
+                        <img @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.img,'img')" :class="{'editor-content-editable-img':editMode.isEdit}"   :style="item.img.style" :src="item.img.path|| '{% static "vue/img/def.jpg" %}'" alt="">
+                    </div>
+                    <div class="page-ourteam-team-blocks-two ">
+                        <h3 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.title)" class="editor-content-editable"  :style="item.title.style" ><span :class="{displayHolo:!item.title.activeText}">[[item.title.text || 'Enter your text here']]</span></h3>
+                        <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.subtitle)"  :style="item.subtitle.style" class="page-ourteam-team-blocks-two-p-one editor-content-editable"><span :class="{displayHolo:!item.subtitle.activeText}">[[item.subtitle.text || 'Enter your text here']]</span></p>
+                        <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.desc)"  :style="item.desc.style" class="page-ourteam-team-blocks-two-p-two editor-content-editable"><span :class="{displayHolo:!item.desc.activeText}">[[item.desc.text || 'Enter your text here']]</span></p>
+                        <div class="page-ourteam-team-blocks-two-contact">
+                            <div @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.contact.email)"  :style="item.contact ? item.contact.email.style:''" class="editor-content-editable"><span :class="{displayHolo:!item.contact.email.activeText}"><a :href="'mailto:'+item.contact.email.text">[[item.contact ? item.contact.email.text || 'Enter your text here':'Enter your text here']]</a></span></div>  
+                            <div @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.contact.num)" :style="item.contact ? item.contact.num.style:''" class="editor-content-editable"><span :class="{displayHolo:!item.contact.num.activeText}"><a :href="'tel:'+item.contact.num.text">[[item.contact ? item.contact.num.text || 'Enter your text here':'Enter your text here']]</a></span></div>
+                        </div>
+                        <div class="page-ourteam-team-blocks-two-social">
+                            <div v-for="(item,index) in item.social && item.social.length > 0 ? item.social : defSocial" :key="index" class="">
+                                <img  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.logo,'img')" :class="{'editor-content-editable-img':editMode.isEdit}"   :style="item.logo.style"  :src="item.logo.path || '{% static "vue/img/defLogo.svg" %}'" alt="">
+                            </div>                                     
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- page-ourteam-team-blocks-even = 2n alternate -->
+                <!-- <div class="page-ourteam-team-blocks page-ourteam-team-blocks-even">
+                    <div class="page-ourteam-team-blocks-one">
+                        <img src="./team2.jpg" alt="">
+                    </div>
+                    <div class="page-ourteam-team-blocks-two ">
+                        <h3>Phasellus</h3>
+                        <p class="page-ourteam-team-blocks-two-p-one">Lorem ipsum dolor sit amet</p>
+                        <p class="page-ourteam-team-blocks-two-p-two">Quisque leo nisi, pretium nec iaculis a, tristique vel quam. Sed interdum elit et erat ultricies mollis.</p>
+                        <div class="page-ourteam-team-blocks-two-contact">
+                            <div class="">asd@gmail.com</div>  
+                            <div class="">+123456789</div>
+                        </div>
+                        <div class="page-ourteam-team-blocks-two-social">
+                            <div class="">
+                                <img src="{% static "vue/img/defLogo.svg" %}" alt="">
+                            </div>  
+                            <div class="">                                        
+                                <img src="./face.svg" alt="">
+                            </div>
+                            <div class="">                                        
+                                <img src="./x.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                
+
+
+            </div>
+        </section>
+
+        <!-- gallery -->
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'gallery'" class="page-gallery mainContainer page-section editor-content-editable">
+            <!-- br after 1st word -->
+            <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="sectionh lowerLine lowerLineCenter headingCenterOnPC editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+
+            <div class="page-gallery-innards">
+                <div   class=" page-gallery-intro">
+                    <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.extra)"  class="editor-content-editable"  :style="pageData.extra.style"><span :class="{displayHolo:!pageData.extra.activeText}">[[pageData.extra.text || 'Enter your text here']]</span></h2>
+                    <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle)" class="editor-content-editable"  :style="pageData.subtitle.style"><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>
+                </div>
+                
+                <div v-for="(item, index) in pageData.content && pageData.content.length > 0 ? pageData.content : defContent" :key="index">
+                    <img :class="{'editor-content-editable-img':editMode.isEdit}"  :style="item.img.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.img,'img')" :src="item.img.path || '{% static "vue/img/def.jpg" %}' " alt="">
+                </div>
+            </div>            
+        </section>
+        
+
+
+        <!-- FAQ -->
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'faq'" class="page-faq mainContainer page-section editor-content-editable">                    
+            <div class="page-faq-one">
+                <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.extra)" :style="pageData.extra.style" class="abovehline editor-content-editable"><span :class="{displayHolo:!pageData.extra.activeText}">[[pageData.extra.text || 'Enter your text here']]</span></p>
+                <!-- br after 3rd word -->
+                <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="sectionh lowerLine editor-content-editable">
+                    <span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span>
+                </h2>
+            </div>
+            <div class="page-faq-two">
+                <div :style="item.style" v-for="(item,index) in pageData.content && pageData.content.length > 0 ? pageData.content : defContent.slice(0,4)" :key="index" class="page-faq-two-blocks editor-content-editable">
+                    <div @click="editMode.isEdit?'' : item.showContent = !item.showContent" class="page-faq-two-block-flex">
+                        <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.title)" :style="item.title.style" class="sectionSubH editor-content-editable"><span :class="{displayHolo:!item.title.activeText}">[[item.title.text || 'Enter your text here']]</span></h2>
+                        <div class="page-faq-two-block-arrow">
+                            <svg :style="{ rotate: item.showContent ? '180deg' : '' }" viewBox="0 0 38 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L19 19L36 2" stroke="black" stroke-width="5"/>
+                            </svg>                                        
+                        </div>
+                    </div>
+                    <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.content)" :style="item.content.style"  v-show="item.showContent" class="sectionP page-faq-two-p editor-content-editable"><span :class="{displayHolo:!item.content.activeText}">[[item.content.text || 'Enter your text here']]</span></p>
+                </div>
+            </div>            
+        </section>
+
+
+        <!-- stats -->
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'stats'" class="page-stats editor-content-editable">
+            <div class="mainContainer">
+                <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="page-stats-heading editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+                <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.extra)" :style="pageData.extra.style" class="page-stats-subheading editor-content-editable"><span :class="{displayHolo:!pageData.extra.activeText}">[[pageData.extra.text || 'Enter your text here']]</span></p>
+                <div class="page-stats-blocks">
+                    <div :style="item.style" v-for="(item,index) in pageData.content && pageData.content.length > 0 ? pageData.content : defContent.slice(0, 4)" class="editor-content-editable">
+                        <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.title)" :style="item.title.style" class="page-stats-count editor-content-editable"><span :class="{displayHolo:!item.title.activeText}">[[item.title.text || 'Enter #']]</span></p>
+                        <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.subtitle)" :style="item.subtitle.style" class="page-stats-count-desc editor-content-editable"><span :class="{displayHolo:!item.subtitle.activeText}">[[item.subtitle.text || 'Enter your text']]</span></p>
+                    </div>
+                </div>
+                <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle)" :style="pageData.subtitle.style" class="page-stats-bottomline editor-content-editable"><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>
+            </div>
+        </section>
+
+
+        <!-- testimonial -->
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'testimonial'" class="page-testimonial mainContainer page-section editor-content-editable">
+            <!-- br after 2nd word -->
+            <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="sectionh lowerLine editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+            
+            <div class="page-testimonial-flex-cont">
+                <div class="page-testimonial-blocks">
+                    <div :style="item.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="pageData.selectable.selected = index" :class="{'active-testim':pageData.selectable.selected === index}" v-for="(item,index) in pageData.selectable.all && pageData.selectable.all.length>0 ? pageData.selectable.all : defContent.slice(0, 3)" :key="index" class="editor-content-editable">
+                        <div class="imgCont "><img  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.img,'img')" :class="{'editor-content-editable-img':editMode.isEdit}"   :style="item.img.style" :src="item.img.path || '{% static "vue/img/defLogoSout.svg" %}'" alt=""></div>
+                        <div class="tesitimCont">
+                            <h2  class="editor-content-editable" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.title)" :style="item.title.style"><span :class="{displayHolo:!item.title.activeText}">[[item.title.text || 'Enter your text here']]</span></h2>
+                            <p  class="editor-content-editable" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.subtitle)" :style="item.subtitle.style"><span :class="{displayHolo:!item.subtitle.activeText}">[[item.subtitle.text || 'Enter your text here']]</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-testimonial-content">
+                    <div class="page-testimonial-quote">
+                        <svg viewBox="0 0 55 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M54.9417 0.794922C54.1428 4.20059 53.3229 7.77443 52.482 11.5165C51.6832 15.2585 50.9474 18.9374 50.2746 22.5533C49.6019 26.1272 49.0343 29.4067 48.5718 32.3919H30.9128L30.0299 31.0044C30.7867 27.9351 31.7537 24.6766 32.931 21.2289C34.1503 17.7392 35.4537 14.2494 36.8412 10.7596C38.2707 7.22785 39.7003 3.90627 41.1298 0.794922H54.9417ZM25.489 0.794922C24.6901 4.20059 23.8702 7.77443 23.0293 11.5165C22.2305 15.2585 21.4947 18.9374 20.8219 22.5533C20.1492 26.1272 19.5816 29.4067 19.1191 32.3919H1.4601L0.577148 31.0044C1.33396 27.9351 2.301 24.6766 3.47827 21.2289C4.69758 17.7392 6.00099 14.2494 7.38848 10.7596C8.81802 7.22785 10.2476 3.90627 11.6771 0.794922H25.489Z" fill="#242424"/>
+                        </svg>
+                    </div>
+                    <p  class="editor-content-editable" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.selectable.all[pageData.selectable.selected].desc)" :style="pageData.selectable ? pageData.selectable.all.length > 0 ? pageData.selectable.all[pageData.selectable.selected].desc.style :'' :''"><i><span :class="{displayHolo:pageData.selectable.all && pageData.selectable.all.length > 0 ? !pageData.selectable.all[pageData.selectable.selected].desc.activeText : ''}">[[ pageData.selectable.all && pageData.selectable.all.length > 0 ? pageData.selectable.all[pageData.selectable.selected].desc.text : 'Enter your text here']]</span></i></p>
+                </div>
+            </div>
+
+
+        </section>
+
+
+
+        <!-- press -->
+        <section :id="'dynamic-section-' + sIndex"  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'press'" class="page-press mainContainer page-section editor-content-editable">
+            <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style"  class="sectionh lowerLine editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here' ]]</span></h2>
+            <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.subtitle)" :style="pageData.subtitle.style" class="sectionP sectionPLimited editor-content-editable"><span :class="{displayHolo:!pageData.subtitle.activeText}">[[pageData.subtitle.text || 'Enter your text here']]</span></p>
+            
+        
+
+            <swiper-container                         
+                :slides-per-view="3"
+                :space-between="20"
+                :breakpoints="{
+                    768: {
+                        slidesPerView: 4,
+                        spaceBetween:50
+                    },
+                    1024: {
+                        slidesPerView: 5,
+                        spaceBetween:50
+                    },
+                }"
+                :speed="500" 
+                :loop="true" 
+                :css-mode="true"
+                navigation="true" 
+                class="page-press-carousel">
+                
+                <swiper-slide v-for="(item,index) in pageData.content &&  pageData.content.length>0 ? pageData.content : defContent" >
+                    <div :style="item.style" class="page-press-carousel-blocks-container editor-content-editable">
+                        <img  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.img,'img')" :class="{'editor-content-editable-img':editMode.isEdit}"   :style="item.img.style" :src="item.img.path|| '{% static "vue/img/def.jpg" %}'" alt="">    
+                    </div>
+                </swiper-slide>                      
+            </swiper-container>
+
+            
+            <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.social.title)" :style="pageData.social.title.style" class="page-press-checkoutline sectionP sectionPLimited editor-content-editable"><span :class="{displayHolo:!pageData.social.title.activeText}">[[  pageData.social ? pageData.social.title.text || 'Enter your text here' : 'Enter your text here']]</span></p>
+            <div class="page-ourteam-team-blocks-two-social">
+                <div v-for="(item,index) in  pageData.social && pageData.social.icons && pageData.social.icons.length>0 ?pageData.social.icons : defSocial  " class="">
+                    <img  @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(item.logo,'img')" :class="{'editor-content-editable-img':editMode.isEdit}"   :style="item.logo.style" :src="item.logo.path||'{% static "vue/img/defLogo.svg" %}'" alt="">
+                </div>                       
+            </div>
+        </section>        
+
+        {% comment %} contact form {% endcomment %}
+        <section :id="'dynamic-section-' + sIndex" id="contactForm" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(pageData,'section')" :style="pageData.style" v-if="pageData.sectionType === 'contactForm'" class="editor-page-contact-form relativePos">
+            <div class="contactus-container">
+                <h2 @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(pageData.title)" :style="pageData.title.style" class="sectionh lowerLine editor-content-editable"><span :class="{displayHolo:!pageData.title.activeText}">[[pageData.title.text || 'Enter your text here']]</span></h2>
+
+                <form id="contactForm" @submit.prevent="sendMail" class="contactus-form">
+                
+                <div class="pc-form-flex">
+
+                    <template v-for="(formContent,formIndex) in pageData.content && pageData.content.length > 0 ? pageData.content : defContent.slice(0, 4)">
+                        
+                        <div  class="contactus-form-group relativePos">
+                            
+
+                            <label :for="formContent.forId" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(formContent.title)" :style="formContent.title.style" class="contactus-label"> <span :class="{displayHolo:!formContent.title.activeText}">[[formContent.title.text]]</span> </label>
+
+                            <input v-model="formContent.value"  :style="formContent.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(formContent, 'formFields')" v-if="formContent.type != 'textarea'" :type="formContent.type" :id="formContent.forId" :name="formContent.forId" class="contactus-input" :placeholder="formContent.placeholder" :required="formContent.required">
+                        
+                            <textarea v-model="formContent.value" :id="formContent.forId" :style="formContent.style" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(formContent, 'formFields')" v-if="formContent.type == 'textarea'" :name="formContent.forId" :rows="formContent.rows" class="contactus-input" :placeholder="formContent.placeholder" :required="formContent.required"></textarea>
+
+                            
+                        </div>
+
+                    </template>
+                   
+                    
+
+                    {% comment %} <div class="contactus-form-group">
+                        <label for="lastName" class="contactus-label">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="contactus-input" placeholder="Enter your last name" required>
+                    </div>
+
+                    <div class="contactus-form-group">
+                        <label for="number" class="contactus-label">Number</label>
+                        <input type="text" id="number" name="number" class="contactus-input" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <div class="contactus-form-group">
+                        <label for="email" class="contactus-label">Email</label>
+                        <input type="email" id="email" name="email" class="contactus-input" placeholder="Enter your email address" required>
+                    </div>
+
+                    <div class="contactus-form-group">
+                        <label for="message" class="contactus-label">Message</label>
+                        <textarea id="message" name="message" rows="4" class="contactus-input" placeholder="Enter your message" required></textarea>
+                    </div> {% endcomment %}
+
+                </div>
+                    <p style="font-size:0.8em" v-if="formShowError.show">[[formShowError.text]]</p>
+                    <button :class="{ 'opacityAnimate': formShowError.loading }" type="submit" class=" contactus-button">
+                        Submit
+                    </button>
+                </form>
+            </div>
+
+
+</template>
+
+        <section   :style="allPageData.general.footer.style" class="page-footer editor-content-editable">
+            
+
+            <div @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click.self="handleEdit(allPageData.general.footer,'footer')" class="page-footer-flex mainContainer">
+                <div class="page-footer-left">
+                    <h2  class="editor-content-editable" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(allPageData.general.companyName)" :style="allPageData.general.companyName.style"><span :class="{displayHolo:!allPageData.general.companyName.activeText}">[[allPageData.general.companyName.text || 'Enter your text here']]</span></h2>
+                    <p  class="editor-content-editable" @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(allPageData.general.desc)" :style="allPageData.general.desc.style"><span :class="{displayHolo:!allPageData.general.desc.activeText}">[[allPageData.general.desc.text || 'Enter your text here']]</span></p>
+                </div>
+                <div class="page-footer-right">
+                    <div v-show="item.tabName.show" v-for="(item,index) in allPageData.sections" :key="index" class="">
+                        <p >[[item.tabName.name]]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="allPageData.general.map != '' "  class="page-footer-map mainContainer">                
+                <iframe style="border:0;" width="100%" height="100%" :src="allPageData.general.map"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+
+            <p @mouseenter.self="handleMouseOver" @mouseover.self="handleMouseOver"  @mouseleave.self="handleMouseLeave" @click="handleEdit(allPageData.general.copyRightName)" :style="allPageData.general.copyRightName.style" class="page-footer-copyright mainContainer editor-content-editable"> <span :class="{displayHolo:!allPageData.general.copyRightName.activeText}">[[allPageData.general.copyRightName.text || 'Your-text']]</span></p>
+
+        </section>
+        
+    
+            
+    
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+<script>
+    
+const { reactive ,createApp,computed,toRaw, ref, h, watch, onMounted,onUnmounted,nextTick} = Vue
+
+createApp({
+    delimiters: ['[[',']]'],
+
+    setup() {
+
+       
+
+    
+
+        const defSocial = ref([
+            createSocialIcon(
+                '{% static "vue/img/defLogo.svg" %}',
+                '#'
+            ),
+            createSocialIcon(
+                '{% static "vue/img/defLogo.svg" %}',
+                '#'
+            ),
+            createSocialIcon(
+                '{% static "vue/img/defLogo.svg" %}',
+                '#'
+            )   
+        ])
+
+
+        const defContent = ref([
+            createContentItem(),
+            createContentItem(),
+            createContentItem(),
+            createContentItem(),
+            createContentItem(),
+            createContentItem(),
+            createContentItem(),
+        ])
+
+        const showTabs = ref(false)
+
+        // all constructors
+
+        function createContentItem(img, title, subtitle, desc, contact, social,content,showContent) {     
+            return reactive({
+                img : createImg(img),
+                title  : createText(title),
+                subtitle : createText(subtitle),
+                desc : createText(desc),
+                contact,
+                social,
+                content : createText(content),
+                showContent,
+                style: createStyle()
+
+            });
+        }
+
+        function createSection(sectionType, tabName, extra, title , subtitle, content, button, style, imgSet,selectable,social) {
+            return reactive({
+                sectionType,
+                tabName,
+                extra  : createText(extra),
+                title : createText(title),
+                subtitle  : createText(subtitle),
+                content,
+                button : createText(button),
+                style,
+                imgSet,
+                selectable :createSelectable(selectable),
+                social,
+            });
+        }
+
+        function createSelectable(all) {
+            return reactive({
+                all,
+                selected:0
+            })
+        }
+
+        function createStyle(backgroundImage, backgroundSize, backgroundPosition, backgroundColor, backgroundRepeat, fontFamily,color,fontSize) {
+            return reactive({
+                backgroundImage: backgroundImage ? `url("${backgroundImage}")` : '' ,
+                backgroundSize: backgroundSize || '',
+                backgroundPosition: backgroundPosition || '',
+                backgroundColor: backgroundColor || '',
+                backgroundRepeat: backgroundRepeat|| '', 
+                fontFamily: fontFamily || '',
+                color: color || '',
+                fontSize: fontSize || '' ,
+
+                activeStylesCustom:{
+                    backgroundImage: {value:backgroundImage,bool:true},
+                    backgroundSize: {value:'',bool:false},
+                    backgroundPosition: {value:'',bool:false},
+                    backgroundColor: {value:'',bool:false},
+                    backgroundRepeat: {value:'',bool:false},
+                    fontFamily: {value:'',bool:false},
+                    color: {value:'',bool:false},
+                    fontSize: {value:'',bool:false},
+                }
+
+            });
+        }
+
+        function createImgStyle(objectFit,objectPosition,backgroundColor,width,height) {
+            return reactive({                
+                objectFit: objectFit || '',
+                objectPosition: objectPosition || '',
+                backgroundColor : backgroundColor ||'',
+                width: width || '',     
+                height: height || '', 
+
+                activeStylesCustom:{
+                    objectFit: {value:'',bool:false},
+                    objectPosition: {value:'',bool:false},
+                    backgroundColor: {value:'',bool:false},
+                    width: {value:'',bool:false},
+                    height: {value:'',bool:false},
+                }
+            });
+        }
+
+        function createGeneral(menu,menuClose,companyName, copyRightName, desc, style) {
+            return reactive({
+                menu: createText(menu),
+                menuClose: createText(menuClose),
+                companyName: createText(companyName),
+                copyRightName: createText(copyRightName),
+                desc : createText(desc),
+                header :{style:createStyle()},
+                footer :{style:createStyle()},
+                style :createStyle()
+            });
+        }
+
+        function createContact(email, num) {
+            return reactive({
+                email: createText(email) ,
+                num: createText(num)
+            });
+        }
+
+        function createSocialIcon(logo, url) {
+            return reactive({
+                logo : createImg(logo),
+                url
+            });
+        }
+
+        function createSocialIconTab(title, icons) {
+            return reactive({                
+                title : createText(title),
+                icons                
+            });
+        }
+        
+        function createText(text, style = createStyle()) {
+            return reactive({
+                text,
+                style,
+                activeText:true  
+            });
+        }
+
+        function createImg(path, style = createImgStyle()) {
+            return reactive({
+                path,
+                style
+            });
+        }
+        
+
+        let False = false
+        let True = true
+
+        let allPageData = ref({{page.allPageData|safe}})
+
+
+        const getResponse = async(formData)=>{
+            try {
+                const response = await fetch('{% url 'promptGet' id=page.id %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}',
+                    },
+                    body: JSON.stringify(formData),
+                });
+        
+                if (!response.ok) {
+
+                    throw new Error('Network response was not ok');
+                }
+        
+                const data = await response.json();
+
+
+            
+                return data.res
+            } catch (error) {
+                console.error('There was a problem with your fetch operation:', error);
+            }
+        }
+
+
+        let themeData = [{
+            id:0,
+            color: 'linear-gradient(-230.41deg, #FFEFBA 35.08%, #FFFDF8 101.34%)',
+            title: 'Topaz',
+            accent: '#fffdf3',
+            type:'l',
+            font:'monda',
+            tags:'Professional',
+            pfont:'#1e1e1e',
+            sfont:'#202020',
+            link:'#1e1e1e',
+            buttons:'#202020',
+            buttonText:'white',
+            bg:'white'
+        },
+        {
+            id:1,
+            color: 'linear-gradient(203.35deg, #E1EEC3 31.47%, #F05053 154.42%)',
+            title: 'Sapphire',
+            accent: '#ffe9e0',
+            type:'l',
+            font:'montserrat',
+            tags:'Colorful',
+            pfont:'#1e1e1e',
+            sfont:'#202020',
+            link:'#1e1e1e',
+            buttons:'#202020',
+            buttonText:'white',
+            bg:'white'
+        },
+        {
+            id:2,
+            color:'linear-gradient(191.73deg, rgba(15, 12, 41, 0.992157) -0.4%, rgba(48, 43, 99, 0.996376) 47.96%, #24243E 89.5%)',
+            title: 'Coral',
+            accent: '#0d051e',
+            type:'d',
+            font:'poppins',
+            tags:'Colorful',
+            pfont:'#FFFFFF',
+            sfont:'#D7D7D7',
+            link:'#CECBEC',
+            buttons:'#FFFFFF',
+            buttonText:'#11101D',
+            bg:'#11101D'
+        },
+        {
+            id:3,
+            color:'linear-gradient(185.41deg, #BDC3C7 35.08%, #2C3E50 101.34%)',
+            title: 'Onyx',
+            accent: '#d6dadd',
+            type:'l',
+            font:'roboto',
+            tags:'Professional',
+            pfont:'#000',
+            sfont:'#202020',
+            link:'#000',
+            buttons:'#000',
+            buttonText:'#fff',
+            bg:'#fff'
+        },                
+        {
+            id:4,
+            color:'linear-gradient(196.39deg, #2980B9 -5.87%, #6DD5FA 40.07%, #FFFFFF 111.01%)',
+            title: 'Opal',
+            accent: '#dbf6ff',
+            type:'l',
+            font:'open-sans',
+            tags:'Colorful',
+            pfont:'#000',
+            sfont:'#202020',
+            link:'#000',
+            buttons:'#000',
+            buttonText:'#fff',
+            bg:'#fff'
+            
+        },
+        {
+            id:5,
+            color:'linear-gradient(203.35deg, #0F2027 31.47%, #F05053 154.42%)',
+            title: 'Garnet',
+            accent: '#11101D',
+            type:'d',
+            font:'monda',
+            tags:'Professional',
+            pfont:'#FFFFFF',
+            sfont:'#D7D7D7',
+            link:'#ECCBCB',
+            buttons:'#FFFFFF',
+            buttonText:'#060d10',
+            bg:'#060d10'
+        },
+        {
+            id:6,
+            color:'linear-gradient(196.39deg, #1F4037 -5.87%, #99F2C8 111.01%)',
+            title: 'Jade',
+            accent: '#dffff0',
+            type:'l',
+            font:'montserrat',
+            tags:'Colorful',
+            pfont:'#000',
+            sfont:'#202020',
+            link:'#000',
+            buttons:'#000',
+            buttonText:'#fff',
+            bg:'#fff'
+        },
+        {
+            id:7,
+            color:'linear-gradient(196.39deg, #7F7FD5 -5.87%, #86A8E7 46.66%, #91EAE4 111.01%)',
+            title: 'Agate',
+            accent: '#bdc8ff',
+            type:'l',
+            font:'poppins',
+            tags:'Colorful',
+            pfont:'#000',
+            sfont:'#202020',
+            link:'#000',
+            buttons:'#000',
+            buttonText:'#fff',
+            bg:'#fff'
+        },
+        {
+            id:8,
+            color:'linear-gradient(188.58deg, rgba(60, 59, 63, 0.992157) 12.58%, #605C3C 88%)',
+            title: 'Quartz',
+            accent: '#101011',
+            type:'d',
+            font:'roboto',
+            tags:'Professional',
+            pfont:'#FFFFFF',
+            sfont:'#D7D7D7',
+            link:'#D7D4C2',
+            buttons:'#FFFFFF',
+            buttonText:'#0f0e09',
+            bg:'#0f0e09'
+        },
+        {
+            id:9,
+            color:' linear-gradient(196.39deg, rgba(241, 39, 17, 0.992157) -5.87%, #F5AF19 111.01%)',
+            title: 'Citrine',
+            accent: '#ffc09f',
+            type:'l',
+            font:'open-sans',
+            tags:'Colorful',
+            pfont:'#000',
+            sfont:'#202020',
+            link:'#000',
+            buttons:'#000',
+            buttonText:'#fff',
+            bg:'#fff'
+        }]
+
+        let sectionHeadings = ref({{ page.sectionHeadings|safe }});
+        let pDesc = ref("{{ page.desc|safe }}");
+        let themeId = ref("{{ page.themeId|safe }}");
+        console.log(toRaw(themeId.value))
+        
+        
+        let ThemeObjectWithId = themeData.find(obj => obj.id === parseInt(themeId.value));
+        console.table(toRaw(ThemeObjectWithId))
+       
+
+        
+        // editor only
+
+        let selectedEditor = ref(
+            createText()
+        )
+
+        let selectedEditorImg = ref(
+            createImg()
+        )
+
+        let selectedEditorSection = ref(
+            createSection()
+        )
+
+        let selectedEditorGeneralPage = ref(
+            createGeneral()
+        )
+
+       
+
+        let isWholeSec = ref(false)
+
+
+        // let toggleEditorBlocks = ref ({
+        //     showFont:false,
+        //     showBackground:false,
+        // })
+    
+        let toggleEditor = ref({
+            show:false,
+            type:'text',
+            selected:'',
+        })
+
+        let element
+
+
+        const handleEdit = (all,type) =>{
+            if(editMode.value.isEdit){
+                event.stopPropagation();
+                if(type === 'img'){
+                    element = all
+                    isWholeSec =  false
+                    //console.log('img')
+                    toggleEditor.value.type = 'img'
+                    selectedEditorImg.value = element
+                    //console.log(selectedEditorImg.value.path)
+                }else if(type === 'section'){  
+                    element = all
+                    isWholeSec =  true
+                    //console.log('section')
+                    toggleEditor.value.type = 'section'
+                    selectedEditorSection.value = element
+                }else if(type === 'generalPage'){ 
+                    element = all
+                    isWholeSec =  false                    
+                    //console.log('generalPage')
+                    toggleEditor.value.type = 'generalPage'
+                    selectedEditorGeneralPage.value = element
+                }else{
+                    element = all
+                    isWholeSec =  false
+                    if(type === 'header'){
+                        toggleEditor.value.type = 'header'
+                    }else if(type === 'footer'){   
+                        toggleEditor.value.type = 'footer'                   
+                    }else{                        
+                        toggleEditor.value.type = 'text'
+                    }
+                    //console.log(toggleEditor.value.type)
+
+                    document.querySelector('.focusOnEditItem').focus();
+                    selectedEditor.value = element
+                }
+                toggleEditor.value.show = true
+            }else{
+                if(all.link){
+                    let link = all.link
+    
+                    if (!link.startsWith("https://")) {
+                        link = `https://${link}`
+                    }
+    
+                    window.location.href = link
+                }
+            }
+        }
+
+        let editMode = ref({
+            isEdit:false
+        })
+
+        const handleEditMode = () =>{
+            editMode.value.isEdit = !editMode.value.isEdit
+            if(!editMode.value.isEdit){
+                toggleEditor.value.show = false
+            }
+            if(isWholeSec){
+                isWholeSec = false
+            }
+        }
+        
+
+
+
+     
+      
+        // Watch for changes in selectedEditor.value and update element properties accordingly
+        watch(selectedEditorGeneralPage, (newValue) => {
+            if (element) {
+                element.style.fontSize =  newValue.style.activeStylesCustom.fontSize.bool ? newValue.style.activeStylesCustom.fontSize.value : '';              
+                element.style.color = newValue.style.activeStylesCustom.color.bool ? newValue.style.activeStylesCustom.color.value : '';
+                element.style.fontFamily = newValue.style.activeStylesCustom.fontFamily.bool ? newValue.style.activeStylesCustom.fontFamily.value : '';
+                element.style.backgroundColor = newValue.style.activeStylesCustom.backgroundColor.bool ? newValue.style.activeStylesCustom.backgroundColor.value : '';
+                element.style.backgroundImage = newValue.style.activeStylesCustom.backgroundImage.bool ? `url("${newValue.style.activeStylesCustom.backgroundImage.value}")` : '';
+                element.style.backgroundSize =  newValue.style.activeStylesCustom.backgroundSize.bool ? newValue.style.activeStylesCustom.backgroundSize.value : '';
+                element.style.backgroundPosition = newValue.style.activeStylesCustom.backgroundPosition.bool ? newValue.style.activeStylesCustom.backgroundPosition.value : '';
+                element.style.backgroundRepeat =  newValue.style.activeStylesCustom.backgroundRepeat.bool ? newValue.style.activeStylesCustom.backgroundRepeat.value : '';
+                //console.log('selectedEditorpage changed:----------------------------------', newValue);
+                //console.log('element- page')
+            }
+        }, { deep: true });
+
+        watch(selectedEditorSection, (newValue) => {
+            if (element && isWholeSec) {
+                //console.log(element.tabName.show)
+                element.style.fontSize =  newValue.style.activeStylesCustom.fontSize.bool ? newValue.style.activeStylesCustom.fontSize.value : '';              
+                element.style.color = newValue.style.activeStylesCustom.color.bool ? newValue.style.activeStylesCustom.color.value : '';
+                element.style.fontFamily = newValue.style.activeStylesCustom.fontFamily.bool ? newValue.style.activeStylesCustom.fontFamily.value : '';
+                element.style.backgroundColor = newValue.style.activeStylesCustom.backgroundColor.bool ? newValue.style.activeStylesCustom.backgroundColor.value : '';
+                element.style.backgroundImage = newValue.style.activeStylesCustom.backgroundImage.bool ? `url("${newValue.style.activeStylesCustom.backgroundImage.value}")` : '';
+                element.style.backgroundSize =  newValue.style.activeStylesCustom.backgroundSize.bool ? newValue.style.activeStylesCustom.backgroundSize.value : '';
+                element.style.backgroundPosition = newValue.style.activeStylesCustom.backgroundPosition.bool ? newValue.style.activeStylesCustom.backgroundPosition.value : '';
+                element.style.backgroundRepeat =  newValue.style.activeStylesCustom.backgroundRepeat.bool ? newValue.style.activeStylesCustom.backgroundRepeat.value : '';
+                //console.log('selectedEditorSection changed:----------------------------------', newValue);
+                //console.log('element- section')
+            }
+        }, { deep: true });
+        
+        watch(selectedEditor, (newValue) => {
+            if (element) {
+                //console.log('selectedEditor changed:', newValue);
+
+                // element.text = newValue.text;
+                element.style.fontSize =  newValue.style.activeStylesCustom.fontSize.bool ? newValue.style.activeStylesCustom.fontSize.value : '';              
+                element.style.color = newValue.style.activeStylesCustom.color.bool ? newValue.style.activeStylesCustom.color.value : '';
+                element.style.fontFamily = newValue.style.activeStylesCustom.fontFamily.bool ? newValue.style.activeStylesCustom.fontFamily.value : '';
+                element.style.backgroundColor = newValue.style.activeStylesCustom.backgroundColor.bool ? newValue.style.activeStylesCustom.backgroundColor.value : '';
+                element.style.backgroundImage = newValue.style.activeStylesCustom.backgroundImage.bool ? `url("${newValue.style.activeStylesCustom.backgroundImage.value}")` : '';
+                element.style.backgroundSize =  newValue.style.activeStylesCustom.backgroundSize.bool ? newValue.style.activeStylesCustom.backgroundSize.value : '';
+                element.style.backgroundPosition = newValue.style.activeStylesCustom.backgroundPosition.bool ? newValue.style.activeStylesCustom.backgroundPosition.value : '';
+                element.style.backgroundRepeat =  newValue.style.activeStylesCustom.backgroundRepeat.bool ? newValue.style.activeStylesCustom.backgroundRepeat.value : '';
+
+            }
+            //console.log('element- text')
+
+        }, { deep: true });
+
+        watch(selectedEditorImg, (newValue) => {
+            if (element) {
+                // element.path = newValue.path;
+
+                element.style.backgroundColor = newValue.style.activeStylesCustom.backgroundColor.bool ? newValue.style.activeStylesCustom.backgroundColor.value : '';
+                element.style.objectPosition = newValue.style.activeStylesCustom.objectPosition.bool ? newValue.style.activeStylesCustom.objectPosition.value : '';
+                element.style.objectFit =  newValue.style.activeStylesCustom.objectFit.bool ? newValue.style.activeStylesCustom.objectFit.value : '';
+               
+                //console.log('element- img')
+            }
+        }, { deep: true });
+        
+      
+        const toggleStyle = (style) => {
+            const index = selectedEditor.value.style.activeStylesCustom.indexOf(style);
+            if (index === -1) {
+              // If style is not in the array, add it
+              selectedEditor.value.style.activeStylesCustom.push(style);
+            } else {
+              // If style is already in the array, remove it
+              selectedEditor.value.style.activeStylesCustom.splice(index, 1);
+            }
+        };
+
+
+     
+
+
+        function handleMouseOver(e){
+            if(editMode.value.isEdit){
+                removeActiveClassFromAll()
+                //console.log('over')
+                e.target.classList.add('editor-content-editable-active')
+            }    
+        
+        }
+        function handleMouseLeave(e){
+            if(editMode.value.isEdit){
+                //console.log('LEav')
+                removeActiveClassFromAll()
+            }
+        }
+        function removeActiveClassFromAll() {
+            if(editMode.value.isEdit){
+                const elements = document.querySelectorAll('.editor-content-editable-active');
+                elements.forEach((element) => {
+                element.classList.remove('editor-content-editable-active');
+                });
+            }
+        }
+        
+
+        // drag functions------------
+            const position = ref({ x: 0, y: 0 });
+            let dragging = false;
+            let startX = 0;
+            let startY = 0;
+
+            function startDrag(event) {
+            event.preventDefault(); // Prevent default touch behavior
+            dragging = true;
+            const clientX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
+            const clientY = event.type === 'touchstart' ? event.touches[0].clientY : event.clientY;
+            startX = clientX - position.value.x;
+            startY = clientY - position.value.y;
+            }
+
+            function stopDrag() {
+            dragging = false;
+            }
+
+            function drag(event) {
+            if (!dragging) return;
+            const clientX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
+            const clientY = event.type === 'touchmove' ? event.touches[0].clientY : event.clientY;
+            position.value.x = clientX - startX;
+            position.value.y = clientY - startY;
+            }
+
+            onMounted(() => {
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+            });
+
+            onUnmounted(() => {
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchend', stopDrag);
+            });
+        // drag functions end---------
+
+        let formShowError = ref({
+            show:false,
+            text:'',
+            loading:false
+        })
+        
+        function sendMail(){
+            formShowError.value.loading = true
+            const formSecIndex = allPageData.value.sections.findIndex(section => section.sectionType === 'contactForm');
+        
+            let emailBody = 'Contact Form Submission\n\n';
+
+            for (const item of allPageData.value.sections[formSecIndex].content) {
+                const title = item.title.text;
+                const value = item.value;
+                emailBody += `${title}: ${value}\n`;
+            }
+
+            
+            
+
+
+            const formDa = {
+                body: emailBody,
+                recipient: allPageData.value.sections[formSecIndex].extra.text
+            };
+            
+            fetch("https://landlyai.com/editor/send_email_view/", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}',
+                },
+                body: JSON.stringify(formDa),
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to send email');
+                }
+            })
+            .then(data => {
+                formShowError.value.loading = false;
+                formShowError.value.show = true
+                formShowError.value.text = data.message
+
+                for (const item of allPageData.value.sections[formSecIndex].content) {
+                    item.value = '';
+                }
+
+                setTimeout(() => {
+                    formShowError.value.show = false;
+                }, 2000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+           
+        }
+
+
+
+
+        return {
+            showTabs,       
+            allPageData,
+            defSocial,            
+            defContent,
+            selectedEditor,
+            // handleInput,
+            handleEdit,
+            toggleStyle,
+            toggleEditor,
+            // drag
+            position, 
+            startDrag, 
+            stopDrag, 
+            drag,
+            handleEditMode,
+            editMode,
+            selectedEditorImg,
+            selectedEditorSection,
+            selectedEditorGeneralPage ,
+            handleMouseOver,
+            handleMouseLeave,
+            sendMail,
+            formShowError
+        };
+    },
+})
+.mount('.editApp')
+    
+    
+       
+
+       
+</script>
+
+
+{% endblock %}

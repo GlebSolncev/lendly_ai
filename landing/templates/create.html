@@ -1,0 +1,597 @@
+
+
+
+{% extends "layout/base.html" %}
+{% load static %}
+{% block 'body' %}
+
+
+
+
+<div class="sectionTweek generateApp">
+    <div :class={showLoader:generateClicked} class="fScreenloader">
+        <div :class={showLoader:generateClicked} class="spinner"></div>
+    </div>
+    <a href="{% url 'getStarted' %}">
+        <div class="backButton">
+            <svg viewBox="0 0 31 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1_24)">
+                <path d="M0.512054 18.9185C0.18683 18.6002 0 18.1712 0 17.7145C0 17.2578 0.18683 16.8288 0.512054 16.5105L12.6906 4.88546C13.3549 4.24885 14.4067 4.27653 15.0364 4.94081C15.6661 5.6051 15.6453 6.65689 14.981 7.28657L5.80558 16.0538H29.3393C30.2596 16.0538 31 16.7942 31 17.7145C31 18.6348 30.2596 19.3752 29.3393 19.3752H5.80558L14.9879 28.1355C15.6522 28.7721 15.673 29.8169 15.0433 30.4812C14.4136 31.1455 13.3618 31.1663 12.6975 30.5366L0.518973 18.9116L0.512054 18.9185Z" fill="black"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_1_24">
+                <rect width="31" height="35.4286" fill="white"/>
+                </clipPath>
+                </defs>
+            </svg>
+            <p>back</p>
+        </div>
+    </a>
+    
+    <h3 class="mainHead-selectionpage">
+        Generate
+    </h3>
+            
+    <form class="pageGenForm" @submit.prevent="submitForm">
+        <div class="pageGenFormFieldAndButton">
+            <textarea  v-model="description" class="inputfieldGen" placeholder="Describe what you’d like to make"></textarea>
+            <button class="cursorPointer">Re-Generate</button>
+        </div>
+    
+        <div class="sectionInputCont">
+            <select class="sectionInput" name="" id=""  v-model="sections">
+                <option value="1">1 section</option>
+                <option value="2">2 section</option>
+                <option value="3">3 section</option>
+                <option value="4">4 section</option>
+                <option value="5">5 section</option>
+                <option value="6">6 section</option>
+                <option value="7">7 section</option>
+                <option value="8">8 section</option>
+                <option value="9">9 section</option>
+                <option value="10">10 section</option>
+            </select>
+            <select class="sectionInput" name="" id="" v-model="language">
+                <option value="en">
+                    English (US)
+                </option>
+            </select>
+        </div>
+    </form>
+    
+    <div class="container">
+        <div class="">
+            <div class="trItOutline trItOutline-selectionpage">
+                <p>Outline</p>
+                <span></span>
+            </div>
+
+            
+            <div class="whiteBox all-sections" >
+                <div id="sortingDiv" class="all-sections-flex dynamicSections" :key="listKey" >                    
+                    <div v-for="(item, index) in items" :key="index" class="list-item targetReciever" :data-index="index">
+                        <div class="whiteBox orange-box">
+                            <p class="section-type-heads">[[items[index].head]]</p>
+                            <div class=" whiteBox  all-sections-inner">
+                                <p class="trigger item-content all-sections-inner-id order">&#8942; [[ index + 1 ]]</p>
+                                <textarea :data-item="items[index].head" placeholder='Enter your title here' class=" all-sections-inner-Content" v-model="items[index].response"></textarea>
+                                <div @click="deleteItem(index)" class="cursorPointer deleteButton">
+                                    <div class="">
+                                        <svg  viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.4174 3.42656L10.1451 5.3125H19.8549L18.5826 3.42656C18.4821 3.28047 18.3147 3.1875 18.1339 3.1875H11.8594C11.6786 3.1875 11.5112 3.27383 11.4107 3.42656H11.4174ZM21.2612 1.66016L23.7188 5.3125H24.6429H27.8571H28.3929C29.2835 5.3125 30 6.02305 30 6.90625C30 7.78945 29.2835 8.5 28.3929 8.5H27.8571V28.6875C27.8571 31.6227 25.4598 34 22.5 34H7.5C4.54018 34 2.14286 31.6227 2.14286 28.6875V8.5H1.60714C0.716518 8.5 0 7.78945 0 6.90625C0 6.02305 0.716518 5.3125 1.60714 5.3125H2.14286H5.35714H6.28125L8.73884 1.65352C9.43527 0.624219 10.6071 0 11.8594 0H18.1339C19.3862 0 20.558 0.624219 21.2545 1.65352L21.2612 1.66016ZM5.35714 8.5V28.6875C5.35714 29.8629 6.31473 30.8125 7.5 30.8125H22.5C23.6853 30.8125 24.6429 29.8629 24.6429 28.6875V8.5H5.35714ZM10.7143 12.75V26.5625C10.7143 27.1469 10.2321 27.625 9.64286 27.625C9.05357 27.625 8.57143 27.1469 8.57143 26.5625V12.75C8.57143 12.1656 9.05357 11.6875 9.64286 11.6875C10.2321 11.6875 10.7143 12.1656 10.7143 12.75ZM16.0714 12.75V26.5625C16.0714 27.1469 15.5893 27.625 15 27.625C14.4107 27.625 13.9286 27.1469 13.9286 26.5625V12.75C13.9286 12.1656 14.4107 11.6875 15 11.6875C15.5893 11.6875 16.0714 12.1656 16.0714 12.75ZM21.4286 12.75V26.5625C21.4286 27.1469 20.9464 27.625 20.3571 27.625C19.7679 27.625 19.2857 27.1469 19.2857 26.5625V12.75C19.2857 12.1656 19.7679 11.6875 20.3571 11.6875C20.9464 11.6875 21.4286 12.1656 21.4286 12.75Z" fill="black"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>    
+                </div>
+
+
+                <div  class="relativePos whiteBox add-section-button cursorPointer">
+                    <div @click="showChooseLayout=true" class="add-section-button-innerCont">
+                        <div class="add-section-buttonPLus">
+                            <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.9615 1.96154C18.9615 0.874519 18.087 0 17 0C15.913 0 15.0385 0.874519 15.0385 1.96154V15.0385H1.96154C0.874519 15.0385 0 15.913 0 17C0 18.087 0.874519 18.9615 1.96154 18.9615H15.0385V32.0385C15.0385 33.1255 15.913 34 17 34C18.087 34 18.9615 33.1255 18.9615 32.0385V18.9615H32.0385C33.1255 18.9615 34 18.087 34 17C34 15.913 33.1255 15.0385 32.0385 15.0385H18.9615V1.96154Z" fill="black"/>
+                            </svg>
+                        </div>
+                        <p>Add Section</p>
+                    </div>
+
+                    <div v-if="showChooseLayout" class="chooseLayoutPanel">
+                        <div  class="chooseLayoutPanelHeadCont">
+                            <p class="chooseLayoutPanelHead">Choose a Layout</p>
+                            <div @click="showChooseLayout=false" class="chooseLayoutPanelClose">
+                                <svg  viewBox="0 0 315 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.7969 299.952L299.7 16.0483M299.7 299.952L15.7969 16.0483" stroke="black" stroke-width="43"/>
+                                </svg>
+                            </div>                             
+                        </div>
+                        <div class="layoutButtons">
+
+                            <p v-for="(item,index) in layouts" @click="addItem(item)" >[[item]]</p>
+                          
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="section-status">
+                    <p>[[items.length]] cards total</p>
+                    <div class="status-circle">
+                        <div>
+                            <svg viewBox="0 0 100 100" class="chakra">
+                                <circle cx="50" cy="50" r="42" stroke-width="12px" class="chakra-progress__track css-axj7a5"></circle>
+                                <circle cx="50" cy="50" r="42" stroke-width="12px" class="chakra-progress__indicator css-1wca4wl" :stroke-dashoffset="strokeDashOffset" :stroke-dasharray="strokeDashArray"></circle>
+                            </svg>
+                        </div>
+                        [[totalCharacters]]/5000
+                        {% comment %} <svg viewBox="0 0 100 100" class="chakra">
+                            <circle cx="50" cy="50" r="42" stroke-width="12px" class="chakra-progress__track css-axj7a5"></circle>
+                            <circle cx="50" cy="50" r="42" stroke-width="12px" class="chakra-progress__indicator css-1wca4wl" :stroke-dashoffset="strokeDashOffset" :stroke-dasharray="strokeDashArray"></circle>
+                        </svg> {% endcomment %}
+
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="trItOutline trItOutline-selectionpage">
+                <p>Settings</p>
+                <span></span>
+            </div>
+            <div class="whiteBox all-settings">
+                <p class="section-headings">Amount of text per card</p>
+                <div class="whiteBox settings-subheadings">
+
+                    <div @click="settings.amount.selected = index" :class="{ activeSelection:settings.amount.selected == index  }" v-for="(amt, index) in settings.amount.all" :key="index" class="whiteBox cursorPointer">
+                        <div class="settings-subheading-icons" v-html="amt.img"></div>
+                        <p>[[amt.name]]</p>
+                    </div>
+
+                </div>
+                    <div style="display:none" class="">
+                        <p class="section-headings">Images</p>
+                        <div class="whiteBox settings-subheadings settings-subheadings-large">
+                        
+                            <div @click="settings.image.selected = index" :class="{ activeSelection:settings.image.selected == index  }" v-for="(set, index) in settings.image.all" :key="index" class="whiteBox cursorPointer">
+                                <div class="settings-subheading-icons" v-html="set.img"></div>
+                                <p>[[set.name]]</p>
+                            </div>
+                        
+                        </div>
+                        <p v-show="settings.image.selected == 0" class="section-headings">Image style</p>
+                        <textarea v-show="settings.image.selected == 0" v-model="imageStyle" placeholder="Optional: describe the colors, style, or mood to use" class="imageStyleTxtarea" rows="3" name="" id=""></textarea>
+                    </div>
+                 </div>
+
+            
+            <div @click="continueToNextStep" class="cursorPointer continueButton">
+                <p>Continue</p>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+    
+const { createApp,computed,toRaw, ref, h, watch, onMounted,onUnmounted,nextTick} = Vue
+
+createApp({
+    delimiters: ['[[',']]'],
+    setup() {
+
+        const items = ref({{ page.sectionHeadings|safe }});
+        const listKey = ref(Date.now()); // Use a timestamp as the initial key
+        let sortable;
+        const description = ref("{{ page.desc|safe }}");
+        const sections = ref("{{ page.sections|safe }}");
+        const language = ref("{{ page.language|safe }}");
+        const generateClicked = ref(false);
+        const imageStyle = ref("{{page.imageStyle|safe}}");
+        let showChooseLayout = ref(false);
+
+        const layouts = [
+            "hero",
+            "about",
+            "service",
+            "team",
+            "gallery",
+            "faq",
+            "stats",
+            "testimonial",
+            "press",
+            "contact form"
+        ]
+        const totalCharacters = ref(0)
+
+        const getTotalCharacters = () =>{
+            const rawObject = toRaw(items.value);
+            let total = 0;
+            rawObject.forEach(item => {
+                total += item.response.length;
+            });
+            totalCharacters.value = total
+
+            circleFillPercent = ((totalCharacters.value)/5000)*100
+            percentage.value = circleFillPercent
+        }
+
+
+        watch(items, (newItems, oldItems) => {
+            console.log('Items updated:', newItems);
+            const rawObject = toRaw(items.value);
+
+            console.log(rawObject); 
+            sendNewHeadOrderToDb(rawObject)
+            getTotalCharacters()
+
+        },{ deep: true });
+        
+
+
+        // radius
+        let circleFillPercent
+
+
+        let percentage = ref(0); // Example percentage value
+        const circleRadius = 42;
+        const strokeWidth = 12;
+        const circumference = 2 * Math.PI * circleRadius;
+
+        const strokeDashOffset = computed(() => {
+            return (1 - percentage.value / 100) * circumference;
+        });
+
+        const strokeDashArray = computed(() => {
+            return `${circumference} ${circumference}`;
+        });
+
+
+
+
+
+        onMounted(() => {
+            getTotalCharacters()
+            initializeSortable();
+
+           
+        });
+    
+        onUnmounted(() => {
+            if (sortable) {
+                sortable.destroy();
+            }
+        });
+      
+          function initializeSortable() {
+            if (sortable) {
+              sortable.destroy(); // Destroy the existing instance if it exists
+            }
+      
+            sortable = new Draggable.Sortable(document.querySelectorAll('.dynamicSections'), {
+              draggable: '.list-item',
+            });
+      
+
+            sortable.on('drag:start', (event) => {
+              const isTriggerClicked = event.originalEvent.target.classList.contains('trigger');
+              if (!isTriggerClicked) {
+                event.cancel();
+              }
+            });
+      
+           
+      
+            sortable.on('drag:stop', (event) => {
+              setTimeout(() => {
+                reorderItems();
+              }, 10);
+            });
+        }
+
+        
+        function reorderItems() {
+            const listItems = document.querySelectorAll('.dynamicSections .list-item');
+            let textareaValues = [];
+
+            // Iterate over each .list-item
+            listItems.forEach(item => {
+                // Find the textarea within the .list-item
+                const textarea = item.querySelector('textarea');
+                // Extract the value of the textarea and add it to the array
+                const dataItemValue = textarea.getAttribute('data-item');
+                console.log(dataItemValue)
+                if (textarea) {
+                    textareaValues.push({head:dataItemValue,response:textarea.value});
+                }
+            });
+            
+            listKey.value = Date.now();
+
+            items.value = textareaValues;
+            nextTick(() => {
+                initializeSortable();
+            });
+        }
+
+
+        const getResponse = async(formData)=>{
+            try {
+                const response = await fetch('{% url 'promptGet' id=page.id %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}',
+                    },
+                    body: JSON.stringify(formData),
+                });
+        
+                if (!response.ok) {
+
+                    throw new Error('Network response was not ok');
+                }
+        
+                const data = await response.json();
+
+
+            
+                return data.res
+            } catch (error) {
+                console.error('There was a problem with your fetch operation:', error);
+            }
+        }
+
+        function typeWriter(target, value) {
+            return new Promise((resolve) => {
+                if (target && value) {
+                    target.response = '';
+
+                    let i = 0;
+                    const intervalId = setInterval(() => {
+                        if (i < value.length) {
+                            target.response += value[i];
+                            i++;
+                        } else {
+                            clearInterval(intervalId);
+                            resolve(); 
+                        }
+                    }, 10); 
+                } else {
+                    resolve(); 
+                }
+            });
+        }
+
+
+        let pDesc = ref("{{ page.desc|safe }}");
+
+        
+        const addItem = async(lay) => {
+            reorderItems()
+
+            let newSecHeadingPromise = getResponse({
+                prompt: `Give me an ${lay} section title in 15 characters related to '${pDesc.value}' and dont include seperate texts just a simple single line statement `,
+                maxT: 50
+            })
+            
+            const itemIndex = items.value.length; // Get the index of the first item pushed
+            items.value.push({ "head": lay, "response": '' });
+
+            let newSecHeading = await newSecHeadingPromise;
+
+            await typeWriter(items.value[itemIndex], newSecHeading);
+
+        };
+
+        const deleteItem = (index) => {
+            reorderItems()
+
+            items.value.splice(index, 1);
+        };
+
+        const sendNewHeadOrderToDb = async(data) =>{
+            const formData = {
+                sectionHeadings: data           
+            };
+            console.log(formData)
+            try {
+                const response = await fetch('{% url 'updateSecHeadOrder' id=page.id %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}',
+
+                    },
+                    body: JSON.stringify(formData),
+                });
+        
+                if (!response.ok) {
+
+                    throw new Error('Network response was not ok');
+                }
+        
+                const data = await response.json();
+
+                if (data.status == 'ok'){
+                    console.log('updated')
+                }
+
+            } catch (error) {
+                console.error('There was a problem with your fetch operation:', error);
+            }
+        }
+
+        const continueToNextStep = async (index) => {
+            generateClicked.value = true
+            
+            const formData = {
+                textAmt: settings.value.amount.all[settings.value.amount.selected].name,
+                imageType: settings.value.image.all[settings.value.image.selected].name,
+                imageStyle: imageStyle.value,
+            };
+            console.table(formData)
+            try {
+                const response = await fetch('{% url 'addMoreDetails' id=page.id %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}',
+
+                    },
+                    body: JSON.stringify(formData),
+                });
+        
+                if (!response.ok) {
+
+                    throw new Error('Network response was not ok');
+                }
+        
+                const data = await response.json();
+
+                if (data.status == 'ok'){
+                    const createUrl = "{% url 'themePicker' id=page.id %}";
+                    window.location.href = createUrl;
+                }
+
+            } catch (error) {
+                console.error('There was a problem with your fetch operation:', error);
+            }
+            
+            
+        };
+
+
+        const settings = ref({
+            amount : {
+                all: [
+                    {
+                        img: '<svg viewBox="0 0 44 4" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 2C0 0.891667 0.919531 0 2.0625 0H41.9375C43.0805 0 44 0.891667 44 2C44 3.10833 43.0805 4 41.9375 4H2.0625C0.919531 4 0 3.10833 0 2Z" fill="#501E12"/></svg>',
+                        name: 'Brief'
+                    },
+                    {
+                        img: '<svg viewBox="0 0 39 31" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 2.02174C0 0.901359 0.931473 0 2.08929 0H36.9107C38.0685 0 39 0.901359 39 2.02174C39 3.14212 38.0685 4.04348 36.9107 4.04348H2.08929C0.931473 4.04348 0 3.14212 0 2.02174ZM0 15.5C0 14.3796 0.931473 13.4783 2.08929 13.4783H25.7679C26.9257 13.4783 27.8571 14.3796 27.8571 15.5C27.8571 16.6204 26.9257 17.5217 25.7679 17.5217H2.08929C0.931473 17.5217 0 16.6204 0 15.5ZM16.7143 28.9783C16.7143 30.0986 15.7828 31 14.625 31H2.08929C0.931473 31 0 30.0986 0 28.9783C0 27.8579 0.931473 26.9565 2.08929 26.9565H14.625C15.7828 26.9565 16.7143 27.8579 16.7143 28.9783Z" fill="#501E12"/></svg>',
+                        name: 'Medium'
+                    },
+                    {
+                        img: ' <svg viewBox="0 0 38 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.03571 0C0.907589 0 0 0.891667 0 2C0 3.10833 0.907589 4 2.03571 4H22.3929C23.521 4 24.4286 3.10833 24.4286 2C24.4286 0.891667 23.521 0 22.3929 0H2.03571ZM2.03571 10.6667C0.907589 10.6667 0 11.5583 0 12.6667C0 13.775 0.907589 14.6667 2.03571 14.6667H35.9643C37.0924 14.6667 38 13.775 38 12.6667C38 11.5583 37.0924 10.6667 35.9643 10.6667H2.03571ZM0 23.3333C0 24.4417 0.907589 25.3333 2.03571 25.3333H22.3929C23.521 25.3333 24.4286 24.4417 24.4286 23.3333C24.4286 22.225 23.521 21.3333 22.3929 21.3333H2.03571C0.907589 21.3333 0 22.225 0 23.3333ZM2.03571 32C0.907589 32 0 32.8917 0 34C0 35.1083 0.907589 36 2.03571 36H35.9643C37.0924 36 38 35.1083 38 34C38 32.8917 37.0924 32 35.9643 32H2.03571Z" fill="#501E12"/></svg>',
+                        name: 'Detailed'
+                    },
+                ],
+                selected:0
+
+            },
+            image:{
+                all:[
+                    {
+                        img: '<svg viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.3004 1.14799C19.9783 0.445982 19.2763 0 18.5 0C17.7237 0 17.0217 0.445982 16.6996 1.14799L11.7855 11.7855L1.14799 16.6996C0.445982 17.0217 0 17.7237 0 18.5C0 19.2763 0.445982 19.9783 1.14799 20.3004L11.7855 25.2145L16.6996 35.852C17.0217 36.554 17.7237 37 18.5 37C19.2763 37 19.9783 36.554 20.3004 35.852L25.2145 25.2145L35.852 20.3004C36.554 19.9783 37 19.2763 37 18.5C37 17.7237 36.554 17.0217 35.852 16.6996L25.2145 11.7855L20.3004 1.14799Z" fill="#501E12"/></svg>',
+                        name: 'Generate images with AI'
+                    },
+                    {
+                        img: '<svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1_115)"><path d="M32.6865 22.6154L28.7728 17.0066V15.492V14.6585V7.13034C28.7728 6.64133 28.5819 6.1815 28.2362 5.83649L22.9356 0.535357C22.5899 0.189769 22.1296 0 21.6422 0H5.68991C3.97143 0 2.57397 1.39804 2.57397 3.11594V31.2136C2.57397 32.9314 3.9715 34.3296 5.68991 34.3296H17.3713H20.2834C20.4229 34.5158 20.5705 34.6962 20.7404 34.8579C21.4761 35.5613 22.467 36 23.5635 36C25.5386 36 23.4721 36 26.0832 36C27.1785 36 28.1718 35.5614 28.9076 34.8579C29.765 34.0396 30.1796 32.9642 30.1796 31.9035V28.9661C31.3687 28.7155 32.3878 27.9493 32.9594 26.8535C33.6679 25.4959 33.5638 23.8717 32.6865 22.6154ZM12.4725 30.4211H6.41034V3.90845H19.2924V7.33661C19.2924 8.55786 20.2858 9.55173 21.5075 9.55173H24.9363V14.4189H24.9176V14.4218C23.6208 14.3913 22.3124 14.956 21.4761 16.142L16.9602 22.6153C16.0828 23.8717 15.9786 25.4958 16.6873 26.8535C17.2588 27.9493 18.2779 28.7155 19.4671 28.9661V30.421H18.7125H12.4725V30.4211ZM30.087 25.3542C29.9382 25.6376 29.6478 25.814 29.329 25.814H29.3279H26.9393V31.9036C26.9393 32.3756 26.5551 32.7588 26.0844 32.7588H26.0831H23.5635H23.5622C23.0912 32.7588 22.7071 32.3756 22.7071 31.9036V25.814H20.3185H20.3174C19.9987 25.814 19.7082 25.6376 19.5595 25.3542C19.4119 25.0707 19.433 24.7316 19.6169 24.4691L24.1209 18.0117C24.2814 17.7827 24.5439 17.6462 24.8226 17.6462H24.8239C25.1027 17.6462 25.365 17.7827 25.5255 18.0117L30.0297 24.4691C30.2134 24.7316 30.2346 25.0707 30.087 25.3542Z" fill="#501E12"/></g><defs><clipPath id="clip0_1_115"><rect width="36" height="36" fill="white"/></clipPath></defs></svg>',
+                        name: 'Upload Manualy'
+                    },
+                ],
+                selected:0
+            }
+        })
+
+        console.log(settings.value.amount.all.findIndex(item => item.name === '{{page.textAmt|safe}}'))
+        console.log(settings.value.image.all.findIndex(item => item.name === '{{page.imageType|safe}}'))
+
+        if(settings.value.amount.all.findIndex(item => item.name === '{{page.textAmt|safe}}') != -1){
+            settings.value.amount.selected = settings.value.amount.all.findIndex(item => item.name === '{{page.textAmt|safe}}')
+        }
+        if(settings.value.image.all.findIndex(item => item.name === '{{page.imageType|safe}}') != -1){
+            settings.value.image.selected = settings.value.image.all.findIndex(item => item.name === '{{page.imageType|safe}}')
+        }
+
+        console.log(settings.value.amount.selected)
+        console.log(settings.value.image.selected)
+
+        const submitForm = async () => {
+            generateClicked.value = true
+            const formData = {
+                description: description.value,
+                sections: sections.value,
+                language: language.value,
+            };
+            console.log(formData)
+            try {
+                const response = await fetch('{% url 'reGenPage' id=page.id %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}',
+
+                    },
+                    body: JSON.stringify(formData),
+                });
+        
+                if (!response.ok) {
+
+                    throw new Error('Network response was not ok');
+                }
+        
+                const data = await response.json();
+
+                console.log(data)
+
+
+                if (data.status == 'ok'){
+                  //  const createUrl = `{% url 'create' id='createPageId' %}`.replace('createPageId', data.pId);
+                  //  window.location.href = createUrl;
+                    listKey.value = Date.now();
+                    items.value = data.newSecHeading;
+                    nextTick(() => {
+                        initializeSortable();
+                    });
+                    generateClicked.value = false
+
+                }
+
+            } catch (error) {
+                console.error('There was a problem with your fetch operation:', error);
+            }
+        };
+    
+
+        return { 
+            items,
+            settings,
+            addItem,
+            deleteItem,           
+            reorderItems,
+            listKey,
+            description,
+            sections,
+            language,
+            generateClicked,
+            submitForm,
+            continueToNextStep,
+            imageStyle,
+            totalCharacters,
+            percentage,
+            strokeDashOffset,
+            strokeDashArray,
+            layouts,
+            showChooseLayout
+        };
+
+    }
+}).mount('.generateApp')
+
+
+   
+</script>
+
+
+{% endblock %}

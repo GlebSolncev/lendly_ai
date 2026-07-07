@@ -1,0 +1,1517 @@
+{% load static %}
+<html lang="en"
+      class="wf-barlow-n4-active wf-barlow-n5-active wf-barlow-n6-active wf-barlow-n7-active wf-barlow-n8-active wf-lato-n3-active wf-lato-n4-active wf-lato-n9-active wf-lato-n7-active wf-active"
+      style="height: 100%; --color_primary_default: rgba(2, 5, 211, 1); --color_primary_default_rgb: 2,5,211; --color_primary_contrast_default: rgba(255, 255, 255, 1); --color_primary_contrast_default_rgb: 255,255,255; --color_text_default: rgba(9, 23, 71, 1); --color_text_default_rgb: 9,23,71; --color_surface_default: rgba(255, 255, 255, 1); --color_surface_default_rgb: 255,255,255; --color_background_default: rgba(255, 255, 255, 0); --color_background_default_rgb: 255,255,255; --color_destructive_default: rgba(255, 0, 0, 1); --color_destructive_default_rgb: 255,0,0; --color_success_default: rgba(23, 219, 78, 1); --color_success_default_rgb: 23,219,78; --color_alert_default: rgba(250, 181, 21, 1); --color_alert_default_rgb: 250,181,21; --font_default: Lato;">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>LandlyAI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="/static/editor/package/early_js/05ae9fe83d6b755291132aab9d325d70918aafd336da1bd91a41a31c8b25734b/xfalse/early.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:regular%7CBarlow:500%7CBarlow:600%7CBarlow:700%7CBarlow:800%7CLato:300%7CLato:regular%7CLato:regular%7CLato%7CLato%7CLato:900%7CLato:900%7CLato:700%7CLato:900%7CLato:900">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Barlow:regular%7CBarlow:500%7CBarlow:600%7CBarlow:700%7CBarlow:800%7CLato:300%7CLato:regular%7CLato:regular%7CLato%7CLato%7CLato:900%7CLato:900%7CLato:700%7CLato:900%7CLato:900">
+    <link type="text/css"  href="/static/editor/package/run_css/10d8f190e26c18ca7d5da8683bf4c73277463f0205c01c25da68ad5bfa6d06f1/slidekick/live/editor/xfalse/xfalse/run.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <script src="{% static 'editor/js/confetti.js' %}"></script>
+   <style>
+      .activeInput {
+         border-color: rgb(107, 107, 107) rgb(107, 107, 107) rgb(107, 107, 107) #FF4A17;
+      }
+      .activeEditTab{
+         background:rgb(197, 255, 176)!important;
+       }
+      .inactiveInput {
+         border-color: rgb(107, 107, 107) rgb(107, 107, 107) rgb(107, 107, 107) rgb(107, 107, 107);
+      }
+      .open-element-1 {
+        border-radius: 10px 10px 0px 0px !important;
+      }
+      .open-element-2 {
+        visibility: visible !important;
+        display: flex !important;
+      }
+
+      /*----------------------- popup styles */
+
+      /* Style for the modal overlay */
+      .modal-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          color:black;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+          z-index: 10;
+      }
+      
+      /* Style for the modal content */
+      .modal-content {
+         background: #fff;
+         padding: 1.5em 2em;
+         border-radius: 0.31em;
+         text-align: center;
+      }
+      
+      /* Style for the buttons */
+      .modal-buttons button {
+         margin: 0 10px;
+         padding: 0.6em 1em;
+         outline: none;
+         border: 1px solid #afafaf;
+         cursor: pointer;
+         border-radius: 0.31em;
+      }
+
+
+
+
+      {% comment %} temp image gen button {% endcomment %}
+
+      .generate-img-btn{
+         display:none;
+      }
+
+
+   </style>
+       <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '6426148630772792');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=6426148630772792&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body style="height: 100%; overflow: auto;">
+
+
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="upgradeModal">
+   <!-- Modal Content -->
+   <div class="modal-content">
+      <p>This feature is available for basic and higher packages.</p>
+      <div class="modal-buttons">
+         <button onclick="upgrade()">Upgrade</button>
+         <button onclick="cancelUpgrade()">Cancel</button>
+      </div>
+   </div>
+</div>
+
+
+
+<div class="main-page bubble-element Page bubble-r-container flex row" style="width: 100%; margin-right: auto; margin-left: auto; position: relative; z-index: 1; min-height: max(700px, 100%); justify-content: flex-start; background: none rgb(235, 236, 241); opacity: 1;">
+   <div class="bubble-element Group bubble-r-container flex column" style="z-index: 2; align-self: stretch; min-width: 0px; order: 5; min-height: 0px; width: 0px; flex-grow: 1; height: auto; margin: 0px; justify-content: flex-start; row-gap: 0px; overflow: visible; background-color: rgb(235, 236, 241); border-radius: 0px; opacity: 1;">
+      <div class="bubble-element Group bubble-r-container flex row" style="z-index: 5; align-self: flex-start; min-width: 100%; max-width: 100%; order: 6; min-height: 50px; max-height: 50px; height: 50px; flex-grow: 1; width: 100%; margin: 0px; justify-content: space-between; overflow: visible; background-color: rgb(246, 247, 249); border-radius: 0px; border-bottom: 1px solid rgb(225, 223, 235); opacity: 1;">
+         <div class="bubble-element Group bubble-r-container flex row" style="z-index: 6; align-self: center; min-width: 155.5px; order: 5; min-height: 36px; width: max-content; flex-grow: 0; height: max-content; margin: 0px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">
+            <div class="bubble-element Image" style="z-index: 2; align-self: center; min-width: 30px; order: 1; min-height: 30px; flex-grow: 1; height: 30px; margin: 0px 0px 6px 16px; border-radius: 0px; opacity: 1;">
+               <a href="{% url 'index' %}">
+                 <span style="text-transform: capitalize;" class="company-name-header"><h4 style="color: black;">Landly<span class="cs-accent_color">AI</span></h4></span>
+               </a>
+               <div style="display: none;"></div>
+            </div>
+            <a href="{% url 'projects' %}" style="z-index: 4; order: 2;">
+              <div class="bubble-element Group bubble-r-container flex row clickable-element" style="z-index: 5; align-self: center; min-width: 87px; order: 3; min-height: 28px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 0px 0px 16px; justify-content: flex-start; overflow: visible; background-color: rgb(235, 236, 241); border-style: solid; border-width: 1px; border-color: rgb(225, 223, 235); border-radius: 5px; opacity: 1; cursor: pointer;">
+                 <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: flex-start; min-width: 20px; max-width: 20px; order: 1; width: 20px; flex-grow: 1; margin: 3px 0px 0px 3px; height: 20px; border-radius: 0px;">
+                    <div id="id_67d71hb10cfhe" style="width: 100%; height: 100%;">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" color="rgba(51, 51, 51, 1)" pointer-events="none">
+                          <polyline points="15 18 9 12 15 6"></polyline>
+                       </svg>
+                    </div>
+                 </div>
+                  <div class="bubble-element Text bubble-r-vertical-center" style="z-index: 4; align-self: flex-start; min-width: 59px; order: 2; min-height: 25px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 8px 0px 2px; white-space: pre-wrap; overflow: visible; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(15, 7, 7); text-align: center; line-height: 1; border-radius: 0px; opacity: 1; word-break: break-word;">
+                     <div>{{landing.title}}</div>
+                  </div>
+              </div>
+            </a>
+         </div>
+         <div class="bubble-element Group bubble-r-container flex row" style="z-index: 7; align-self: center; min-width: 73px; order: 9; min-height: 30px; width: max-content; flex-grow: 0; height: max-content; margin: 0px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">
+<!--            <div class="bubble-element Group bubble-r-container flex row clickable-element" style="z-index: 6; align-self: center; min-width: 153px; max-width: 153px; order: 2; min-height: 28px; width: 153px; flex-grow: 1; height: max-content; margin: 0px 8px 0px 0px; justify-content: center; overflow: visible; background-color: rgb(0, 93, 255); border-style: solid; border-width: 2px; border-color: rgb(0, 93, 255); border-radius: 5px; opacity: 1; cursor: pointer;">-->
+<!--               <div class="bubble-element Group bubble-r-container flex row" style="z-index: 5; align-self: center; min-width: 130px; max-width: 130px; order: 1; min-height: 27px; width: 130px; flex-grow: 1; height: max-content; margin: 0px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">-->
+<!--                  <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: center; min-width: 3.2px; order: 1; width: 3.2px; flex-grow: 1; margin: 0px 2px 0px 0px; height: 16px; border-radius: 0px;">-->
+<!--                     <div id="id_3b1f24b2efc9a" style="width: 100%; height: 100%;">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-flag" color="rgba(255, 255, 255, 1)" pointer-events="none">-->
+<!--                           <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>-->
+<!--                           <line x1="4" y1="22" x2="4" y2="15"></line>-->
+<!--                        </svg>-->
+<!--                     </div>-->
+<!--                  </div>-->
+<!--                  <div class="bubble-element Text bubble-r-vertical-center" style="z-index: 4; align-self: center; min-width: 111px; order: 2; min-height: 19px; width: max-content; flex-grow: 0; height: max-content; margin: 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 14px; font-weight: bold; color: rgb(255, 255, 255); text-align: center; line-height: 1.4; border-radius: 0px; opacity: 1;">-->
+<!--                     <div>Request a feature</div>-->
+<!--                  </div>-->
+<!--               </div>-->
+<!--            </div>-->
+            <div class="bubble-element Group bubble-r-container flex row" style="visibility: hidden; z-index: 9; align-self: center; min-width: 108px; max-width: 108px; order: 3; min-height: 28px; width: 108px; flex-grow: 1; height: max-content; margin: 0px 8px 0px 0px; display: none; justify-content: center;">
+               <div class="bubble-element Group bubble-r-container flex row" style="z-index: 5; align-self: center; min-width: 75px; max-width: 75px; order: 1; min-height: 27px; width: 75px; flex-grow: 1; height: max-content; margin: 0px; justify-content: center;">
+                  <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: center; min-width: 3.2px; order: 1; width: 3.2px; flex-grow: 1; margin: 0px 2px 0px 0px;"></div>
+                  <div class="bubble-element Text" style="z-index: 4; align-self: center; min-width: 56px; max-width: 56px; order: 2; min-height: 19px; width: 56px; flex-grow: 1; height: max-content; margin: 0px;"></div>
+               </div>
+            </div>
+            <div class="bubble-element Group bubble-r-container flex row clickable-element" style="z-index: 7; align-self: center; min-width: 36px; max-width: 36px; order: 4; min-height: 28px; width: 36px; flex-grow: 1; height: max-content; margin: 0px 16px 0px 0px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1; cursor: pointer;">
+               <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 4; align-self: center; min-width: 28px; max-width: 28px; order: 1; width: 28px; flex-grow: 1; margin: 0px 16px 0px 8px; height: 28px; border-style: solid; border-width: 1px; border-color: rgb(107, 107, 107); border-radius: 20px;">
+                  <div id="accountButton" style="width: 100%; height: 100%;">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="26.390625" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user" color="rgba(107, 107, 107, 1)" pointer-events="none">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                     </svg>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="bubble-element Group bubble-r-container-wrapper" style="z-index: 6; align-self: flex-start; min-width: 0px; order: 7; min-height: 0px; height: 0px; flex-grow: 1; width: calc(100% - 8px); margin: 8px 8px 8px 0px; overflow: visible; border-radius: 0px; padding: 0px 8px; opacity: 1;">
+         <div class="bubble-r-container flex row" style="justify-content: flex-start; gap: 0px 8px;">
+            <div id="overFlowScrollAdj" class="bubble-element Group bubble-r-container flex column" style="z-index: 3; align-self: flex-start; min-width: 400px; max-width: 400px; order: 6; min-height: 100%; max-height: 100%; width: 400px; flex-grow: 1; height: 100%; margin: 0px; justify-content: flex-start; overflow: hidden auto; background-color: rgb(235, 236, 241); border-radius: 0px; padding: 0px 2px 0px 0px; opacity: 1;">
+
+
+
+              
+               <div class="pageSettings">
+                  <p>Page Settings</p>
+
+                  <label for="text_only">CHOOSE TEMPLATE</label>
+                  <select id="template_id" onchange="updateData('template_id')" >
+                     {% for template in templates %}
+                        <option class="dropdown-choice" value="{{template.id}}" data-example="{% if template.template == 'template_4.html'  %} https://template4.landlyai.com/ {%else%} https://{{template.example.get_domain}} {% endif %}" style="color: rgb(0, 0, 0);" {% if template == landing.template %}selected{% endif %}>{{template.title}}</option>
+                     {% endfor %}
+                  </select>
+                  <a id="exampleLink" style="order: 3; color: #FF4A17; font-size: 15px; margin-left: 0px; margin-top: 16px;" href="https://template{{landing.template_id}}.landlyai.com/" target="_blank">Template example</a>
+
+                  <label for="PrimaryFont">Primary Font</label>
+                  <select id="PrimaryFont" onchange="updateData('PrimaryFont')" name="pfont">
+                     {% for choice_value, choice_label in landing.Type.choices %}
+                         <option value="{{ choice_value }}" {% if choice_value == landing.PrimaryFont %}selected{% endif %}>{{ choice_label }}</option>
+                     {% endfor %}
+                  </select>
+
+                  <label for="SecondaryFont">secondary Font</label>
+                  <select id="SecondaryFont" onchange="updateData('SecondaryFont')" name="sfont">
+                     {% for choice_value, choice_label in landing.Type.choices %}
+                         <option value="{{ choice_value }}" {% if choice_value == landing.SecondaryFont %}selected{% endif %}>{{ choice_label }}</option>
+                     {% endfor %}
+                  </select>
+
+                  <label for="text_only">LANDING CONTENT TYPE</label>
+                  <select id="text_only" onchange="updateData('text_only')" name="text_only">
+                     <option value="1" {% if landing.text_only == 1 %}selected{% endif %}>Text only</option>
+                     <option value="0" {% if landing.text_only == 0 %}selected{% endif %}>Text and images</option>
+                  </select>
+
+                
+
+
+
+               </div>
+
+               {% include 'editor_partials/description.html' %}
+
+               <div class="bubble-element CustomElement bubble-r-container-wrapper" style="z-index: 18; align-self: flex-start; min-width: 100%; max-width: 100%; order: 2; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 0px; overflow: hidden auto; border-radius: 0px; opacity: 1;">
+                  <div class="bubble-r-container flex column" style="justify-content: flex-start;">
+                     <div class="bubble-element RepeatingGroup bubble-rg" style="z-index: 15; align-self: flex-start; min-width: 100%; max-width: 100%; order: 1; min-height: 0px; max-height: 100%; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 0px; gap: 0px; grid-auto-rows: minmax(max-content, 0px); grid-template-columns: repeat(1, minmax(0px, 1fr)); grid-auto-flow: row; overflow: auto; border-radius: 0px; opacity: 1;">
+
+                        {% if not landing.is_new %}
+                           {% for part in landing.template.parts.all %}
+                                 {% if not part.slug == 'product_title' and not part.slug == 'product_price' and not part.slug == 'product_features' and not part.slug == 'product_link' %}
+                                    {% include 'editor_partials/input.html' with active_elements=landing.active_elements %}
+                                 {% endif %}
+                           {% endfor %}
+                           {% if landing.template.id == 4  %}
+                              <div class="productContainer">
+                                 <div class="productButton">
+                                    {% if 'product' in landing.active_elements %}
+                                       <div data-elementToggle='product' style="background:black" class="elementSwitcher">
+                                          on
+                                       </div>
+                                       {% else %}
+                                       <div data-elementToggle='product' style="background:#808080" class="elementSwitcher">
+                                          off
+                                       </div>
+                                    {% endif %}
+                                    <p>Product</p>
+                                 </div>
+                                 {% if 'product' in landing.active_elements %}
+                                    <div class="productInputs">
+
+                                       <div id="product_title-colorForm" class="colorfm">
+                                          
+
+                                          <div class="">
+                                              <label for="customFont">Use Custom Font Colors:</label>
+                                              <input
+                                              {% with dynamic_key=landing.allColors|get_item:'product_title' %}
+                                                  {% if not dynamic_key.fontColor == 'default' %}
+                                                      checked
+                                                  {% endif %}
+                                              {% endwith %}
+                                              
+                                              
+                                              
+                                              type="checkbox" id="customFont" onchange="toggleColorPickers('product_title','customFont','fontColor')">
+                                          </div>
+                              
+                                          <div class="">
+                                              <label for="fontColor">Font Color:</label>
+                                              <input 
+                                              {% with dynamic_key=landing.allColors|get_item:'product_title' %}
+                                                  {% if dynamic_key.fontColor == 'default' %}
+                                                      value="#000000"
+                                                      disabled
+                                                  {% else %}
+                                                      value = {{dynamic_key.fontColor}}
+                                                  {% endif %}
+                                              {% endwith %}
+                                              
+                                              onchange="updateColor('product_title','fontColor')" type="color" id="fontColor">
+                                          </div>
+                              
+                              
+                                          <div class="">
+                                              <label for="customBg">Use Custom bg Colors:</label>
+                                              <input 
+                                              
+                                              {% with dynamic_key=landing.allColors|get_item:'product_title' %}
+                                                  {% if not dynamic_key.bgColor == 'default' %}
+                                                      checked
+                                                  {% endif %}
+                                              {% endwith %}
+                                              
+                                              type="checkbox" id="customBg" onchange="toggleColorPickers('product_title','customBg','bgColor')">
+                                          </div>
+                              
+                              
+                                          <div class="">
+                                              <label for="bgColor">Background Color:</label>
+                                              <input
+                              
+                                              {% with dynamic_key=landing.allColors|get_item:'product_title' %}
+                                                  {% if dynamic_key.bgColor == 'default' %}
+                                                      value="#ffffff"
+                                                      disabled
+                                                  {% else %}
+                                                      value = {{dynamic_key.bgColor}}
+                                                  {% endif %}
+                                              {% endwith %}
+                                              
+                                              onchange="updateColor('product_title','bgColor')" type="color" id="bgColor">
+                                          </div>
+                              
+                                      </div>
+
+                                       {% for part in landing.template.parts.all %}
+                                             {% if part.slug == 'product_title' or part.slug == 'product_price' or part.slug == 'product_features' or part.slug == 'product_link'  %}
+                                                {% include 'editor_partials/input.html' %}
+                                             {% endif %}
+                                       {% endfor %}
+                                    </div>
+                                 {% endif %}
+                              </div>
+                           {% endif %}
+
+
+
+                        {% endif %}
+
+                        
+
+                        {% include 'editor_partials/additional.html' %}
+                        <div style='margin-top:1em' class="pageSettings metaSettings">
+                           <div class="dropButtonCont">
+                              <p>Meta</p>
+                              {% comment %} <p class='dropButt'>+</p> {% endcomment %}
+                           </div>
+         
+         
+                           <input id='allMetaInput' type='hidden' value='{{landing.meta}}'>  
+                           <label for="mtitle"> META TITLE</label>
+                           <input value='{{landing.meta.0.data}}' oninput='updateMeta("#mtitle")' class='commonMetaInputs' id='mtitle' type='text'>
+                           <label for="mkeywords"> META KEYWORDS</label>
+                           <input value='{{landing.meta.1.data}}' oninput='updateMeta("#mkeywords")' class='commonMetaInputs' id='mkeywords' type='text'>
+                           <label for="mdescription"> META DESCRIPTION</label>
+                           <textarea oninput='updateMeta("#mdescription")' class='commonMetaInputs' id='mdescription' >{{landing.meta.2.data}}</textarea>
+                           
+                           <button class='metaGenerateButton'>
+                              generate more
+                           </button>
+         
+                           <div class="row">
+                              <div class="col-12">
+                                  <span class="text-bold" style="color: black">Favicon Image</span>
+                              </div>
+                              <div class="col-12">
+                                 {% comment %} <textarea class="bubble-element MultiLineInput a1687185060327x4640 img-description" data-type="favIcon" minlength="40" required="" maxlength="1000"  maxlength="" placeholder="Image description">{% if images.favIcon %}{{ images.favIcon.description }}{% endif %}</textarea> {% endcomment %}
+                              </div>
+                              <form enctype="multipart/form-data" class="d-none img-form" data-type="favIcon" method="post" action="{% url 'upload_img' landing.id %}">
+                                 <input name="type" type="hidden" value="favIcon" />
+                                 <input hidden accept="image/*" name="image" type="file" class="img-input" data-type="favIcon"/>
+                              </form>
+                              <div class="col-12">
+                              <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0px; margin-bottom: 10px; margin-top: 10px; padding: 0px; cursor: pointer; background: none rgb(255, 255, 255); border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: #FF4A17; line-height: 1; border-radius: 10px; opacity: 1;" class="bubble-element Button clickable-element upload-img-btn" data-type="favIcon">Upload Image</button>
+                                 
+                              <p style='font-size:15px'>{{ images.favIcon.file }}</p>
+                              <button style="align-self: flex-start; min-width: 30%; order: 11; min-height: 40px; max-height: 40px; height: 40px; flex-grow: 1; width: 30%; margin: 0; padding: 0px; cursor: pointer; background: #FF4A17; border: 2px solid #FF4A17; text-align: center; font-family: Lato; font-size: 14px; font-weight: 400; color: white; line-height: 1; border-radius: 10px; opacity: 1;" class="generate-img-btn bubble-element Button clickable-element" data-type="favIcon" data-id="{{ landing.id }}">Generate Image</button>
+                              </div>
+                           </div>
+         
+                        </div>
+                     </div>
+                     <div class="bubble-element 1488796042609x768734193128308700-AAC" style="z-index: 16; align-self: flex-start; min-width: 1px; max-width: 1px; order: 3; flex-grow: 0; flex-shrink: 0; width: 1px; margin: 0px; height: 1px;"></div>
+                  </div>
+               </div>
+               <div class="bubble-element Text" style="z-index: 19; align-self: flex-start; min-width: 1px; max-width: 1px; order: 3; min-height: 1px; max-height: 1px; height: 1px; flex-grow: 1; width: 1px; margin: 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Barlow; font-size: 16px; font-weight: 400; color: rgb(59, 59, 59); line-height: 1.4; border-radius: 0px; opacity: 1;">
+                  <div></div>
+               </div>
+            </div>
+            <div class="bubble-element Group bubble-r-container-wrapper" style="z-index: 3; align-self: flex-start; min-width: 320px; order: 7; min-height: 100%; max-height: 100%; width: 320px; flex-grow: 1; height: 100%; margin: 0px; overflow: visible; background-color: rgb(235, 236, 241); border-radius: 0px; opacity: 1;">
+               <div class="bubble-r-container flex row" style="justify-content: flex-start;">
+                  <div class="bubble-element Group bubble-r-container flex column" style="z-index: 5; align-self: flex-start; min-width: 0%; order: 2; min-height: 100%; max-height: 100%; width: 0%; flex-grow: 1; height: 100%; margin: 0px 0px 8px; justify-content: flex-start; overflow: visible; background-color: rgb(255, 255, 255); border-style: solid; border-width: 1px; border-color: rgb(225, 223, 235); border-radius: 10px; opacity: 1;">
+                     <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 100%; max-width: 100%; order: 3; min-height: 0px; height: max-content; flex-grow: 0; flex-shrink: 0; width: 100%; margin: 0px; justify-content: space-between; overflow: visible; background-color: rgb(246, 247, 249); border-radius: 10px 10px 0px 0px; border-bottom: 1px solid rgb(225, 223, 235); opacity: 1;">
+                        <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 216.5px; order: 1; min-height: 44.5938px; width: max-content; flex-grow: 0; height: max-content; margin: 0px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">
+                           <div class="bubble-element Text" style="z-index: 40; align-self: flex-start; min-width: 85px; max-width: 85px; order: 1; min-height: 15px; width: 85px; flex-grow: 1; height: max-content; margin: 8px 16px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: Lato; font-size: 18px; font-weight: bold; color: rgb(0, 0, 0); line-height: 1.3; border-radius: 0px; opacity: 1;">Preview</div>
+                           <div style="max-width: 100px; order: 2;">
+                            <select class="bubble-element Dropdown" id="previewModeSelect" style="z-index: 2; align-self: flex-start; order: 2; min-height: 40px; width: 120px; flex-grow: 1; height: 40px; margin: 0px 16px; display: block; border: 1px solid rgb(186, 186, 186); background-color: rgb(252, 252, 252); color: black; font-family: var(--font_default); font-size: 14px; font-weight: 500; border-radius: 3px; padding: 0px 15px 0px 5px; opacity: 1;">
+               
+                             <option class="dropdown-choice" value="desktop" style="color: rgb(0, 0, 0);" selected=''>Desktop</option>
+                             
+                             <option class="dropdown-choice" value="mobile" style="color: rgb(0, 0, 0);">Mobile</option>
+                             
+                             <option class="dropdown-choice" value="full" style="color: rgb(0, 0, 0);">Fullscreen</option>
+                             
+                          </select>
+                          </div>
+                          <script type="text/javascript">
+                            $('#previewModeSelect').on('change', function() {
+                              if (this.value == 'desktop') {
+                                $('#editorFrame').css('width', '100%');
+                              } else if (this.value == 'mobile') {
+                                $('#editorFrame').css('width', '500px');
+                              } else if (this.value == 'full') {
+                                window.open($('#editorFrame').attr('src'), '_blank');
+                              }
+                            });
+                          </script>
+                        </div>
+
+                        {% if not landing.is_new %}
+                        <div class="bubble-element Group bubble-r-container flex row" style="align-self: center; min-width: 150px; order: 5; min-height: 35px; width: max-content; flex-grow: 0; height: max-content; margin: 0px; justify-content: center; overflow: visible; border-radius: 0px; opacity: 1;">
+                           <div class="bubble-element Group bubble-r-container flex row" style="visibility: hidden; align-self: center; min-width: 0px; max-width: 300px; order: 1; min-height: 45px; max-height: 45px; width: max-content; flex-grow: 0; height: 45px; margin: 0px 8px 0px 0px; display: none; justify-content: center;">
+                              <div class="bubble-element Text" style="z-index: 1; align-self: center; min-width: 0px; max-width: 300px; order: 1; min-height: 0px; width: max-content; flex-grow: 0; height: max-content; margin: 0px;"></div>
+                           </div>
+                           <div class="bubble-element Group bubble-r-container flex row" style="visibility: hidden; align-self: center; min-width: 87px; order: 2; min-height: 28px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 8px 0px 0px; display: none; justify-content: flex-start;">
+                              <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: center; min-width: 12px; max-width: 12px; order: 1; width: 12px; flex-grow: 1; margin: 0px 4px;"></div>
+                              <div class="bubble-element Text" style="align-self: center; min-width: 80px; max-width: 200px; order: 2; min-height: 0px; width: max-content; flex-grow: 0; height: max-content; margin: 0px;"></div>
+                           </div>
+                           <a                           
+                           href="{% if currSubscription == 'BASIC' or currSubscription == 'PRO' %} {% url 'publish' id=landing.id %} {% else %} javascript:void(0) {% endif %}" 
+                           {% if currSubscription == 'BASIC' or currSubscription == 'PRO' %} {% else %} onclick="showUpgradePopup()" class="askForUpgradation"  {% endif %}           
+                           
+                           style="align-self: center;">
+                             <div class="bubble-element Group bubble-r-container flex row clickable-element" style="align-self: center; min-width: 87px; max-width: 200px; order: 3; min-height: 28px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 8px 0px 0px; justify-content: flex-start; overflow: visible; background-color: rgb(235, 236, 241); border-style: solid; border-width: 1px; border-color: rgb(225, 223, 235); border-radius: 5px; opacity: 1; cursor: pointer;">
+                                <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: center; min-width: 12px; max-width: 12px; order: 1; width: 12px; flex-grow: 1; margin: 0px 4px; height: 12px; border-radius: 0px;">
+                                   <div id="id_474ad515408f6" style="width: 100%; height: 100%;">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle" color="rgba(51, 51, 51, 1)" pointer-events="none">
+                                         <circle cx="12" cy="12" r="10"></circle>
+                                         <line x1="15" y1="9" x2="9" y2="15"></line>
+                                         <line x1="9" y1="9" x2="15" y2="15"></line>
+                                      </svg>
+                                   </div>
+                                </div>
+                                <div class="bubble-element Text" style="align-self: center; min-width: 80px; order: 2; min-height: 0px; width: max-content; flex-grow: 0; height: max-content; margin: 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: var(--font_default); font-size: 14px; font-weight: 400; color: rgb(15, 7, 7); text-align: center; line-height: 1.4; border-radius: 0px; opacity: 1;">Publish site</div>
+                             </div>
+                           </a>
+                           <div class="bubble-element Group bubble-r-container flex row" style="visibility: hidden; align-self: center; min-width: 87px; order: 4; min-height: 28px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 8px 0px 0px; display: none; justify-content: flex-start;">
+                              <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: center; min-width: 12px; max-width: 12px; order: 1; width: 12px; flex-grow: 1; margin: 0px 4px;"></div>
+                              <div class="bubble-element Text" style="align-self: center; min-width: 80px; order: 2; min-height: 0px; width: 80px; flex-grow: 1; height: max-content; margin: 0px;"></div>
+                           </div>
+                           <a 
+                           href="{% if currSubscription == 'BASIC' or currSubscription == 'PRO' %} {% url 'view_site' id=landing.id %}  {% else %} javascript:void(0) {% endif %}" 
+                           {% if currSubscription == 'BASIC' or currSubscription == 'PRO' %} target="_blank" {% endif %}
+                           {% if currSubscription == 'BASIC' or currSubscription == 'PRO' %} {% else %}class="askForUpgradation"  onclick="showUpgradePopup()"{% endif %}           
+
+                           
+                           style="align-self: center;">
+                              <div class="bubble-element Group bubble-r-container flex row clickable-element" style="align-self: center; min-width: 87px; order: 5; min-height: 28px; width: max-content; flex-grow: 0; height: max-content; margin: 0px 8px 0px 0px; justify-content: flex-start; overflow: visible; background-color: rgb(235, 236, 241); border-style: solid; border-width: 1px; border-color: rgb(225, 223, 235); border-radius: 5px; opacity: 1; cursor: pointer;">
+                                <div class="bubble-element 1553889862898x186125300131692540-AAC" style="z-index: 3; align-self: center; min-width: 12px; max-width: 12px; order: 1; width: 12px; flex-grow: 1; margin: 0px 4px; height: 12px; border-radius: 0px;">
+                                   <div id="id_20c1fd67c6f32" style="width: 100%; height: 100%;">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="rgba(51, 51, 51, 1)" pointer-events="none">
+                                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                         <polyline points="15 3 21 3 21 9"></polyline>
+                                         <line x1="10" y1="14" x2="21" y2="3"></line>
+                                      </svg>
+                                   </div>
+                                </div>
+                                <div class="bubble-element Text" style="align-self: center; min-width: 80px; order: 2; min-height: 0px; width: 80px; flex-grow: 1; height: max-content; margin: 0px; white-space: pre-wrap; overflow: visible; word-break: break-word; font-family: var(--font_default); font-size: 14px; font-weight: 400; color: rgb(15, 7, 7); text-align: center; line-height: 1.4; border-radius: 0px; opacity: 1;">View site</div>
+                             </div>
+                           </a>
+                        </div>
+                        {% endif %}
+                     </div>
+                     <div class="bubble-element Group bubble-r-container-wrapper" style="align-self: flex-start; min-width: 0px; order: 4; min-height: 0px; height: 0px; flex-grow: 1; width: calc(100% - 0px); margin: 0px; overflow: visible; border-radius: 0px; opacity: 1;">
+                        <div class="bubble-r-container flex column" style="justify-content: flex-start;">
+                           <div class="bubble-element HTML" style="display: flex; align-self: flex-start; justify-content: center; min-width: 0%; order: 4; min-height: 100%; max-height: 100%; height: 100%; flex-grow: 1; width: calc(100% - 0px); margin: 0px; border-radius: 0px; opacity: 1;" id="dudaIframe"><iframe id="editorFrame" src="{% if landing.is_new %}{% url 'default' %}{% else %}{% url 'view' id=landing.id %}{% endif %}" name="iFrame Name" scrolling="Yes" height="100%" width="100%" style="border: none;"></iframe></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+
+
+
+
+            
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+
+
+{% include 'editor_partials/change_modal.html' %}
+{% include 'editor_partials/generate_modal.html' %}
+{% include 'editor_partials/account_modal.html' %}
+{% include 'editor_partials/cancel_modal.html' %}
+<script type="text/javascript">
+
+
+   $('.accountButtonCloseNew').on("click", function() {
+      $('.accountGreyout').css('display', 'none');
+      $('.accountGreyout').css('opacity', '0');
+   
+      $('#accountModal').css('display', 'none');
+      $('#accountModal').css('opacity', '0');
+   })
+
+
+  $('#accountButton').on("click", function() {
+    $('.accountGreyout').css('display', 'block');
+    $('.accountGreyout').css('opacity', '1');
+
+    $('#accountModal').css('display', 'block');
+    $('#accountModal').css('opacity', '1');
+  });
+</script>
+<script>
+var template = `<div id="valueInputTemplate" class="bubble-element GroupItem bubble-r-container flex row group-item entry-1"'
+'style="justify-content: space-around; box-sizing: content-box; min-height: 40px; border-top-style: none; border-left-style: none; display: none;">
+   <div class="bubble-element Group bubble-r-container flex row" style="align-self: flex-start; min-width: 80%; order: 2; min-height: 26px; width: 80%; flex-grow: 1; height: max-content; margin: 0px; justify-content: space-between; overflow: visible; border-radius: 5px; opacity: 1;">
+      <div data-type="DATATYPE" data-index="DATAINDEX" data-field="DATAFIELD" class="DATACLASS DATAFIELD-field DATAFIELD-field-DATAINDEX valueInput bubble-element Text clickable-element" style="align-self: center; min-width: 80%; order: 6; min-height: 0px; width: 80%; flex-grow: 1; height: max-content; margin: 0px 0px 15px; white-space: pre-wrap; overflow: visible; font-family: Lato; font-size: 14px; font-weight: 400; color: rgb(0, 0, 0); line-height: 1; padding: 10px 8px; border-radius: 3px; border-style: none none none solid; border-width: 1px 1px 1px 10px; background-color: rgb(246, 247, 249); opacity: 1; cursor: pointer; word-break: break-word;">TEXT</div>
+      <div class="bubble-element CustomElement bubble-r-container flex row" style="align-self: flex-start; min-width: 32px; max-width: 32px; order: 7; min-height: 45px; width: 32px; flex-grow: 1; height: max-content; margin: 0px 0px 0px 4px; justify-content: flex-start; overflow: visible; border-radius: 0px; opacity: 1;">
+         <button class="bubble-element materialicons-Materialicon clickable-element inner-element material-icons changeButton DATAFIELD-button-DATAINDEX" data-index="DATAINDEX" data-field="DATAFIELD" data-text="TEXT" data-input="DATAFIELD-field-DATAINDEX" data-button="DATAFIELD-button-DATAINDEX" style="z-index: 4; align-self: center; min-width: 32px; max-width: 32px; order: 1; width: 32px; flex-grow: 1; margin: 0px; height: 32px; padding: 0px; text-align: center; background: none rgb(246, 247, 249); border: none; color: rgb(204, 204, 204); font-size: 0px; border-radius: 40px; cursor: pointer;">more_vert</button>
+      </div>
+   </div>
+</div>`;
+
+  $('.generateMore').on("click", function() {
+     var field = $(this).attr('data-field');
+     var data = {
+        "csrfmiddlewaretoken": '{{csrf_token}}',
+        "field": field,
+     };
+
+     $.ajax({
+         url: "{% url 'generate_more' id=landing.id %}",
+         type: "post",
+         data: data,
+         success: function(d) {
+             if (d.status) {
+              $('#' + field + '-element-3').empty();
+
+              for (var i = 0; i < d.texts.length; i++) {
+                var new_template = template;
+
+                new_template = new_template.replace(' display: none;', '');
+                new_template = new_template.replace('valueInputTemplate', '');
+                new_template = new_template.replace('DATATYPE', d.part.type);
+                new_template = new_template.replace('DATAINDEX', i);
+                new_template = new_template.replace('DATAFIELD', d.part.slug);
+                new_template = new_template.replace('TEXT', d.texts[i].text);
+                
+                
+
+                if (d.part.slug == 'single') {
+                  if (d.texts[i] == d.value) {
+                    new_template = new_template.replace('DATACLASS', 'activeInput');
+                  } else {
+
+                    new_template = new_template.replace('DATACLASS', 'inactiveInput');
+                  }
+                 } else {
+                  
+                  /*
+                  if (d.value.indexOf(d.texts[i]) !== -1) {
+
+                    new_template = new_template.replace('DATACLASS', 'activeInput');
+                  } else {
+                     console.log(d.value.indexOf(d.texts[i]))
+                    new_template = new_template.replace('DATACLASS', 'inactiveInput');
+                  }*/
+                 
+
+                  if (d.value.some(obj => JSON.stringify(obj) === JSON.stringify(d.texts[i])) ) {
+                     console.log('yay')
+                     new_template = new_template.replace('DATACLASS', 'activeInput');
+                  } else {
+                     console.log(   d.value, d.texts[i])
+                     new_template = new_template.replace('DATACLASS', 'inactiveInput');
+                  }
+
+
+                 }
+
+                $('#' + field + '-element-3').append(new_template);
+              }
+              document.getElementById("editorFrame").contentDocument.location.reload(true);
+             }
+         }
+     });
+  });
+</script>
+<script>
+
+
+  $('.changeButton').on("click", function() {
+     $('#greyout').css({'opacity': '1', 'display': 'block'});
+     $('#changeModal').css({'visibility': '', "display": ''});
+
+      console.log('lk')
+     var field = $(this).attr('data-field');
+     var index = $(this).attr('data-index');
+     $('#changeFormInput').val($(this).attr('data-text'));
+     $('#changeFormButton').attr('data-field', field);
+     $('#changeFormButton').attr('data-index', index);
+     $('#changeFormButton').attr('data-input', $(this).attr('data-input'));
+     $('#changeFormButton').attr('data-button', $(this).attr('data-button'))
+     $('#changeFormButton').attr('data-id', $(this).attr('data-id'))
+
+  });
+</script>
+<script>
+ $('#greyout').on("click", function() {
+     $('#greyout').css({'opacity': '0', 'display': 'none'});
+     $('#changeModal').css({'visibility': 'hidden', "display": 'none'});
+  });
+</script>
+<script>
+  $('#changeFormButton').on("click", function() {
+     var field = $(this).attr('data-field');
+     var index = $(this).attr('data-index');
+     var input = $(this).attr('data-input');
+     var button = $(this).attr('data-button');
+     var textId = $(this).attr('data-id');
+     var textVal = $('#changeFormInput').val()
+    /* var textId = $(this).attr('data-id');
+     var textCont = $(this).text()
+     var value = `${textCont}@~${textId}` */
+  
+      console.log(textVal)
+
+      var value = {'id':textId , 'text':textVal};
+
+      console.log()
+      var data = {
+         "csrfmiddlewaretoken": '{{csrf_token}}',
+         "field": field,
+         "index": index,
+         "value": JSON.stringify(value),
+      };
+
+    
+     $.ajax({
+         url: "{% url 'change' id=landing.id %}",
+         type: "post",
+         data: data,
+         success: function(d) {
+             if (d.status) {
+                $('#greyout').css({'opacity': '0', 'display': 'none'});
+                $('#changeModal').css({'visibility': 'hidden', "display": 'none'});
+                $('.' + input).text(textVal);
+                $('.' + button).attr('data-text', textVal);
+                
+                document.getElementById("editorFrame").contentDocument.location.reload(true);
+             }
+         }
+     });
+  });
+</script>
+<script>
+  $('.valueInput').on("click", function() {
+     var field = $(this).attr('data-field');
+     var index = $(this).attr('data-index');
+     var type = $(this).attr('data-type');
+     var textId = $(this).attr('data-id');
+     var textCont = $(this).text()
+     var value = {'id':textId,'text':textCont}
+
+
+     if ($(this).hasClass('activeInput')) {
+        var data = {
+           "csrfmiddlewaretoken": '{{csrf_token}}',
+           "field": field,
+           "value": JSON.stringify(value),
+        };
+
+        $.ajax({
+            url: "{% url 'remove' id=landing.id %}",
+            type: "post",
+            data: data,
+            success: function(d) {
+                if (d.status) {
+                    $('.' + field + '-field-' + index).removeClass("activeInput");
+                    $('.' + field + '-field-' + index).addClass("inactiveInput");
+
+                    document.getElementById("editorFrame").contentDocument.location.reload(true);
+                }
+            }
+        });
+     } else {
+        var data = {
+           "csrfmiddlewaretoken": '{{csrf_token}}',
+           "field": field,
+           "index": index,
+        };
+
+        $.ajax({
+            url: "{% url 'change' id=landing.id %}",
+            type: "post",
+            data: data,
+            success: function(d) {
+                if (d.status) {
+                    if (type == 'single') {
+                       $('.' + field + '-field').removeClass("activeInput");
+                       $('.' + field + '-field').addClass("inactiveInput");
+                    }
+
+                    $('.' + field + '-field-' + index).removeClass("inactiveInput");
+                    $('.' + field + '-field-' + index).addClass("activeInput");
+
+                  setTimeout(function() {
+                    document.getElementById("editorFrame").contentDocument.location.reload(true);
+                  },100)
+                }
+            }
+        });
+     }
+  });
+</script>
+<script>
+
+   $("#infoForm").submit(function(e) {
+
+      e.preventDefault();
+
+      var form = $(this);
+      var actionUrl = form.attr('action');
+
+      $.ajax({
+         type: "POST",
+         url: actionUrl,
+         data: form.serialize(),
+         success: function(d) {
+            if (d.status) {
+               document.getElementById("editorFrame").contentDocument.location.reload(true);
+            }
+         }
+      });
+
+   });
+</script>
+<script>
+
+   $("#generateForm").submit(function(e) {
+
+       e.preventDefault();
+
+       $('#greyoutGenerate').css({'opacity': '1', 'display': 'block'});
+        $('#generateModal').css({'visibility': '', "display": ''});
+
+       var form = $(this);
+       var actionUrl = form.attr('action');
+
+       $.ajax({
+           type: "POST",
+           url: actionUrl,
+           data: form.serialize(),
+           success: function(d) {
+              if (d.status) {
+                $('#greyoutGenerate').css({'opacity': '0', 'display': 'none'});
+                $('#generateModal').css({'visibility': 'hidden', "display": 'none'});
+                  
+                $('#greyoutSuccessGenerate').css({'opacity': '1', 'display': 'block'});
+                $('#successGenerateModal').css({'visibility': '', "display": ''});
+
+                startConfetti();
+
+                setTimeout( function(){
+                  stopConfetti();
+                }, 3000);
+
+                setTimeout(function() {
+                  location.reload();
+                }, 4000);
+              }
+          },
+          error: function () {
+               window.location.reload();
+          }
+       });
+
+   });
+</script>
+<script>
+ $('#greyoutSuccessGenerate').on("click", function() {
+     $('#greyoutSuccessGenerate').css({'opacity': '0', 'display': 'none'});
+     $('#successGenerateModal').css({'visibility': 'hidden', "display": 'none'});
+
+     location.reload();
+  });
+</script>
+
+<script>
+   /* $('.generate-img-btn').on('click', function (e) {
+        e.preventDefault();
+
+       $('#greyoutGenerate').css({'opacity': '1', 'display': 'block'});
+       $('#generateModal').css({'visibility': '', "display": ''});
+       const landingId = $(this).data('id');
+       const type = $(this).data('type');
+       const description = $(`.img-description[data-type="${type}"]`).val();
+
+       $.ajax({
+           type: "POST",
+           url: '{% url 'generate_img' landing.id %}',
+           data: {type, description},
+           success: function(d) {
+              if (d.ok) {
+                $('#greyoutGenerate').css({'opacity': '0', 'display': 'none'});
+                $('#generateModal').css({'visibility': 'hidden', "display": 'none'});
+
+                $('#greyoutSuccessGenerate').css({'opacity': '1', 'display': 'block'});
+                $('#successGenerateModal').css({'visibility': '', "display": ''});
+
+                startConfetti();
+
+                setTimeout( function(){
+                  stopConfetti();
+                }, 3000);
+
+                setTimeout(function() {
+                  location.reload();
+                }, 4000);
+              }
+          }
+       });
+    }) */
+</script>
+
+<script>
+    $('.upload-img-btn').on('click', function (e) {
+        e.preventDefault();
+
+        const type = $(this).data('type');
+        $(`.img-input[data-type="${type}"]`).click();
+    });
+
+    {% comment %} $('.img-input').on('change', function () {
+        const type = $(this).data('type');
+        $(`.img-form[data-type="${type}"]`).submit();
+    }); {% endcomment %}
+
+
+   document.querySelectorAll('.img-input').forEach(function(fileInput) {
+      fileInput.addEventListener('change', function(event) {
+          const selectedFile = event.target.files[0];
+         
+          console.log('image added')
+          if (selectedFile && selectedFile.size > 1024 * 1024) { // 1MB = 1024 * 1024 bytes
+              alert('Selected image is greater than 1MB. Please choose a smaller image.');
+              // Optionally, you can clear the file input to prevent submitting the large file
+              event.target.value = '';
+          }else{
+            if(fileInput.getAttribute('data-type')=='favIcon'){
+               const reader = new FileReader();
+               reader.onload = function (e) {
+                  // Create an image object
+                  const img = new Image();
+                  img.onload = function () {
+                        // Check if the image is square
+                        if (img.width === img.height) {
+
+                           $(`.img-form[data-type="favIcon"]`).submit();
+
+                        } else { 
+                           alert('Please upload a square image');
+                        }
+                  };
+                  img.src = e.target.result;
+               };
+               reader.readAsDataURL(selectedFile);
+            }else{
+               const type = $(this).data('type');
+               $(`.img-form[data-type="${type}"]`).submit();
+               
+            }
+
+
+
+          }
+      });
+  });
+</script>
+
+<script>
+
+// editable components
+   
+   
+let iframe = document.getElementById('editorFrame');
+
+
+
+   const edit = (datafield) => {
+      let element = document.getElementById(`${datafield}-element-2`);
+
+      console.log(element)
+      element.classList.add('activeEditSection')
+      $(element).css('border-radius', '10px 10px 0px 0px');
+      $(element).css('visibility', '');
+      $(element).css('display', '');
+
+
+      setTimeout(function() {
+         element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+      }, 200);
+
+      document.querySelectorAll('.activeEditSection').forEach(function (rm) {
+         if (rm !== element) {
+           rm.classList.remove('activeEditSection');
+           $(rm).css('border-radius', '10px');
+           $(rm).css('visibility', 'hidden');
+           $(rm).css('display', 'none');
+         }
+      });
+      
+   }
+
+   iframe.onload = function() {
+      let iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+      iframeDocument.querySelectorAll('a').forEach(function(link) {
+         if (!link.href.includes('#')) {
+         link.href = "javascript:void(0);";
+         }
+      });
+
+
+      
+      document.querySelectorAll('.clickable-element').forEach(function(element) {
+         element.addEventListener( 'click',  ()=>{
+            const dataField = element.getAttribute('data-field');
+
+            const targetElement = iframeDocument.querySelector(`[data-field='${dataField}']`);
+
+            console.log(targetElement)
+            if (targetElement) {
+              
+               //setTimeout(function() {
+               targetElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" })
+               //}, 2);
+
+            } 
+         })
+      })
+
+
+      iframeDocument.querySelectorAll('.iframeClickable').forEach(function(element) {
+         // Check if contenteditable is not explicitly set to false
+         if (element.getAttribute('contenteditable') !== 'false') {
+             element.contentEditable = true;
+         }
+     });
+      /*let feature = iframeDocument.querySelector('#feature');
+
+      feature.addEventListener('click', function(e) {      
+         e.preventDefault()
+         console.log('H1 element in the iframe is clicked!');
+         $(this).edit();
+      })*/
+   
+      iframeDocument.querySelectorAll('.iframeClickable').forEach(function (element) {
+         element.addEventListener('click', function(e) {      
+            e.preventDefault()
+            console.log('H1 element in the iframe is clicked!');
+            let datafield = element.getAttribute('data-field');
+            console.log(datafield)
+            edit(datafield);
+
+            
+         })
+      })
+      
+
+      iframeDocument.querySelectorAll('.iframeClickable').forEach(function (element) {
+         element.addEventListener('click', function () {
+            // Get the data-id value of the clicked element
+            var dataId = element.getAttribute('data-id');
+            console.log(dataId)
+            handleElementClick(dataId);
+         });
+      });
+
+      function handleElementClick(dataId) {
+         var elementsWithSameId = document.querySelectorAll('[data-id="' + dataId + '"]');
+         var iframeWithSameId = iframeDocument.querySelectorAll('[data-id="' + dataId + '"]');
+      
+         document.querySelectorAll('.activeEditTab').forEach(function (element) {
+            if (element.getAttribute('data-id') !== dataId) {
+              element.classList.remove('activeEditTab');
+              
+            }
+         });
+
+         iframeDocument.querySelectorAll('.activeEditTab').forEach(function (element) {
+            if (element.getAttribute('data-id') !== dataId) {
+              element.classList.remove('activeEditTab');
+            }
+         });
+
+
+
+   
+         elementsWithSameId.forEach(function (element) {
+            element.classList.add('activeEditTab')
+            setTimeout(function() {
+               element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" })
+            }, 200);
+
+         });
+
+         iframeWithSameId.forEach(function (element) {
+            element.classList.add('activeEditTab')
+         });
+   
+      }
+ 
+      
+      // handle change in text   
+      
+ 
+      var clickableElement = iframeDocument.querySelectorAll('.iframeClickable');
+
+      // Function to be called when mutation occurs
+      var mutationCallback = function(mutationsList, observer) {
+         for (var mutation of mutationsList) {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                  // Log a message to the console whenever the content changes for the specific element
+                     let targetElement = mutation.target.parentElement
+                     console.log(targetElement)
+                     let textId = targetElement.getAttribute('data-id');
+                     let dataCompanyname = targetElement.getAttribute('data-companyname');
+                     let dataService = targetElement.getAttribute('data-service');
+                     let dataStats = targetElement.getAttribute('data-stats');
+                     
+                     let similarElement = document.querySelector(`[data-id="${textId}"]`);
+                     let field = targetElement.getAttribute('data-field');
+                     let index = similarElement.getAttribute('data-index');
+                     let input = `${field}-field-${index}`
+                     let button = `${field}-button-${index}`;
+
+                     let textVal
+                     if(dataService){
+                        let serviceTitleAndText = iframeDocument.querySelectorAll(`[data-id='${textId}']`);
+
+                        textVal = `${serviceTitleAndText[0].textContent}:${serviceTitleAndText[1].textContent}`
+                     }else if(dataStats){
+                        let statsTitleAndText = iframeDocument.querySelectorAll(`[data-id='${textId}']`);
+                        
+                      
+
+                        textVal = `${statsTitleAndText[1].textContent}:${statsTitleAndText[0].textContent.replace(/\+/g, '')}`
+                        
+                        console.log('here');
+                     }else{
+
+                        textVal = mutation.target.textContent.trim();
+                     }
+                     
+                     
+                     console.log(dataCompanyname === 'true')
+                     
+                     let value = {'id':textId , 'text':textVal};
+                     
+                     var data = {
+                        "csrfmiddlewaretoken": '{{csrf_token}}',
+                        "field": field,
+                        "index": index,
+                        "value": JSON.stringify(value),
+                     };
+
+                     if(dataCompanyname){
+                        console.log('hello')
+                        console.log(similarElement)
+                        document.querySelector(`[data-id="${textId}"]`).value = textVal
+
+                        
+                     }else if(field == 'addtional'){
+                        similarElement.value = textVal
+
+                     }else{
+                        $.ajax({
+                           url: "{% url 'change' id=landing.id %}",
+                           type: "post",
+                           data: data,
+                           success: function(d) {
+                              if (d.status) {
+                              $('#greyout').css({
+                                 'opacity': '0',
+                                 'display': 'none'
+                              });
+                              $('#changeModal').css({
+                                 'visibility': 'hidden',
+                                 "display": 'none'
+                              });
+                              $('.' + input).text(textVal);
+                              $('.' + button).attr('data-text', textVal);
+
+                              //document.getElementById("editorFrame").contentDocument.location.reload(true);
+                              }
+                           }
+                        });
+                     }
+
+
+
+            }
+         }
+      };
+
+      // Iterate over all clickable elements
+      clickableElement.forEach(function(clickableElement) {
+         // Create a MutationObserver for each clickable element with the callback
+         var observer = new MutationObserver(function(mutationsList) {
+            mutationCallback(mutationsList, observer);
+         });
+
+         // Configure the observer to watch for changes in the target node's content
+         var observerConfig = { characterData: true, subtree: true };
+
+         // Start observing the target node for configured mutations
+         observer.observe(clickableElement, observerConfig);
+      });   
+      
+      
+
+      
+      
+      let dataStats = iframeDocument.querySelectorAll('[data-stats="true"]');
+      
+      if(dataStats){
+         dataStats.forEach((element, i) => {
+            if (i % 2 === 0) {
+      
+               // Get the first child element
+               let firstChild = element.firstElementChild;
+      
+               // Check if the first child exists before accessing its attributes
+               if (firstChild) {
+                  let dataCountTo = firstChild.getAttribute('data-count-to');
+                  console.log(dataCountTo);
+
+                  element.innerHTML = dataCountTo+'+'
+               }
+            }
+         });
+      }
+
+   };
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+<script>
+// new image gen
+document.querySelectorAll('.generate-img-btn').forEach((element) => {
+
+   element.addEventListener('click', async (e) => {
+      e.preventDefault()
+
+      $('#greyoutGenerate').css({'opacity': '1', 'display': 'block'});
+      $('#generateModal').css({'visibility': '', "display": ''});
+
+
+      const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+      //let user_input = document.querySelector('#user_input').value;
+      const type = element.getAttribute('data-type');
+      const description = document.querySelector(`.img-description[data-type="${type}"]`).value;
+
+
+      //{type, description}
+      const response = await fetch( "{% url 'new_image_gen' landing.id %}" , {
+         method: 'POST',
+         headers: { 'X-CSRFToken': csrftoken },
+         body: JSON.stringify({ type : type ,description : description })
+      });
+      
+      
+      const data = await response.json();
+      
+      console.log(data)
+
+      async function fetchData() {
+         const periodicResponse = await fetch("{% url 'new_image_gen_periodic' landing.id %}", {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken },
+            body: JSON.stringify({ message_id: data.mId })
+         });
+
+         console.log(periodicResponse)
+         
+         
+         const periodic_data = await periodicResponse.json();
+         
+         
+         const urlObject = new URL(periodic_data.image_urls);
+
+         // Remove query parameters
+         urlObject.search = '';
+
+         const newUrl = urlObject.toString();
+         //document.querySelector('.live_progress_meter').textContent = periodic_data.progress;
+
+         if(periodic_data.progress == 100){
+         console.log(newUrl);
+         imgUrl = newUrl
+         message_id = data.mId
+
+         $.ajax({
+            type: "POST",
+            url: "{% url 'generate_img' landing.id %}",
+            data: {type, description, imgUrl,message_id },
+            success: function(d) {
+               if (d.ok) {
+               $('#greyoutGenerate').css({'opacity': '0', 'display': 'none'});
+               $('#generateModal').css({'visibility': 'hidden', "display": 'none'});
+
+               $('#greyoutSuccessGenerate').css({'opacity': '1', 'display': 'block'});
+               $('#successGenerateModal').css({'visibility': '', "display": ''});
+
+               startConfetti();
+
+               setTimeout( function(){
+                  stopConfetti();
+               }, 3000);
+
+               setTimeout(function() {
+                  location.reload();
+               }, 4000);
+               }
+            }
+         });
+
+         }
+
+         if (periodic_data.progress < 100) {
+            // Call the function again after a delay (e.g., 5 seconds)
+            setTimeout(fetchData, 5);
+         }
+
+         
+
+      }
+
+
+      fetchData()
+   })
+
+})
+
+
+
+
+
+// show popup
+function showUpgradePopup() {
+   // Display the modal overlay
+   console.log(document.getElementById('upgradeModal'))
+
+   document.getElementById('upgradeModal').style.display = 'flex';
+}
+
+function upgrade() {
+   location.href="https://landlyai.com/#pricingSection"
+}
+
+function cancelUpgrade() {
+   document.getElementById('upgradeModal').style.display = 'none';
+}
+
+
+const upgradeModal = document.querySelector('#upgradeModal')
+
+upgradeModal.addEventListener('click',(e) =>{
+   if (event.target === event.currentTarget) {
+      document.getElementById('upgradeModal').style.display = 'none';
+   }
+})
+
+
+
+let elementSwitcher = document.querySelectorAll('.elementSwitcher')
+const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+elementSwitcher.forEach((e)=>{
+   e.addEventListener('click',async()=>{
+      field = e.getAttribute('data-elementtoggle')
+      
+      const response = await fetch("{% url 'active_elements' landing.id %}", {
+         method: 'POST',
+         headers: { 'X-CSRFToken': csrftoken },
+         body: JSON.stringify({ field: field })
+      });
+      
+      if (response.ok) {
+         location.reload();
+      }
+
+   })
+})
+
+
+
+   
+
+   async function updateData(data) {
+      const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+      const newValue = document.getElementById(data).value;
+
+   
+      if (data == 'template_id'){
+         const exampleLink = document.querySelector('#exampleLink');
+         exampleLink.href = `https://template${newValue}.landlyai.com/`
+      }
+
+
+      const response = await fetch( "{% url 'updateData' landing.id %}" , {
+         method: 'POST',
+         headers: { 'X-CSRFToken': csrftoken },
+         body: JSON.stringify({ data: data, newValue: newValue })
+      });
+      
+
+      if (response.ok) {
+         location.reload();
+      }
+   }
+
+
+
+
+   async function toggleColorPickers(formid,checkbox,picker) {
+      var useCustomColorsCheckbox = document.getElementById(formid+'-colorForm').querySelector('#' + checkbox);
+      var ColorPicker = document.getElementById(formid+'-colorForm').querySelector('#' + picker);
+
+
+      ColorPicker.disabled = !useCustomColorsCheckbox.checked;
+
+      if(ColorPicker.disabled){
+         let newVal = 'default';
+         let field = formid+'_colors'
+
+         const response = await fetch( "{% url 'updateColor' landing.id %}" , {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken },
+            body: JSON.stringify({ field: field, newVal: newVal, type:picker })
+         });
+         
+
+         if (response.ok) {
+            document.getElementById("editorFrame").contentDocument.location.reload(true);
+         }
+      }else{
+         let newVal = document.getElementById(formid+'-colorForm').querySelector('#' + picker).value;
+         let field = formid+'_colors'
+
+         const response = await fetch( "{% url 'updateColor' landing.id %}" , {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken },
+            body: JSON.stringify({ field: field, newVal: newVal, type:picker })
+         });
+         
+
+         if (response.ok) {
+            document.getElementById("editorFrame").contentDocument.location.reload(true);
+         }
+      }
+
+   }   
+
+
+
+   async function updateColor(section, type) {
+
+      let newVal = document.getElementById(section+'-colorForm').querySelector('#' + type).value;
+      let field = section+'_colors'
+
+      console.log(newVal)
+
+      const response = await fetch( "{% url 'updateColor' landing.id %}" , {
+         method: 'POST',
+         headers: { 'X-CSRFToken': csrftoken },
+         body: JSON.stringify({ field: field, newVal: newVal, type:type })
+      });
+      
+
+      if (response.ok) {
+         document.getElementById("editorFrame").contentDocument.location.reload(true);
+      }
+   }
+      
+
+
+
+   altTextField = document.querySelectorAll('.altTextField')
+
+  
+
+
+   altTextField.forEach((field) => {
+      field.addEventListener('input', async() => {
+
+         fieldType =  field.getAttribute('data-type')
+         newVal =  field.value
+         console.log(fieldType, newVal)
+      
+         const response = await fetch( "{% url 'altImage' landing.id %}" , {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken },
+            body: JSON.stringify({ fieldType: fieldType, newVal: newVal })
+         });
+         
+   
+         if (response.ok) {
+            document.getElementById("editorFrame").contentDocument.location.reload(true);
+         }
+
+      });
+   })
+
+
+
+   metaGenerateButton = document.querySelector('.metaGenerateButton')
+
+
+
+
+
+   let metaData = [
+      {'id':'suggest a meta title for {{landing.get_company_name.text}}','data':'','targetid':'#mtitle'},
+      {'id':'suggest meta keywords for {{landing.get_company_name.text}}, keywords should be relevant','data':'','targetid':'#mkeywords'},
+      {'id':'suggest meta description for {{landing.get_company_name.text}}','data':'','targetid':'#mdescription'}
+   ]
+   
+
+   metaData = [
+      {'id':'suggest a meta title for {{landing.get_company_name.text}}','data':'{{landing.meta.0.data}}','targetid':'#mtitle'},
+      {'id':'suggest meta keywords for {{landing.get_company_name.text}}, keywords should be relevant','data':'{{landing.meta.1.data}}','targetid':'#mkeywords'},
+      {'id':'suggest meta description for {{landing.get_company_name.text}}','data':'{{landing.meta.2.data}}','targetid':'#mdescription'}
+   ]
+
+   // Now, metaData is an array that you can use
+
+   metaGenerateButton.onclick = async function () {
+      $('#greyoutGenerate').css({'opacity': '1', 'display': 'block'});
+      $('#generateModal').css({'visibility': '', "display": ''});
+
+      for (const item of metaData) {
+
+         const response = await fetch("{% url 'genMeta' landing.id %}", {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: item.id })
+         });
+      
+         if (response.ok) {
+            // Assuming that the response contains the generated data
+            const responseData = await response.json();
+            
+            // Update the 'data' property of the corresponding item in metaData
+            item.data = responseData.data;
+            document.querySelector(item.targetid).value = item.data 
+
+         }
+      }
+
+      updateMetaDB(metaData)
+
+      $('#greyoutGenerate').css({'opacity': '0', 'display': 'none'});
+      $('#generateModal').css({'visibility': 'hidden', "display": 'none'});
+
+
+
+   
+   }
+
+
+   function updateMeta(field){
+      newVal = document.querySelector(field).value
+      
+      metaData = metaData.map(item => {
+         if (item.targetid === field) {
+           // Update the data property for the target id
+           return { ...item, data: newVal };
+         }
+         return item;
+      });
+     
+      updateMetaDB(metaData)
+
+   }
+  
+   
+
+
+   async function updateMetaDB(data) {
+
+
+      const response = await fetch("{% url 'updateMeta' landing.id %}", {
+         method: 'POST',
+         headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
+         body: JSON.stringify({ data:data })
+      });
+
+      if (response.ok) {
+         document.getElementById("editorFrame").contentDocument.location.reload(true);
+      }
+   }
+
+
+
+</script>
+
+</body>
+</html>
+

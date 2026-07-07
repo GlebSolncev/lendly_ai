@@ -1,0 +1,19 @@
+# Ignore Python bytecode files
+*.pyc
+
+# Ignore __pycache__ directories
+__pycache__/
+
+# Ignore environment configuration files
+.env
+
+# Ignore database files
+*.sqlite3
+
+# Ignore compressed files
+*.zip
+
+
+landing/landings/
+static/assets/vid/landing.mp4
+

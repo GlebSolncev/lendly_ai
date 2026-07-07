@@ -1,0 +1,761 @@
+{% extends 'layout/layoutNew.html' %}
+{% load static %}
+
+{% block 'head' %}
+<title>AI Logo Generator | Make Brand Logo Using AI With LandlyAi</title>
+<meta name="description" content="Transform your brand's identity effortlessly with LandlyAi's AI Logo Generator. Craft professional logos intelligently. Elevate your branding effortlessly.">
+<meta name="keywords" content="ai logo genrator, make logo with ai, generate logos with ai, best ai logo generator">
+{% endblock %}
+
+{% block 'body' %}
+
+<style>
+  p{
+    margin: 0;
+  }
+
+
+
+  .newInnerContainer{
+    display: flex;
+    gap: 0.4em;
+
+  }
+
+  .newContainer #midjourney-form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    width:50%;
+  }
+
+  .generatedImg{
+    overflow:hidden;
+
+    width:50%;
+    color: rgb(158, 158, 158);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #user_input{
+    all:unset;
+    background-color: rgb(33, 33, 33);
+    border-radius: 0.3em;
+    padding: 0.3em 0.5em;
+  }
+
+  .generatedImg{
+    background-color: rgb(33, 33, 33);
+    position: relative;
+    border-radius: 0.4em;
+
+  }
+
+  .genImgText{
+    position: absolute;
+    z-index: 1;
+    color: rgb(177, 177, 177);
+
+  }
+
+  .generatedImg img{
+    z-index: 2;
+  }
+
+  .imgGenSubmit:hover {
+    opacity:75%;
+  }
+  .imgGenSubmit{
+    all:unset;
+    cursor:pointer;
+    text-transform: uppercase;
+    background-color: rgb(108, 209, 61);
+    border-radius: 0.3em;
+    padding: 0.2em 0.6em;
+    color: #1f1f1f;
+  }
+
+  .LoadingSvgMidjourney{
+    position: absolute;
+    display: none;
+    z-index: 3;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .midjourney-buttons{
+    display: flex;
+    flex-wrap: wrap;   
+    gap:0.3em;
+    margin-top: 0.5em;
+    width: 100%;
+  }
+
+  
+  .midjourney-buttons button{
+
+    all:unset;
+    width:20%;
+    flex-grow: 1;
+    font-weight: 600;
+    font-size: 0.8em;
+    background-color: rgb(18, 18, 18);
+    display: flex;
+    font-size: 0.9em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.3em;   
+    padding: 0.2em 0; 
+    text-transform: uppercase;
+  }
+  
+
+
+  .midjourney-buttons .refresh{
+    width:100%
+  }
+
+  #midjourney-var-upsc{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    width:50%;
+    margin-left: auto;
+  }
+
+  .downloadbutton{
+    font-size: 0.9em;
+    position: absolute;
+    color: #fff;
+    top: 0.5em;
+    left:0.5em;
+    cursor: pointer;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.585);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2em;
+    padding: 0.2em 0.8em;
+    border-radius: 0.5em;
+  }
+  .downloadbutton svg{
+    width: 0.5em;
+  }
+
+  .genImgDiv{
+    position: absolute;
+    z-index: 2;  
+    background-color: transparent;
+  }
+
+  .genImgDiv{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .genImgDiv > div{
+    width: 40%;
+    flex-grow: 1;
+  }
+
+  .creationsDivContainer h4{
+    font-size: 1.8em;
+    margin: 1em 0;
+  }
+
+  .pastCreationsDiv{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .pastCreationsDiv img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+        {% comment %} flex-grow: 1; {% endcomment %}
+  } 
+
+  .pastCreationsDiv .thumbnail{
+    width:40%;
+    flex-grow:1;
+  }
+  
+  .modalImage{
+      width: 100%;
+      max-width: 600px;
+  }
+
+  .galleryModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    backdrop-filter:blur(20px);
+    height: 100vh;
+    width: 100%;
+    z-index:999;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .displayNoneAi{
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .closeModal{
+    position: fixed;
+    background:rgba(255, 21, 21, 0.333);
+    top: 0;
+    right:0;
+    margin: 0.6em;
+  }
+  .downloadPrevImage{
+    background:rgba(79, 255, 21, 0.356);
+    position:fixed;
+    top:0;
+    left:0;
+    margin: 0.6em;
+  }
+  
+  .galleryModal button{
+    border: none;
+    backdrop-filter: blur(20px);
+
+    padding: 0.2em 1.3em;
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 0.4em;
+    z-index:9999;
+  }
+
+
+  .nextPrevContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 700px;
+    align-items: center;
+    position: absolute;
+  }
+
+  .prevImage,
+  .nextImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5em;
+    padding: 0.6em!important;
+  }
+
+  .marginBottom{
+    margin-bottom: -100%;
+  }
+
+  .creationsDivContainer{
+    margin:2em 0
+  }
+
+  .mainTitle{
+      font-size: 4em;
+      margin: 0.4em 0 0.6em ;
+      line-height: 1em;
+  }
+
+  @media (max-width:500px) {
+    .newInnerContainer{
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .generatedImg{
+      width: 100%;
+      height: 90vw;
+    }
+    .newContainer #midjourney-form{
+      width: 100%;
+    }
+
+    #user_input{
+      height: 3em;
+    }
+
+    .mainTitle{
+      font-size: 12vw;
+    }
+  }
+
+
+  @media (min-width:500px) {
+    .pastCreationsDiv .thumbnail{
+   
+      max-width: calc(100%/3);
+    }
+    
+    {% comment %} .pastCreationsDiv img{
+      width: 40%;
+    } {% endcomment %}
+  }
+
+
+{% comment %} new {% endcomment %}
+  .generatedImgOpaque{
+    background: #00000063;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+  }
+
+
+  #generatedImg:hover{
+    filter:brightness(50%);
+    cursor:pointer;
+  }
+
+
+  /* Styles for Modal */
+.modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+  position: fixed;
+  z-index: 8;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.modal-controls {
+  display: flex;
+  justify-content:center;
+  margin-top: 10px;
+}
+
+/* Close button */
+.modal  .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Other buttons */
+.modal button {
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal  button:hover {
+  background-color: #404040;
+}
+
+/* Thumbnails styling */
+.thumbnail {
+  cursor: pointer;
+}
+
+
+
+
+#prevBtn{
+  position: absolute;
+  left: 2%;
+  top: 50%;
+  transform: translatey(-50%);
+}
+
+#nextBtn{
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translatey(-50%);
+}
+
+#downloadBtn{
+  position: absolute;
+
+ bottom:2%;
+
+}
+
+
+
+
+{% comment %} image loader {% endcomment %}
+.pastCreationsDiv img{
+  visibility:hidden;
+}
+
+
+.loader-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.loader-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3c3c3c; /* Set the background color for the skeleton loader */
+  animation: pulse 1200ms infinite alternate ease-out;
+  z-index:-1
+}
+
+img{display:block}
+
+@keyframes pulse {
+  0% {
+      opacity: 0.6;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+</style>
+
+
+
+
+<!-- Modal Popup -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+  <button id="prevBtn">Prev</button>
+  <button id="nextBtn">Next</button>
+  <div class="modal-controls">
+    <button id="downloadBtn">Download</button>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Start Hero -->
+
+
+  <div class="newContainer">
+    <h1 class="mainTitle">Logo Generator</h1>
+    <div class="newInnerContainer">
+      <form method="post" id="midjourney-form">
+          {% csrf_token %}
+          <textarea required placeholder="Your prompt here" id="user_input" name="user_input" id="" cols="30" rows="10"></textarea>
+          <button class="imgGenSubmit" type="submit"><b>Generate</b></button>
+      </form>
+      <div class="generatedImg">
+          <div class="generatedImgOpaque">  </div>
+          <div class="downloadbutton displayNoneAi">
+            <svg width="100%" height="100%"  viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.29289 19.7071C7.68342 20.0976 8.31658 20.0976 8.70711 19.7071L15.0711 13.3431C15.4616 12.9526 15.4616 12.3195 15.0711 11.9289C14.6805 11.5384 14.0474 11.5384 13.6569 11.9289L8 17.5858L2.34315 11.9289C1.95262 11.5384 1.31946 11.5384 0.928933 11.9289C0.538408 12.3195 0.538408 12.9526 0.928933 13.3431L7.29289 19.7071ZM7 4.37114e-08L7 19L9 19L9 -4.37114e-08L7 4.37114e-08Z" fill="white"/>
+            </svg>
+            <p>DOWNLOAD</p>
+              
+          </div>
+          
+        <div class="genImgDiv">
+            <div class="thumbnail " >
+              <img loading="eager" id="generatedImg" width="100%" height="100%" src="{% static 'assets/img/none.png' %}" alt="">
+            </div>
+            <div class="thumbnail " >
+              <img loading="eager" id="generatedImg" width="100%" height="100%" src="{% static 'assets/img/none.png' %}" alt="">
+            </div>
+            <div class="thumbnail " >
+              <img loading="eager" id="generatedImg" width="100%" height="100%" src="{% static 'assets/img/none.png' %}" alt="">
+            </div>
+            <div class="thumbnail " >
+              <img loading="eager" id="generatedImg" width="100%" height="100%" src="{% static 'assets/img/none.png' %}" alt="">
+            </div>
+        </div>
+        <p class="genImgText">Generated Image</p>
+        <div class=" LoadingSvgMidjourney">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block; shape-rendering: auto;" width="50px" height="50px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"><path d="M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50" fill="#ffffff" stroke="none">  <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" keyTimes="0;1" values="0 50 51;360 50 51"></animateTransform></path></svg>
+          {% comment %} <p><span class="live_progress_meter">0</span>%</p> {% endcomment %}
+        </div>
+        
+      </div>
+     
+    </div>  
+    
+
+
+
+  <div class="creationsDivContainer">
+      {% if past_creations %}
+      <h4>Your Creations</h4>
+
+      {% endif %}
+      <div class="pastCreationsDiv">
+      <!--dynamic past images  -->
+        {% for image_path in past_creations %}
+        <div class="thumbnail loader-image">
+          {% comment %} <img class="lazy-image" data-imgsrc="{{image_path}}" alt="Image"> {% endcomment %}
+          {% with file_name=image_path|cut:"https://landlyai.com/static/assets/dallegenerated/img/" %}
+          <img class="lazy-image" src="{% url 'lower_resolution_image' image_path=file_name %}" alt="">
+          {% endwith %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+   
+
+
+<script>
+ 
+  const buttonElement = document.querySelector('.imgGenSubmit'); 
+
+  let generatedImg =  document.querySelectorAll('#generatedImg')
+  let generatedImgOpaque =  document.querySelector('.generatedImgOpaque')
+
+  let genImgDiv =  document.querySelector('.genImgDiv')
+
+  let genThumbnail = genImgDiv.querySelectorAll('.thumbnail')
+
+
+
+  let allImages = []
+  document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    buttonElement.disabled=true
+
+    
+    generatedImg.forEach((img)=>{
+      img.src="{% static 'assets/img/none.png' %}"
+    })
+
+    
+    genThumbnail.forEach((img)=>{
+      img.classList.add('loader-image')
+    })
+
+    //document.querySelector('.live_progress_meter').textContent = 0;
+    document.querySelector('.genImgText').style.display='none'
+    document.querySelector('.LoadingSvgMidjourney').style.display='flex'
+    generatedImgOpaque.style.display='block'
+
+    const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    let user_input = document.querySelector('#user_input').value
+          
+    user_input =  `A sleek logo of a ${user_input} featuring a modern abstract design, monochrome style, contemporary aesthetic, any color scheme, logo focused in center, uniform background color, simple background`
+    user_input = user_input.replace(/[^\w\s]/gi, '').replace(/\s+/g, '_');
+
+
+
+    const fetchPromises = [];
+    allImages = []
+    for (let i = 0; i < 4; i++) {
+      const fetchPromise = fetch('/logo_generator/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken },
+        body: JSON.stringify({ user_input: user_input })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const newUrl = data.response;
+        if( newUrl != 'Limit Reached'){
+          generatedImg[i].src = newUrl;
+        }
+        allImages.push(newUrl)
+      });
+
+      fetchPromises.push(fetchPromise);
+    }
+
+    // Wait for all promises to resolve
+    await Promise.all(fetchPromises);
+  
+    setTimeout(() => {
+      document.querySelector('.LoadingSvgMidjourney').style.display='none'
+      generatedImgOpaque.style.display='none'
+      buttonElement.disabled=false
+    }, 1300)
+
+    if (allImages[0] != 'Limit Reached'){
+      saveImageToDb()
+    }else{
+      showLimitReachedMessage() 
+      genThumbnail.forEach((img)=>{
+        img.classList.remove('loader-image')
+      })
+    }
+
+  })
+          
+  function showLimitReachedMessage() {
+    // Create a <p> element
+    const limitReachedMessage = document.createElement('p');
+    limitReachedMessage.innerHTML = 'Limit reached' + ' <a href="https://landlyai.com/#pricingSection"><u>Upgrade plan to continue using.</u></a>';
+  
+    // Append the <p> element below the button
+    buttonElement.parentNode.insertBefore(limitReachedMessage, buttonElement.nextSibling);
+  
+    // Set a timeout to remove the message after 2 seconds
+    setTimeout(() => {
+      limitReachedMessage.remove();
+    }, 4000);
+  }
+
+
+  async function saveImageToDb() {
+
+    const csrftoken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+    const response = await fetch('/saveImg/', {
+      method: 'POST',
+      headers: { 'X-CSRFToken': csrftoken },
+      body: JSON.stringify({ imgs: allImages, type:'logo'})
+    }); 
+  }
+
+
+
+
+
+
+
+  //popup
+
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const prevBtn = document.getElementById('prevBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const closeBtn = document.querySelector('.close');
+
+  let currentIndex = 0;
+
+  // Event listeners for each thumbnail
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+      currentIndex = index;
+      openModal();
+    });
+  });
+
+  // Event listener for the close button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Event listener for the previous button
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+    updateModalContent();
+  });
+
+  // Event listener for the download button
+  downloadBtn.addEventListener('click', () => {
+    let imageUrl = thumbnails[currentIndex].querySelector('img').src;
+     imageUrl = imageUrl.endsWith('/') ? imageUrl.slice(0, -1) : imageUrl;
+
+     imageUrl = imageUrl.replace("lower_resolution", "mid_resolution_image");
+     imageUrl = imageUrl.replace("static/assets/dallegenerated/img", "mid_resolution_image");
+     
+     // Create a temporary anchor element
+    const downloadLink = document.createElement('a');
+    downloadLink.href = imageUrl;
+    downloadLink.download = 'image';  // You can set a custom filename here
+  
+    // Append the anchor element to the document
+    document.body.appendChild(downloadLink);
+  
+    // Trigger a click on the anchor element
+    downloadLink.click();
+  
+    // Remove the anchor element from the document
+    document.body.removeChild(downloadLink);
+  });
+
+  // Event listener for the next button
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % thumbnails.length;
+    updateModalContent();
+  });
+
+  // Function to open the modal
+  function openModal() {
+    updateModalContent();
+    modal.style.display = 'flex';
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  // Function to update modal content based on the current index
+  function updateModalContent() {
+    modalImage.src = '';
+    let imageUrl = thumbnails[currentIndex].querySelector('img').src;
+    modalImage.src = imageUrl;
+    
+  }
+
+
+
+
+   {% comment %} loader {% endcomment %}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const lazyImage = document.querySelectorAll('.lazy-image');
+
+  lazyImage.forEach(function(thumbnail, index) {
+    thumbnail.style.visibility = 'visible';
+  });
+});
+
+
+
+
+
+
+ 
+
+
+</script>
+
+
+  
+
+{% endblock %}
