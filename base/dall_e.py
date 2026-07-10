@@ -24,30 +24,44 @@ async def save_image(image_url, filename):
         await download_image(session, image_url, filename)
 
 
-
-
-
-
 def dall_e(prompt):
-    
-    openai.api_key = settings.NEW_CHAT_GPT_KEY
+    api_key = settings.NEW_CHAT_GPT_KEY
     extra_prompts = ""
 
+    # Формируем заголовки для авторизации в API OpenAI
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}"
+    }
 
-    response = openai.Image.create(
-        model="dall-e-3",
-        prompt= f"{prompt} {extra_prompts}",
-        size="1024x1024",
-        quality="standard",
-        n=1,
+    # Payload запроса с явным указанием dall-e-3
+    payload = {
+        "model": "dall-e-3",
+        "prompt": f"{prompt} {extra_prompts}",
+        "size": "1024x1024",
+        "quality": "standard",
+        "n": 1
+    }
+
+    # Делаем прямой POST-запрос к эндпоинту OpenAI
+    api_response = requests.post(
+        "https://api.openai.com/v1/images/generations",
+        headers=headers,
+        json=payload
     )
-    
-    image_url = response['data'][0]['url']
 
+    # Проверяем успешность ответа от OpenAI
+    if api_response.status_code == 200:
+        response_data = api_response.json()
+        image_url = response_data['data'][0]['url']
+    else:
+        raise Exception(f"OpenAI API Error: {api_response.text}")
+
+    # Оставляем твою логику сохранения файла без изменений
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     unique_id = str(uuid.uuid4())[:8]
     filename = f'static/assets/dallegenerated/img/{timestamp}_{unique_id}.jpg'
-    
+
     asyncio.run(save_image(image_url, filename))
 
     return f"{settings.DOMAIN_URL}{filename}"
