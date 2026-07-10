@@ -480,7 +480,7 @@
 
                         {% if user.is_authenticated %}
                             <p style="{% if not currSubscriptionClass == 'free' %} background: #666; cursor:not-allowed {% endif %}"
-                            class="PriceButton {% if currSubscriptionClass == 'free' %} submitSubscription {% endif %}" data-price="{{ subscriptions.4.stripe_price }}">
+                            class="PriceButton {% if currSubscriptionClass == 'free' %} submitSubscription {% endif %}" data-price="{{ subscriptions.light.stripe_price }}">
                                 {% if currSubscriptionClass == 'light' %}
                                 ACTIVE
                                 {% else %}
@@ -602,7 +602,7 @@
                             
 
                                 <h4 style="{% if currSubscription == 'FREE' or currSubscription == 'LIGHT' %}  {% else %} background: #666; cursor:not-allowed {% endif %}"
-                                class="PriceButton {% if currSubscription == 'FREE'%} submitSubscription {% endif %} " data-price="{{ subscriptions.4.stripe_price }}" >
+                                class="PriceButton {% if currSubscription == 'FREE'%} submitSubscription {% endif %} " data-price="{{ subscriptions.light.stripe_price }}" >
                                     {% if currSubscription == 'LIGHT' %}
                                     ACTIVE
                                     {% else %}
@@ -693,7 +693,7 @@
 
                             {% if user.is_authenticated %}
                                 <h4 style="{% if currSubscriptionClass == 'ai-web-generator' %} background: #666; cursor:not-allowed {% endif %}"
-                                class="PriceButton {% if currSubscriptionClass == 'free' or currSubscriptionClass == 'light' %} submitSubscription {% endif %} " data-price="{{ subscriptions.5.stripe_price }}" >
+                                class="PriceButton {% if currSubscriptionClass == 'free' or currSubscriptionClass == 'light' %} submitSubscription {% endif %} " data-price="{{ subscriptions.ai_tools.stripe_price }}" >
                                     {% if currSubscriptionClass == 'ai-tools' %}
                                     ACTIVE
                                     {% else %}
@@ -756,7 +756,7 @@
 
                             {% if user.is_authenticated %}
                                 <h4
-                                class="PriceButton {% if not currSubscriptionClass == 'ai-web-generator'%} submitSubscription {% endif %}" data-price="{{ subscriptions.6.stripe_price }}">
+                                class="PriceButton {% if not currSubscriptionClass == 'ai-web-generator'%} submitSubscription {% endif %}" data-price="{{ subscriptions.ai_web_generator.stripe_price }}">
                                     {% if currSubscriptionClass == 'ai-web-generator'  %}
                                     ACTIVE
                                     {% else %}

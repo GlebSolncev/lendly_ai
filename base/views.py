@@ -78,10 +78,11 @@ def button(button,button_id):
 
 
 def index(request):
-   # print(request.user)
-    # print(request.user.id)
-    # print(request.user.subscription_id)
-    subscriptions = Subscription.objects.all()
+    # subscriptions = Subscription.objects.all()
+    subscriptions = {
+        sub.classname.replace('-', '_'): sub
+        for sub in Subscription.objects.all().order_by('id')
+    }
 
     if isinstance(request.user, AnonymousUser):        
         context = {

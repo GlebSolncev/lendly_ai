@@ -1,5 +1,6 @@
 from django.urls import path
 import base.views as base
+from . import views
 
 handler404 = "base.views.my_custom_page_not_found_view"
 
@@ -45,8 +46,8 @@ urlpatterns = [
     path('test-text/', base.test_text, name="test_text"),    
     # path('testdall/', base.testdall, name="testdall"),    
     # path('testdallreq/', base.testdallreq, name="testdallreq"),    
-    path('saveImg/', base.saveImg, name="saveImg"),    
-    path('lower_resolution/<str:image_path>/', base.lower_resolution_image, name='lower_resolution_image'),
+    path('saveImg/', base.saveImg, name="saveImg"),
+    path('lower_resolution/<path:image_path>/', views.lower_resolution_image, name='lower_resolution_image'),
     path('mid_resolution_image/<str:image_path>/', base.mid_resolution_image, name='mid_resolution_image'),
     # path('404/', base.my_custom_page_not_found_view, name="my_custom_page_not_found_view"),    
 ]

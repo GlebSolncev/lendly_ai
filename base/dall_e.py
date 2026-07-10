@@ -36,9 +36,9 @@ def dall_e(prompt):
 
     # Payload запроса с явным указанием dall-e-3
     payload = {
-        "model": "dall-e-3",
+        "model": "dall-e-2",
         "prompt": f"{prompt} {extra_prompts}",
-        "size": "1024x1024",
+        "size": "512x512",
         "quality": "standard",
         "n": 1
     }

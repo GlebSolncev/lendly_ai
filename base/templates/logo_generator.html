@@ -529,8 +529,8 @@ img{display:block}
         {% for image_path in past_creations %}
         <div class="thumbnail loader-image">
           {% comment %} <img class="lazy-image" data-imgsrc="{{image_path}}" alt="Image"> {% endcomment %}
-          {% with file_name=image_path|cut:"https://landlyai.com/static/assets/dallegenerated/img/" %}
-          <img class="lazy-image" src="{% url 'lower_resolution_image' image_path=file_name %}" alt="">
+          {% with file_name=image_path|cut:"https://landlyai.com/static/assets/dallegenerated/img/"|cut:"http://127.0.0.1:8000/static/assets/dallegenerated/img/" %}
+            <img class="lazy-image" src="{% url 'lower_resolution_image' image_path=file_name %}" alt="">
           {% endwith %}
         </div>
         {% endfor %}
