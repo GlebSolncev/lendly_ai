@@ -1,3 +1,5 @@
+import shutil
+
 from django.http import JsonResponse
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 import ast
@@ -1422,6 +1424,20 @@ def savePageNew(request, landing):
         with open(nginx_config, 'w', encoding='utf-8') as f:
             f.write(content_nginx)
 
-        # 4. Безопасный вызов системных команд (защита от внедрения команд)
-        subprocess.run(['certbot', '--nginx', '-d', domain_new, '--non-interactive', '--redirect'], check=True)
-        subprocess.run(['systemctl', 'restart', 'nginx'], check=True)
+        # Перезапускаем Nginx, чтобы он подцепил новый конфиг ДО вызова Certbot
+        if shutil.which('systemctl'):
+            subprocess.run(['systemctl', 'restart', 'nginx'], check=True)
+
+        if shutil.which('certbot'):
+            try:
+                # Пытаемся выпустить SSL-сертификат
+                # Добавляем sudo, если у пользователя веб-сервера есть беспарольный доступ
+                subprocess.run(['sudo', 'certbot', '--nginx', '-d', domain_new, '--non-interactive', '--redirect'], check=True)
+                subprocess.run(['sudo', 'systemctl', 'restart', 'nginx'], check=True)
+                print(f"[Success] SSL Certificate for {domain_new} generated successfully.")
+            except subprocess.CalledProcessError as e:
+                # Если Certbot упал — логируем ошибку, но НЕ валим всё приложение в 500!
+                print(f"[Error] Certbot failed for {domain_new}. Output: {e}")
+                # Здесь можно сделать запись в базу, например: landing.ssl_status = 'failed'
+        else:
+            print(f"[Warning] Certbot command not found. Skipping SSL generation.")
