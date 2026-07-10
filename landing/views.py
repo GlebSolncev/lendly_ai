@@ -3,6 +3,8 @@ from django.shortcuts import render, reverse, redirect, get_object_or_404
 import ast
 import random
 import string
+import subprocess
+import pprint
 from payments.models import Subscription, Payment
 from landing.chatgpt_service import chat_gpt_service
 from landing.models import Landing, Template, Part, LandingImage, Pages
@@ -623,8 +625,8 @@ def save_landing(request, landing):
         f = open(f"landing/landings/{landing.get_domain()}.html", "w")
     
         f.write(content)
-        f.close() 
-
+        f.close()
+        breakpoint()
         nginx_config = f'/etc/nginx/custom-subdomain/{landing.get_domain()}.conf'
         if os.path.isfile(nginx_config):
             return
@@ -1371,61 +1373,55 @@ def send_email_view(request):
     return JsonResponse({'error': 'Invalid request method.'})
 
 
-
-
 def savePageNew(request, landing):
-
-
-    # if request.user.subscription_id:
-    #     currPayment = Payment.objects.get(id=request.user.subscription_id)
-    #     currSubscription = Subscription.objects.get(id=currPayment.subscription_object_id).title
-    # else:
-    #     currSubscription = 'FREE'
-
-
     subscriptions = Subscription.objects.all()
 
- 
     try:
         currPayment = Payment.objects.get(id=request.user.subscription_id)
-
         if currPayment.canceled:
             currSubscriptionClass = 'free'
-
         else:
             currSubscriptionClass = Subscription.objects.get(id=currPayment.subscription_object_id).classname
-            
     except Payment.DoesNotExist:
-        currSubscriptionClass = 'free',
-
-      
-
-
-
+        currSubscriptionClass = 'free'  # Убрали лишнюю запятую
 
     if not currSubscriptionClass == 'ai-tools':
-        print('done')   
-    
-        content = preview(request, landing.id).content.decode("utf-8")
-    
-        f = open(f"landing/landings/{landing.get_domain_new()}.html", "w")
-        f.write(content)
-        f.close() 
+        print('done')
 
-        nginx_config = f'/etc/nginx/custom-subdomain/{landing.get_domain_new()}.conf'
+        content = preview(request, landing.id).content.decode("utf-8")
+
+        domain_new = landing.get_domain_new()
+
+        # 1. Исправляем путь к HTML-файлу лендинга через BASE_DIR
+        html_file_path = settings.BASE_DIR / 'landing' / 'landings' / f"{domain_new}.html"
+
+        # Автоматически создаем папки landing/landings/, если их вдруг нет
+        html_file_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(html_file_path, "w", encoding="utf-8") as f:
+            f.write(content)
+
+        nginx_config = f'/etc/nginx/custom-subdomain/{domain_new}.conf'
         if os.path.isfile(nginx_config):
             return
-        with open('landing/templates/nginx_config.txt') as f:
+
+        # 2. Исправляем путь к шаблону nginx конфигурации
+        nginx_template_path = settings.BASE_DIR / 'landing' / 'templates' / 'nginx_config.txt'
+
+        with open(nginx_template_path, 'r', encoding='utf-8') as f:
             content_nginx = f.read()
-            content_nginx = content_nginx.replace('DOMAIN', landing.get_domain_new())
-            content_nginx = content_nginx.replace('ROOT', '/var/www/landing_ai/landing/landings')
-            content_nginx = content_nginx.replace('FILENAME', f'{landing.get_domain_new()}.html')
 
-        f = open(nginx_config, 'w')
-        f.write(content_nginx)
-        f.close()
+        content_nginx = content_nginx.replace('DOMAIN', domain_new)
 
-        os.system(f'certbot --nginx -d {landing.get_domain_new()} --non-interactive --redirect')
-        os.system('systemctl restart nginx')
-    
+        # Подставляем правильный абсолютный путь к папке с лендингами для Nginx
+        landings_dir = settings.BASE_DIR / 'landing' / 'landings'
+        content_nginx = content_nginx.replace('ROOT', str(landings_dir))
+        content_nginx = content_nginx.replace('FILENAME', f'{domain_new}.html')
 
+        # 3. Запись конфигурации Nginx
+        with open(nginx_config, 'w', encoding='utf-8') as f:
+            f.write(content_nginx)
+
+        # 4. Безопасный вызов системных команд (защита от внедрения команд)
+        subprocess.run(['certbot', '--nginx', '-d', domain_new, '--non-interactive', '--redirect'], check=True)
+        subprocess.run(['systemctl', 'restart', 'nginx'], check=True)
