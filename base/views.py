@@ -620,12 +620,18 @@ def lower_resolution_image(request, image_path):
     if not os.path.exists(original_image_path):
         raise Http404("Оригинальное изображение не найдено")
 
-    # Открываем оригинальное изображение
     original_image = Image.open(original_image_path)
 
     lower_resolution = (original_image.width // 2, original_image.height // 2)
 
     resized_image = original_image.resize(lower_resolution, Image.Resampling.LANCZOS)
+
+    if resized_image.mode in ('RGBA', 'LA') or (resized_image.mode == 'P' and 'transparency' in resized_image.info):
+        background = Image.new("RGB", resized_image.size, (255, 255, 255))
+        background.paste(resized_image, mask=resized_image.split()[3] if resized_image.mode == 'RGBA' else None)
+        resized_image = background
+    elif resized_image.mode != 'RGB':
+        resized_image = resized_image.convert('RGB')
 
     output_buffer = BytesIO()
     resized_image.save(output_buffer, format='JPEG')
