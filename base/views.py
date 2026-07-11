@@ -1,5 +1,7 @@
+import os
+
 from django.shortcuts import render, redirect, reverse
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from base.mail_service import mail_service
 from base.models import Faq, Page, subscriberList
 from payments.models import Subscription, Payment
@@ -611,31 +613,25 @@ from PIL import Image
 from io import BytesIO
 from django.shortcuts import render
 
+
 def lower_resolution_image(request, image_path):
-    # Construct the full path to the original image
     original_image_path = f"static/assets/dallegenerated/img/{image_path}"
-    
-    
-    # Load the original image
+
+    if not os.path.exists(original_image_path):
+        raise Http404("Оригинальное изображение не найдено")
+
+    # Открываем оригинальное изображение
     original_image = Image.open(original_image_path)
 
-    # Set the desired lower resolution (e.g., 50% of original dimensions)
     lower_resolution = (original_image.width // 2, original_image.height // 2)
 
-    # Resize the image to the lower resolution
-    resized_image = original_image.resize(lower_resolution, Image.ANTIALIAS)
+    resized_image = original_image.resize(lower_resolution, Image.Resampling.LANCZOS)
 
-    # Save the resized image to a BytesIO buffer
     output_buffer = BytesIO()
     resized_image.save(output_buffer, format='JPEG')
     image_data = output_buffer.getvalue()
 
-    # Set the appropriate content type for the response
-    response = HttpResponse(content_type='image/jpeg')
-
-    # Write the image data to the response
-    response.write(image_data)
-
+    response = HttpResponse(image_data, content_type='image/jpeg')
     return response
 
 def mid_resolution_image(request, image_path):
